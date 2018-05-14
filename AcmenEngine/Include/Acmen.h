@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <string>
 #include <iostream>
@@ -7,13 +6,14 @@
 #include <sstream>
 #include <iostream>
 
+
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
+
 // Common
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
-
-#include "Common/Vector2.h"
-#include "Common/Vector3.h"
-#include "Common/Vector4.h"
 
 #include "Common/Camera.h"
 #include "Common/Shader.h"

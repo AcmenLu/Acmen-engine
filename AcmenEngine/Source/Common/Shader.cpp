@@ -105,14 +105,14 @@ void Shader::SetVector3( const string &name, float x, float y, float z )
 		glUniform3f( location, x, y, z );
 }
 
-void Shader::SetVector3( const string &name,Vector3 vec )
+void Shader::SetVector3( const string &name, glm::vec3 vec )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )
 		glUniform3f( location, vec.x, vec.y, vec.z );
 }
 
-void Shader::SetMatrix4( const string &name, float* value, bool transpose )
+void Shader::SetMatrix4( const string &name, _float* value, _bool transpose )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )
