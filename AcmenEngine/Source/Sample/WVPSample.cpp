@@ -5,7 +5,7 @@ int main( )
 {
 	Windows* window = new Windows( 800, 600 );
 	if ( window != _null )
-		window->Run( );
+		window->run( );
 
 	delete window;
 }

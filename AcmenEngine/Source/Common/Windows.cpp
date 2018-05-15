@@ -6,37 +6,14 @@ void OnKeyCallback( GLFWwindow* window, int key, int scancode, int action, int m
 		glfwSetWindowShouldClose( window, true );
 }
 
-Windows::Windows( _dword w, _dword h )
+Windows::Windows( ) : mWidth( 800 ), mHeight( 600 )
 {
-	mWidth = w;
-	mHeight = h;
-	glfwInit( );
-	glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
-	glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3 );
-	glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
+	initWindows( );
+}
 
-	mWindow = glfwCreateWindow( mWidth, mHeight, "Acmen", NULL, NULL );
-	if ( mWindow == _null )
-	{
-		Trace::TraceString( "[WM] Create windows failed!" );
-		return;
-	}
-
-	glfwMakeContextCurrent( mWindow );
-	glfwSetKeyCallback( mWindow, OnKeyCallback );
-
-	glewExperimental = GL_TRUE;
-	if ( glewInit( ) != GLEW_OK )
-	{
-		Trace::TraceString( "[WM] Failed to initialize GLEW" );
-		return;
-	}
-
-	int width, height;
-	glfwGetFramebufferSize( mWindow, &width, &height );
-	glViewport( 0, 0, width, height );
-	glEnable( GL_DEPTH_TEST );
-	mRenderer = new Renderer( );
+Windows::Windows( _dword w, _dword h ) : mWidth( w ), mHeight( h )
+{
+	initWindows( );
 }
 
 Windows::~Windows( )
@@ -45,12 +22,19 @@ Windows::~Windows( )
 		mRenderer->~Renderer( );
 }
 
-void Windows::Run( )
+_bool Windows::ReSize( _dword w, _dword h )
+{
+	mWidth =  w;
+	mHeight = h;
+	initWindows( );
+}
+
+_void Windows::Run( )
 {
 	if ( mWindow == _null )
 		return;
 
-	while (!glfwWindowShouldClose( mWindow ) )
+	while ( !glfwWindowShouldClose( mWindow ) )
 	{
 		glfwPollEvents( );
 		if ( mRenderer != _null )
@@ -63,4 +47,41 @@ void Windows::Run( )
 	}
 
 	glfwTerminate( );
+}
+
+_void Windows::initWindows( )
+{
+	glfwInit( );
+	glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
+	glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3 );
+	glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
+	glewExperimental = GL_TRUE;
+
+	mWindow = glfwCreateWindow( mWidth, mHeight, "Acmen", NULL, NULL );
+	if ( mWindow == _null )
+	{
+		Trace::TraceString( "[WM] Create windows failed!" );
+		return;
+	}
+
+	if ( glewInit( ) != GLEW_OK )
+	{
+		Trace::TraceString( "[WM] Initialize windows failed!" );
+		return;
+	}
+
+	glfwSetFramebufferSizeCallback( mWindow, &(this->onReSize) );
+	glfwMakeContextCurrent( mWindow );
+	glfwSetKeyCallback( mWindow, this->processInput );
+	glEnable( GL_DEPTH_TEST );
+	mRenderer = new Renderer( );
+}
+
+_void Windows::processInput( GLFWwindow* window, int key, int scancode, int action, int mode )
+{
+}
+
+_void Windows::onReSize( GLFWwindow* window, _long width, _long height )
+{
+	glViewport( 0, 0, width, height );
 }
