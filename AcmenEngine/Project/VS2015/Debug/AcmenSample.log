@@ -1,7 +1,0 @@
-﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  WVPSample.cpp
-MSVCRTD.lib(initializers.obj) : warning LNK4098: 默认库“msvcrt.lib”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
-MSVCRTD.lib(initializers.obj) : warning LNK4098: 默认库“libcmt.lib”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
-glew32s.lib(glew.obj) : warning LNK4099: 未找到 PDB“vc100.pdb”(使用“glew32s.lib(glew.obj)”或在“F:\Develop\opengl\Acmen-engine\AcmenEngine\Project\VS2015\Output\vc100.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-  AcmenSample.vcxproj -> F:\Develop\opengl\Acmen-engine\AcmenEngine\Project\VS2015\$..\..\Output\AcmenSample.exe
-  AcmenSample.vcxproj -> F:\Develop\opengl\Acmen-engine\AcmenEngine\Project\VS2015\$..\..\Output\AcmenSample.pdb (Partial PDB)
