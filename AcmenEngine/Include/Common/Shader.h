@@ -8,7 +8,7 @@ class Shader
 public:
 	_dword mShaderProgram;
 
-	Shader( const char* vertexPath, const char* fragmentPath );
+	Shader( const string& vertexPath, const string& fragmentPath, _bool isFile );
 	inline ~Shader( )
 		{ }
 

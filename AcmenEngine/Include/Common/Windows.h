@@ -10,6 +10,7 @@
 
 namespace Acmen
 {
+
 class Renderer;
 
 class Windows
@@ -19,13 +20,23 @@ public:
 	typedef _void (*OnKeyDown)( _dword keyCode );
 	typedef _void (*OnKeyUp)( _dword keyCode );
 
+	static Windows*		sInstance;
+
+	OnIdle				mIdleFunc;
+	OnKeyDown			mKeyDownFunc;
+	OnKeyUp				mKeyUpFunc;
+
 	_dword			mWidth;
 	_dword			mHeight;
 	Renderer*		mRenderer;
+	Camera*			mCamera;
+	glm::mat4		mProjection;
 	GLFWwindow*		mWindow;
 
 
 public:
+	static Windows* GetInstance( );
+
 	Windows( );
 	Windows( _dword w, _dword h );
 	~Windows( );
@@ -37,19 +48,19 @@ public:
 	inline _void SetKeyUpFunc( OnKeyUp funcptr )
 		{ mKeyUpFunc = funcptr; }
 
-	_bool ReSize( _dword w, _dword h );
+	_void ReSize( _dword w, _dword h );
 	_void Run( );
+	_void Close( );
+
+	inline Renderer* GetRenderer( )
+		{ return mRenderer; }
+	inline Camera* GetCamera( )
+		{ return mCamera; }
+	inline glm::mat4 GetProjection( )
+		{ return mProjection; }
 
 private:
 	_void initWindows( );
-	_void processInput( GLFWwindow* window, int key, int scancode, int action, int mode );
-	_void onReSize( GLFWwindow* window, _long width, _long height );
-	
-
-protected:
-	OnIdle				mIdleFunc;
-	OnKeyDown			mKeyDownFunc;
-	OnKeyUp				mKeyUpFunc;
 
 };
 

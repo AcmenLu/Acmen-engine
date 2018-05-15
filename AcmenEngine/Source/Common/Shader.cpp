@@ -1,36 +1,45 @@
 #include "Acmen.h"
 
-Shader::Shader( const char* vertexPath, const char* fragmentPath )
+Shader::Shader( const string& vertexPath, const string& fragmentPath, _bool isFile )
 {
-	string vertexCode;
-	string fragmentCode;
-	ifstream vShaderFile;
-	ifstream fShaderFile;
-	vShaderFile.exceptions( ifstream::failbit | ifstream::badbit );
-	fShaderFile.exceptions( ifstream::failbit | ifstream::badbit );
-
-	try
+	const char* vShaderCode;
+	const char* fShaderCode;
+	if ( isFile )
 	{
-		vShaderFile.open( vertexPath );
-		fShaderFile.open( fragmentPath );
-		stringstream vShaderStream, fShaderStream;
-		vShaderStream << vShaderFile.rdbuf( );
-		fShaderStream << fShaderFile.rdbuf( );
+		string vertexCode;
+		string fragmentCode;
+		ifstream vShaderFile;
+		ifstream fShaderFile;
+		vShaderFile.exceptions( ifstream::failbit | ifstream::badbit );
+		fShaderFile.exceptions( ifstream::failbit | ifstream::badbit );
 
-		vShaderFile.close( );
-		fShaderFile.close( );
+		try
+		{
+			vShaderFile.open( vertexPath );
+			fShaderFile.open( fragmentPath );
+			stringstream vShaderStream, fShaderStream;
+			vShaderStream << vShaderFile.rdbuf( );
+			fShaderStream << fShaderFile.rdbuf( );
 
-		vertexCode = vShaderStream.str( );
-		fragmentCode = fShaderStream.str( );
+			vShaderFile.close( );
+			fShaderFile.close( );
+
+			vertexCode = vShaderStream.str( );
+			fragmentCode = fShaderStream.str( );
+		}
+		catch( ifstream::failure e )
+		{
+			 cout << "[ERROR]: Read file failed!" << endl;
+		}
+
+		vShaderCode = vertexCode.c_str( );
+		fShaderCode = fragmentCode.c_str( );
 	}
-	catch( ifstream::failure e )
+	else
 	{
-		 cout << "[ERROR]: Read file failed!" << endl;
+		vShaderCode = vertexPath.c_str( );
+		fShaderCode = fragmentPath.c_str( );
 	}
-
-	const char* vShaderCode = vertexCode.c_str( );
-	const char* fShaderCode = fragmentCode.c_str( );
-
 	unsigned int vertex, fragment;
 	int success;
 	char infoLog[512];
@@ -72,47 +81,47 @@ Shader::Shader( const char* vertexPath, const char* fragmentPath )
 	glDeleteShader( fragment );
 }
 
-void Shader::Use( )
+_void Shader::Use( )
 {
 	glUseProgram( mShaderProgram );
 }
 
-void Shader::SetBool( const string &name, bool value )
+_void Shader::SetBool( const string &name, _bool value )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location > 0 )
 		glUniform1i( location, int( value ) );
 }
 
-void Shader::SetInt( const string &name, int value )
+_void Shader::SetInt( const string &name, _long value )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location > 0 )
 		glUniform1i( location, value );
 }
 
-void Shader::SetFloat( const string &name, float value )
+_void Shader::SetFloat( const string &name, _float value )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location > 0 )
 		glUniform1f( location, value );
 }
 
-void Shader::SetVector3( const string &name, float x, float y, float z )
+_void Shader::SetVector3( const string &name, _float x, _float y, _float z )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )
 		glUniform3f( location, x, y, z );
 }
 
-void Shader::SetVector3( const string &name, glm::vec3 vec )
+_void Shader::SetVector3( const string &name, glm::vec3 vec )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )
 		glUniform3f( location, vec.x, vec.y, vec.z );
 }
 
-void Shader::SetMatrix4( const string &name, _float* value, _bool transpose )
+_void Shader::SetMatrix4( const string &name, _float* value, _bool transpose )
 {
 	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )

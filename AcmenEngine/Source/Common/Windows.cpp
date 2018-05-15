@@ -1,19 +1,44 @@
 #include "Acmen.h"
 
-void OnKeyCallback( GLFWwindow* window, int key, int scancode, int action, int mode )
+_void OnKeyCallback( GLFWwindow* window, _long key, _long scancode, _long action, _long mode )
 {
-	if ( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
-		glfwSetWindowShouldClose( window, true );
+	if ( action == GLFW_PRESS )
+	{
+		if ( Windows::GetInstance( ) != _null && Windows::GetInstance( )->mKeyDownFunc )
+			Windows::GetInstance( )->mKeyDownFunc( key );
+	}
+	else if ( action == GLFW_RELEASE )
+	{
+		if ( Windows::GetInstance( ) != _null && Windows::GetInstance( )->mKeyUpFunc )
+			Windows::GetInstance( )->mKeyUpFunc( key );
+	}
+}
+
+_void OnReSize( GLFWwindow* window, _long width, _long height )
+{
+	glViewport( 0, 0, width, height );
+}
+
+Windows* Windows::sInstance = _null;
+
+Windows* Windows::GetInstance( )
+{
+	if ( sInstance == _null )
+		sInstance = new Windows( );
+
+	return sInstance;
 }
 
 Windows::Windows( ) : mWidth( 800 ), mHeight( 600 )
 {
 	initWindows( );
+	sInstance = this;
 }
 
 Windows::Windows( _dword w, _dword h ) : mWidth( w ), mHeight( h )
 {
 	initWindows( );
+	sInstance = this;
 }
 
 Windows::~Windows( )
@@ -22,9 +47,9 @@ Windows::~Windows( )
 		mRenderer->~Renderer( );
 }
 
-_bool Windows::ReSize( _dword w, _dword h )
+_void Windows::ReSize( _dword w, _dword h )
 {
-	mWidth =  w;
+	mWidth = w;
 	mHeight = h;
 	initWindows( );
 }
@@ -49,6 +74,11 @@ _void Windows::Run( )
 	glfwTerminate( );
 }
 
+_void Windows::Close( )
+{
+	glfwSetWindowShouldClose( mWindow, _true );
+}
+
 _void Windows::initWindows( )
 {
 	glfwInit( );
@@ -63,25 +93,27 @@ _void Windows::initWindows( )
 		Trace::TraceString( "[WM] Create windows failed!" );
 		return;
 	}
-
+	glfwMakeContextCurrent( mWindow );
 	if ( glewInit( ) != GLEW_OK )
 	{
 		Trace::TraceString( "[WM] Initialize windows failed!" );
 		return;
 	}
 
-	glfwSetFramebufferSizeCallback( mWindow, &(this->onReSize) );
-	glfwMakeContextCurrent( mWindow );
-	glfwSetKeyCallback( mWindow, this->processInput );
+	glfwSetFramebufferSizeCallback( mWindow, OnReSize );
+	glfwSetKeyCallback( mWindow, OnKeyCallback );
 	glEnable( GL_DEPTH_TEST );
-	mRenderer = new Renderer( );
-}
 
-_void Windows::processInput( GLFWwindow* window, int key, int scancode, int action, int mode )
-{
-}
 
-_void Windows::onReSize( GLFWwindow* window, _long width, _long height )
-{
-	glViewport( 0, 0, width, height );
+	_long width, height;
+	glfwGetFramebufferSize( mWindow, &width, &height );
+	OnReSize( mWindow, width, height );
+
+	if ( mRenderer == _null )
+		mRenderer = new Renderer( );
+
+	if ( mCamera == _null )
+		mCamera = new Camera( );
+
+	mProjection = glm::perspective( glm::radians( 45.0f ), (_float)mWidth / (_float)mHeight, 0.1f, 100.0f );
 }
