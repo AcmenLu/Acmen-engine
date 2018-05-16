@@ -56,10 +56,11 @@ _void Texture::InitShader( )
 	string vsstr = "#version 330 core\n" \
 					"layout (location = 0) in vec4 vertex;\n" \
 					"out vec2 TexCoords;\n" \
+					"uniform mat4 transform;\n" \
 					"void main()\n" \
 					"{\n" \
 					"TexCoords = vertex.zw;\n" \
-					"gl_Position = vec4(vertex.xy, 0.0, 1.0);\n" \
+					"gl_Position = transform * vec4(vertex.xy, 0.0, 1.0);\n" \
 					"}";
 
 	string psstr = "#version 330 core\n" \
@@ -78,8 +79,15 @@ _void Texture::BindShaderData( )
 	if ( mShader == _null )
 		return;
 
+	glm::mat4 pro = Windows::GetInstance( )->mRenderer->GetProjection2D( );
+	glm::mat4 view;
+	view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	glm::mat4 transform = pro * view * mTransform;
+
 	mShader->Use( );
 	mShader->SetInt( "image", 0 );
+
+	mShader->SetMatrix4( "transform", glm::value_ptr( transform ), false );
 
 }
 _void Texture::LoadImage( const string& filename )
