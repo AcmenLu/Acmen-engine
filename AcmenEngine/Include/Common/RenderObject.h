@@ -7,8 +7,7 @@ class RenderObject
 public:
 	inline RenderObject( ){}
 	inline ~RenderObject( ){}
-	inline void Render( )
-		{ }
+	virtual inline void Render( ) = 0;
 };
 
 };

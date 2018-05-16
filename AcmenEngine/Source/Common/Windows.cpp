@@ -17,10 +17,11 @@ _void OnKeyCallback( GLFWwindow* window, _long key, _long scancode, _long action
 _void OnReSize( GLFWwindow* window, _long width, _long height )
 {
 	glViewport( 0, 0, width, height );
+	//if ( Windows::GetInstance( )->mRenderer != _null )
+	//	Windows::GetInstance( )->mRenderer->ResetProjection( (_float)width, (_float)height );
 }
 
 Windows* Windows::sInstance = _null;
-
 Windows* Windows::GetInstance( )
 {
 	if ( sInstance == _null )
@@ -108,12 +109,4 @@ _void Windows::initWindows( )
 	_long width, height;
 	glfwGetFramebufferSize( mWindow, &width, &height );
 	OnReSize( mWindow, width, height );
-
-	if ( mRenderer == _null )
-		mRenderer = new Renderer( );
-
-	if ( mCamera == _null )
-		mCamera = new Camera( );
-
-	mProjection = glm::perspective( glm::radians( 45.0f ), (_float)mWidth / (_float)mHeight, 0.1f, 100.0f );
 }

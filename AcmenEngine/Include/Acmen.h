@@ -17,10 +17,10 @@
 
 #include "Common/Camera.h"
 #include "Common/Shader.h"
+#include "Common/RenderObject.h"
 #include "Common/Texture.h"
 #include "Common/Mesh.h"
 #include "Common/Model.h"
-#include "Common/RenderObject.h"
 #include "Common/Renderer.h"
 #include "Common/Windows.h"
 

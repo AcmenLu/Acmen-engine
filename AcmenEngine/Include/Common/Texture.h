@@ -11,12 +11,13 @@ public:
 	glm::mat4	mTransform;
 
 public:
-	Texture( );
+	Texture( const string& filename );
 	~Texture( );
 	_void InitData( );
 	_void InitShader( );
-	_void Render( );
 	_void LoadImage( const string& filename );
+	_void BindShaderData( );
+	virtual _void Render( );
 
 };
 

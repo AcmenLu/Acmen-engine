@@ -3,10 +3,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Texture::Texture( )
+Texture::Texture( const string& filename )
 {
 	mTransform = glm::mat4( );
 	InitData( );
+	InitShader( );
+	LoadImage( filename );
+	BindShaderData( );
 }
 
 Texture::~Texture( )
@@ -20,55 +23,65 @@ Texture::~Texture( )
 
 _void Texture::InitData( )
 {
-	_dword VBO;
 	_float vertices[] = {
-		0.0f, 1.0f, 0.0f, 1.0f,
-		1.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 0.0f, 
-
-		0.0f, 1.0f, 0.0f, 1.0f,
-		1.0f, 1.0f, 1.0f, 1.0f,
-		1.0f, 0.0f, 1.0f, 0.0f
+		0.5f,  0.5f, 1.0f, 1.0f,
+		0.5f, -0.5f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f, 0.0f,
+		-0.5f, 0.5f, 0.0f, 1.0f
 	};
 
-	glGenVertexArrays( 1, &mVAO );
+	_dword indices[] = {
+		0, 1, 3,
+		1, 2, 3
+	};
+	_dword VBO;
 	glGenBuffers( 1, &VBO );
+	glGenVertexArrays( 1, &mVAO );
+	glBindVertexArray( mVAO );
 
 	glBindBuffer( GL_ARRAY_BUFFER, VBO );
 	glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_STATIC_DRAW );
 
-	glBindVertexArray( mVAO );
+	_dword EBO;
+	glGenBuffers( 1, &EBO );
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, EBO );
+	glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof( indices ), indices, GL_STATIC_DRAW );
+
 	glEnableVertexAttribArray( 0 );
 	glVertexAttribPointer( 0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof( _float ), (_void*)0 );
-
-	glBindBuffer( GL_ARRAY_BUFFER, 0 );
-	glBindVertexArray( 0 );
 }
 
 _void Texture::InitShader( )
 {
-	string vsstr = "#version 330 core" \
-					"layout (location = 0) in vec4 vertex;" \
-					"out vec2 TexCoords;" \
-					"uniform mat4 transform;" \
-					"void main()" \
-					"{" \
-					"TexCoords = vertex.zw;" \
-					"gl_Position = transform * vec4(vertex.xy, 0.0, 1.0);" \
+	string vsstr = "#version 330 core\n" \
+					"layout (location = 0) in vec4 vertex;\n" \
+					"out vec2 TexCoords;\n" \
+					"void main()\n" \
+					"{\n" \
+					"TexCoords = vertex.zw;\n" \
+					"gl_Position = vec4(vertex.xy, 0.0, 1.0);\n" \
 					"}";
 
-	string psstr = "#version 330 core" \
-					"in vec2 TexCoords;" \
-					"out vec4 color;" \
-					"uniform sampler2D image;" \
-					"uniform vec3 spriteColor;" \
-					"void main()" \
-					"{" \
-					"color = vec4(spriteColor, 1.0) * texture(image, TexCoords);" \
-					"}";
+	string psstr = "#version 330 core\n" \
+					"out vec4 FragColor;\n" \
+					"in vec2 TexCoords;\n" \
+					"uniform sampler2D image;\n" \
+					"void main()\n" \
+					"{\n" \
+					"FragColor = texture(image, TexCoords);\n" \
+					"}\n";
 	mShader = new Shader( vsstr, psstr, _false );
 }
 
+_void Texture::BindShaderData( )
+{
+	if ( mShader == _null )
+		return;
+
+	mShader->Use( );
+	mShader->SetInt( "image", 0 );
+
+}
 _void Texture::LoadImage( const string& filename )
 {
 	glGenTextures( 1, &mTexture );
@@ -96,14 +109,11 @@ _void Texture::LoadImage( const string& filename )
 
 _void Texture::Render( )
 {
-	mShader->Use();
-	glm::mat4 transform = Windows::GetInstance( )->GetProjection( ) * mTransform;
-	mShader->SetMatrix4( "transform", glm::value_ptr( transform ) );
-
+	mShader->Use( );
 	glActiveTexture( GL_TEXTURE0 );
 	glBindTexture( GL_TEXTURE_2D, mTexture );
 
 	glBindVertexArray( mVAO );
-	glDrawArrays( GL_TRIANGLES, 0, 6 );
+	glDrawElements( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );
 	glBindVertexArray( 0 );
 }

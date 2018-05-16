@@ -26,13 +26,10 @@ public:
 	OnKeyDown			mKeyDownFunc;
 	OnKeyUp				mKeyUpFunc;
 
-	_dword			mWidth;
-	_dword			mHeight;
-	Renderer*		mRenderer;
-	Camera*			mCamera;
-	glm::mat4		mProjection;
-	GLFWwindow*		mWindow;
-
+	Renderer*			mRenderer;
+	_dword				mWidth;
+	_dword				mHeight;
+	GLFWwindow*			mWindow;
 
 public:
 	static Windows* GetInstance( );
@@ -48,16 +45,12 @@ public:
 	inline _void SetKeyUpFunc( OnKeyUp funcptr )
 		{ mKeyUpFunc = funcptr; }
 
+	inline _void BindRenderer( Renderer* renderer )
+		{ mRenderer = renderer; }
+
 	_void ReSize( _dword w, _dword h );
 	_void Run( );
 	_void Close( );
-
-	inline Renderer* GetRenderer( )
-		{ return mRenderer; }
-	inline Camera* GetCamera( )
-		{ return mCamera; }
-	inline glm::mat4 GetProjection( )
-		{ return mProjection; }
 
 private:
 	_void initWindows( );

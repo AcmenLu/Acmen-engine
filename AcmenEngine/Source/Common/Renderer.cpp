@@ -1,16 +1,36 @@
 
 #include "Acmen.h"
 
-void Renderer::OnRender( _float elapse )
+Renderer::Renderer( )
 {
-	glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );
-	for ( _dword i = 0; i < mRenderList.size( ); i++ )
-		mRenderList[i]->Render( );
-
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	mCamera = new Camera( );
+	ResetProjection( _float( Windows::GetInstance( )->mWidth ), Windows::GetInstance( )->mHeight );
 }
 
-void Renderer::ClearRenderList( )
+Renderer::~Renderer( )
+{
+	if ( mCamera != _null )
+	{
+		mCamera->~Camera( );
+		delete mCamera;
+	}
+}
+
+_void Renderer::ResetProjection( _float width, _float height )
+{
+	mProjection3D = glm::perspective( glm::radians( 60.0f ), width / height, 0.1f, 100.0f );
+	mProjection2D = glm::ortho( 0.0f, width, height, 0.0f, -1.0f, 1.0f );
+}
+
+_void Renderer::OnRender( _float elapse )
+{
+	glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	for ( _dword i = 0; i < mRenderList.size( ); i++ )
+		mRenderList[i]->Render( );
+}
+
+_void Renderer::ClearRenderList( )
 {
 	for ( _dword i = mRenderList.size( ) - 1; i >= 0 ; i-- )
 	{
@@ -20,7 +40,7 @@ void Renderer::ClearRenderList( )
 	}
 }
 
-void Renderer::AddRenderObject( RenderObject* object )
+_void Renderer::AddRenderObject( RenderObject* object )
 {
 	_bool isAtList = _false;
 	for ( _dword i = 0; i < mRenderList.size( ); i++ )
@@ -33,7 +53,7 @@ void Renderer::AddRenderObject( RenderObject* object )
 		mRenderList.push_back( object );
 }
 
-void Renderer::RemoveRenderObject( RenderObject* object )
+_void Renderer::RemoveRenderObject( RenderObject* object )
 {
 	for ( _dword i = 0; i < mRenderList.size( ); i++ )
 	{

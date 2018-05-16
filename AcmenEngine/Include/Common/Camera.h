@@ -6,6 +6,7 @@ namespace Acmen
 
 class Camera
 {
+
 public:
 	glm::vec3 mPosition;
 	glm::vec3 mTarget;
