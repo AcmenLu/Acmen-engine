@@ -72,9 +72,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)$..\..\Output</OutDir>
+    <OutDir>$(SolutionDir)..\..\Output</OutDir>
     <IncludePath>..\..\Include;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\Dependencies\glfw\lib;..\..\Library;..\..\Dependencies\glew\lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)..\..\Output\tmp</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$..\..\Output</OutDir>

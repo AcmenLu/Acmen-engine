@@ -94,7 +94,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)..\..\Library</OutDir>
-    <IntDir>tmp\_$(ProjectName)_$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\..\Output\tmp\</IntDir>
     <TargetName>$(ProjectName)</TargetName>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\Dependencies\glfw\lib;..\..\Dependencies\glew\lib;$(LibraryPath)</LibraryPath>

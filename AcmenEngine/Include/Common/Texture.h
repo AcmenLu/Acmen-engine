@@ -8,6 +8,7 @@ public:
 	Shader*		mShader;
 	_dword		mVAO;
 	_dword		mTexture;
+	glm::vec2	mSize;
 	glm::mat4	mTransform;
 
 public:
