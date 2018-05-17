@@ -5,6 +5,4 @@
 *.log
 *.pdb
 *.db
-*.pdb
-*.pdb
-AcmenEngine/Project/VS2015/.vs/AcmenEngine/v14/.suo
+*.suo
