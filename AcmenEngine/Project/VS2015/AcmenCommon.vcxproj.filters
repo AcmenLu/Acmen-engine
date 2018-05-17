@@ -17,9 +17,6 @@
     <ClCompile Include="..\..\Source\Common\Renderer.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Common\RenderObject.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Common\Mesh.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -30,6 +27,12 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Common\Texture.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Common\Cube.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Common\RenderObject.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,6 +71,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\Common\stb_image.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Cube.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
