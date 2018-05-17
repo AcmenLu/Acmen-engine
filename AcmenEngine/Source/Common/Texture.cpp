@@ -82,12 +82,12 @@ _void Texture::BindShaderData( )
 
 	mTransform = glm::scale( mTransform, glm::vec3( mSize, 1.0f ) );
 	glm::mat4 pro = Windows::GetInstance( )->mRenderer->GetProjection2D( );
-
 	mShader->Use( );
 	mShader->SetMatrix4( "projection", glm::value_ptr( pro ), _false );
 	mShader->SetMatrix4( "model", glm::value_ptr( mTransform ), _false );
 	mShader->SetInt( "image", 0 );
 }
+
 _void Texture::LoadImage( const string& filename )
 {
 	glGenTextures( 1, &mTexture );
@@ -98,8 +98,8 @@ _void Texture::LoadImage( const string& filename )
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load( true );
+	_long width, height, nrChannels;
+	//stbi_set_flip_vertically_on_load( _true );
 	unsigned char* data = stbi_load( filename.c_str( ), &width, &height, &nrChannels, 0 );
 	if ( data )
 	{
