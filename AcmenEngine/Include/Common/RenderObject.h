@@ -26,7 +26,7 @@ class RenderObject
 public:
 	vector< Vertex >		mVertices;
 	vector< _dword >		mIndices;
-	vector< Texture >		mTextures;
+	vector< _dword >		mTextures;
 	Shader*					mShader;
 	glm::mat4				mTransform;
 	_dword					mVAO;
@@ -37,8 +37,8 @@ public:
 
 	_void InitVAO( );
 
-	virtual _void InitData( ) = 0;
-	virtual _void InitShader( ) = 0;
+	_void InitData( ){ };
+	_void InitShader( ){};
 	virtual _void Render( ) = 0;
 };
 

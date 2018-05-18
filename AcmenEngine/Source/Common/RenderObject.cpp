@@ -24,6 +24,6 @@ _void RenderObject::InitVAO( )
 	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof( Vertex ), (_void*)offsetof( Vertex, Normal ) );
 
 	// Texcoord
-	glEnableVertexAttribArray( 1 );
+	glEnableVertexAttribArray( 2 );
 	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof( Vertex ), (_void*)offsetof( Vertex, TexCoord ) );
 }

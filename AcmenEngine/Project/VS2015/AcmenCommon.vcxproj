@@ -19,30 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Common\Cube.cpp" />
-    <ClCompile Include="..\..\Source\Common\Mesh.cpp" />
-    <ClCompile Include="..\..\Source\Common\Model.cpp" />
     <ClCompile Include="..\..\Source\Common\Renderer.cpp" />
     <ClCompile Include="..\..\Source\Common\RenderObject.cpp" />
     <ClCompile Include="..\..\Source\Common\Shader.cpp" />
     <ClCompile Include="..\..\Source\Common\Spriter.cpp" />
-    <ClCompile Include="..\..\Source\Common\String.cpp" />
     <ClCompile Include="..\..\Source\Common\Texture.cpp" />
     <ClCompile Include="..\..\Source\Common\Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Camera.h" />
-    <ClInclude Include="..\..\Include\Common\Cube.h" />
-    <ClInclude Include="..\..\Include\Common\Macros.h" />
-    <ClInclude Include="..\..\Include\Common\Mesh.h" />
-    <ClInclude Include="..\..\Include\Common\Model.h" />
     <ClInclude Include="..\..\Include\Common\Renderer.h" />
     <ClInclude Include="..\..\Include\Common\RenderObject.h" />
     <ClInclude Include="..\..\Include\Common\Shader.h" />
     <ClInclude Include="..\..\Include\Common\shaderstr.h" />
     <ClInclude Include="..\..\Include\Common\stb_image.h" />
     <ClInclude Include="..\..\Include\Common\Spriter.h" />
-    <ClInclude Include="..\..\Include\Common\String.h" />
     <ClInclude Include="..\..\Include\Common\Texture.h" />
     <ClInclude Include="..\..\Include\Common\Trace.h" />
     <ClInclude Include="..\..\Include\Common\Typedef.h" />

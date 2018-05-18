@@ -1,9 +1,5 @@
 #pragma once
 
-#define GLEW_STATIC
-#include "glew.h"
-#include "glfw3.h"
-
 #pragma comment( lib, "glfw3" )
 #pragma comment( lib, "glew32s" )
 #pragma comment( lib, "opengl32" )
