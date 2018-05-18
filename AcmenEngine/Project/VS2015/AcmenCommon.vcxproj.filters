@@ -26,13 +26,19 @@
     <ClCompile Include="..\..\Source\Common\Shader.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Common\Texture.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Common\Cube.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Common\RenderObject.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Common\Spriter.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Common\Texture.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Common\String.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,9 +70,6 @@
     <ClInclude Include="..\..\Include\Common\Shader.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Include\Common\Texture.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Include\Common\shaderstr.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -74,6 +77,15 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\Common\Cube.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Spriter.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Texture.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Common\String.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
