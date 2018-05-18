@@ -88,5 +88,8 @@
     <ClInclude Include="..\..\Include\Common\String.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Macros.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

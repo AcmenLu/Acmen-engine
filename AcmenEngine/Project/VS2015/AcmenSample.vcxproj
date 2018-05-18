@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Sample\ImageSample.cpp" />
+    <ClCompile Include="..\..\Source\Sample\test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{569CDEEF-635C-405F-A038-E79F0C31B823}</ProjectGuid>

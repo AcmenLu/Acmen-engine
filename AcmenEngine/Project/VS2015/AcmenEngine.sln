@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcmenCommon", "AcmenCommon.vcxproj", "{4B9FB2F0-3068-4703-9530-B9643B79B892}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AcmenSample", "AcmenSample.vcxproj", "{569CDEEF-635C-405F-A038-E79F0C31B823}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4B9FB2F0-3068-4703-9530-B9643B79B892} = {4B9FB2F0-3068-4703-9530-B9643B79B892}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItem", "SolutionItem", "{BB6AB2A3-0C15-4A2A-BD2D-2792D5321A2D}"
 	ProjectSection(SolutionItems) = preProject

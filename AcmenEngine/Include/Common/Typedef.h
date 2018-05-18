@@ -14,4 +14,5 @@ typedef bool			_bool;
 
 typedef unsigned char	_char;
 typedef wchar_t			_wchar;
+
 };

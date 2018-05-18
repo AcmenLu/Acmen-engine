@@ -13,6 +13,7 @@
 
 // Common
 #include "Common/Typedef.h"
+#include "Common/Macros.h"
 #include "Common/String.h"
 
 #include "Common/Trace.h"
