@@ -9,11 +9,8 @@ Renderer::Renderer( )
 
 Renderer::~Renderer( )
 {
-	if ( mCamera != _null )
-	{
-		mCamera->~Camera( );
-		delete mCamera;
-	}
+	/*if ( mCamera != _null )
+		delete mCamera;*/
 }
 
 _void Renderer::ResetProjection( _float width, _float height )

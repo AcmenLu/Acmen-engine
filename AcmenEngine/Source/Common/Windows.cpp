@@ -44,8 +44,6 @@ Windows::Windows( _dword w, _dword h ) : mWidth( w ), mHeight( h )
 
 Windows::~Windows( )
 {
-	if ( mRenderer != _null )
-		mRenderer->~Renderer( );
 }
 
 _void Windows::ReSize( _dword w, _dword h )

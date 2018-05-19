@@ -35,7 +35,7 @@ public:
 	inline RenderObject( ){ }
 	inline ~RenderObject( ){ }
 
-	_void InitVAO( );
+	virtual _void InitVAO( ) = 0;
 
 	_void InitData( ){ };
 	_void InitShader( ){};

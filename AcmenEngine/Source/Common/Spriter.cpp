@@ -1,11 +1,9 @@
 #include "Acmen.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 Spriter::Spriter( const string& filename ): mTransform( glm::mat4( ) )
 {
 	InitData( filename );
+	InitVAO( );
 	InitShader( );
 	BindShaderData( );
 }
@@ -30,13 +28,41 @@ _void Spriter::InitData( const string& filename )
 	mIndices.push_back( 1 );
 	mIndices.push_back( 3 );
 	mIndices.push_back( 1 );
-	mIndices.push_back( 1 );
+	mIndices.push_back( 2 );
 	mIndices.push_back( 3 );
 
 	Texture texture = Texture( filename );
 	_long width, height, channel;
 	_dword tex = Texture::CreateGLTexture( &texture );
 	mTextures.push_back( tex );
+}
+
+_void Spriter::InitVAO( )
+{
+	_dword VBO;
+	glGenBuffers( 1, &VBO );
+	glGenVertexArrays( 1, &mVAO );
+	glBindVertexArray( mVAO );
+
+	glBindBuffer( GL_ARRAY_BUFFER, VBO );
+	glBufferData( GL_ARRAY_BUFFER, mVertices.size( ) * sizeof( Vertex ), &mVertices[0], GL_STATIC_DRAW );
+
+	_dword EBO;
+	glGenBuffers( 1, &EBO );
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, EBO );
+	glBufferData( GL_ELEMENT_ARRAY_BUFFER, mIndices.size( ) * sizeof( _dword ), &mIndices[0], GL_STATIC_DRAW );
+
+	// Position
+	glEnableVertexAttribArray( 0 );
+	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)0 );
+
+	// Normal
+	glEnableVertexAttribArray( 1 );
+	glVertexAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)offsetof( Vertex, Normal ) );
+
+	// Texcoord
+	glEnableVertexAttribArray( 2 );
+	glVertexAttribPointer( 2, 2, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)offsetof( Vertex, TexCoord ) );
 }
 
 _void Spriter::InitShader( )
@@ -51,8 +77,8 @@ _void Spriter::InitShader( )
 					"uniform mat4 projection;\n" \
 					"void main()\n" \
 					"{\n" \
-					"TexCoords = texcoord;\n" \
-					"gl_Position = projection * view * model * vec4(position, 1.0);\n" \
+					"TexCoord = texcoord;\n" \
+					"gl_Position = vec4(position, 1.0);\n" \
 					"}";
 
 	string psstr = "#version 330 core\n" \
@@ -61,7 +87,7 @@ _void Spriter::InitShader( )
 					"uniform sampler2D texture0;\n" \
 					"void main()\n" \
 					"{\n" \
-					"FragColor = Spriter(texture0, TexCoord);\n" \
+					"FragColor = texture(texture0, TexCoord);\n" \
 					"}\n";
 	mShader = new Shader( vsstr, psstr, _false );
 }
@@ -91,6 +117,6 @@ _void Spriter::Render( )
 	}
 
 	glBindVertexArray( mVAO );
-	glDrawElements( GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0 );
+	glDrawElements( GL_TRIANGLES, mIndices.size( ), GL_UNSIGNED_INT, 0 );
 	glBindVertexArray( 0 );
 }
