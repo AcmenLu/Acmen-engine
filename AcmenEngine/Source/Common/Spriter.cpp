@@ -1,6 +1,6 @@
 #include "Acmen.h"
 
-Spriter::Spriter( const string& filename ): mTransform( glm::mat4( ) )
+Spriter::Spriter( const string& filename ): mShader( _null ), mSize( glm::vec2( ) ), mTransform( glm::mat4( ) )
 {
 	InitData( filename );
 	InitVAO( );
@@ -32,18 +32,18 @@ _void Spriter::InitData( const string& filename )
 	mIndices.push_back( 3 );
 
 	Texture texture = Texture( filename );
-	_long width, height, channel;
+	mSize = glm::vec2( texture.GetWidth( ), texture.GetHeight( ) );
 	_dword tex = Texture::CreateGLTexture( &texture );
 	mTextures.push_back( tex );
 }
 
 _void Spriter::InitVAO( )
 {
-	_dword VBO;
-	glGenBuffers( 1, &VBO );
 	glGenVertexArrays( 1, &mVAO );
 	glBindVertexArray( mVAO );
 
+	_dword VBO;
+	glGenBuffers( 1, &VBO );
 	glBindBuffer( GL_ARRAY_BUFFER, VBO );
 	glBufferData( GL_ARRAY_BUFFER, mVertices.size( ) * sizeof( Vertex ), &mVertices[0], GL_STATIC_DRAW );
 
@@ -53,16 +53,17 @@ _void Spriter::InitVAO( )
 	glBufferData( GL_ELEMENT_ARRAY_BUFFER, mIndices.size( ) * sizeof( _dword ), &mIndices[0], GL_STATIC_DRAW );
 
 	// Position
-	glEnableVertexAttribArray( 0 );
 	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)0 );
-
+	glEnableVertexAttribArray( 0 );
 	// Normal
-	glEnableVertexAttribArray( 1 );
 	glVertexAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)offsetof( Vertex, Normal ) );
-
+	glEnableVertexAttribArray( 1 );
 	// Texcoord
-	glEnableVertexAttribArray( 2 );
 	glVertexAttribPointer( 2, 2, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)offsetof( Vertex, TexCoord ) );
+	glEnableVertexAttribArray( 2 );
+
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+	glBindVertexArray( 0 );
 }
 
 _void Spriter::InitShader( )
@@ -73,12 +74,11 @@ _void Spriter::InitShader( )
 					"layout (location = 2) in vec2 texcoord;\n" \
 					"out vec2 TexCoord;\n" \
 					"uniform mat4 model;\n" \
-					"uniform mat4 view;\n" \
 					"uniform mat4 projection;\n" \
 					"void main()\n" \
 					"{\n" \
 					"TexCoord = texcoord;\n" \
-					"gl_Position = vec4(position, 1.0);\n" \
+					"gl_Position = projection * model * vec4(position, 1.0);\n" \
 					"}";
 
 	string psstr = "#version 330 core\n" \
@@ -98,11 +98,9 @@ _void Spriter::BindShaderData( )
 		return;
 
 	mTransform = glm::scale( mTransform, glm::vec3( mSize, 1.0f ) );
-	glm::mat4 pro = Windows::GetInstance( )->mRenderer->GetProjection2D( );
-	glm::mat4 view = glm::mat4( );
+	glm::mat4 pro = Renderer::GetProjection2D( );
 	mShader->Use( );
 	mShader->SetMatrix4( "projection", glm::value_ptr( pro ), _false );
-	mShader->SetMatrix4( "view", glm::value_ptr( pro ), _false );
 	mShader->SetMatrix4( "model", glm::value_ptr( mTransform ), _false );
 	mShader->SetInt( "texture0", 0 );
 }

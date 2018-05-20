@@ -17,5 +17,8 @@
     <ClCompile Include="..\..\Source\Sample\test.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Sample\MeshSample.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

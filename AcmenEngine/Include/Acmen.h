@@ -6,13 +6,14 @@
 #include <sstream>
 #include <iostream>
 
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #define GLEW_STATIC
-#include "glew.h"
-#include "glfw3.h"
+#include <glew/glew.h>
+#include <glfw/glfw3.h>
+
 // Common
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
@@ -24,9 +25,9 @@
 #include "Common/Renderer.h"
 #include "Common/Windows.h"
 
-
 #include "Common/Spriter.h"
-
+#include "Common/Material.h"
+#include "Common/Mesh.h"
 
 using namespace Acmen;
 using namespace std;

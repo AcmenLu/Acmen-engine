@@ -7,4 +7,6 @@
 *.db
 *.suo
 *.opendb
-*.pdb
+*.ilk
+*.exe
+AcmenEngine/Library/AcmenCommon.lib

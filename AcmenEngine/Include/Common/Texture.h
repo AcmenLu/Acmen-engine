@@ -6,7 +6,7 @@ namespace Acmen
 class Texture
 {
 
-public:
+private:
 	_long			mWidth;
 	_long			mHeight;
 	_long			mChannel;
@@ -18,8 +18,7 @@ public:
 public:
 	inline Texture( )
 		: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( "" ){ }
-	inline Texture( const string& filename )
-		: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( filename ){ }
+	Texture( const string& filename , _bool reversal = _false );
 	~Texture( );
 
 	inline _long GetWidth( )
@@ -33,7 +32,7 @@ public:
 	inline _char* GetData( )
 		{ return mData; }
 
-	_void LoadTexture( _bool reversal = _false );
+private:
 	_void LoadTexture( const string& filename, _bool reversal = _false );
 };
 

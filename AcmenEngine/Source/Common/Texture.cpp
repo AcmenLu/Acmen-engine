@@ -1,10 +1,19 @@
 #include "Acmen.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "Common/stb_image.h"
+
+Texture::Texture( const string& filename, _bool reversal )
+	: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( filename )
+{
+	LoadTexture( filename, reversal );
+}
 
 _dword Texture::CreateGLTexture( Texture* texture ,_dword wrap_s, _dword wrap_t, _dword min_filter, _dword mag_filter )
 {
+	if ( texture->mData == _null )
+		return -1;
+
 	_dword tex;
 	glGenTextures( 1, &tex );
 	glBindTexture( GL_TEXTURE_2D, tex );
@@ -16,7 +25,7 @@ _dword Texture::CreateGLTexture( Texture* texture ,_dword wrap_s, _dword wrap_t,
 
 	if ( texture->GetChannel( ) == 3 )
 		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, texture->GetWidth( ), texture->GetHeight( ), 0, GL_RGB, GL_UNSIGNED_BYTE, texture->GetData( ) );
-	else
+	else if ( texture->GetChannel( ) == 4 )
 		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, texture->GetWidth( ), texture->GetHeight( ), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture->GetData( ) );
 
 	glGenerateMipmap( GL_TEXTURE_2D );
@@ -28,18 +37,7 @@ Texture::~Texture( )
 	if ( mData != _null )
 		stbi_image_free( mData );
 
-	if ( mData != _null )
-		delete mData;
-
 	mData = _null;
-}
-
-_void Texture::LoadTexture( _bool reversal )
-{
-	if ( mResName == "" )
-		return;
-
-	LoadTexture( mResName, reversal );
 }
 
 _void Texture::LoadTexture( const string& filename, _bool reversal )

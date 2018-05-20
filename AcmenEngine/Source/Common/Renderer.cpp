@@ -1,22 +1,22 @@
 
 #include "Acmen.h"
 
-Renderer::Renderer( )
+glm::mat4 Renderer::GetProjection2D( )
 {
-	mCamera = new Camera( );
-	ResetProjection( _float( Windows::GetInstance( )->mWidth ), Windows::GetInstance( )->mHeight );
+	return glm::ortho( 0.0f, (_float)(Windows::GetInstance( )->GetWidth( ) ), (_float)( Windows::GetInstance( )->GetHeight( ) ), 0.0f, -1.0f, 1.0f );
+}
+
+glm::mat4 Renderer::GetProjection3D( )
+{
+	return glm::perspective( glm::radians( 60.0f ), (_float)(Windows::GetInstance( )->GetWidth( ) ) / (_float)( Windows::GetInstance( )->GetHeight( ) ), 0.1f, 100.0f );
 }
 
 Renderer::~Renderer( )
 {
-	/*if ( mCamera != _null )
-		delete mCamera;*/
-}
+	if ( mCamera != _null )
+		delete mCamera;
 
-_void Renderer::ResetProjection( _float width, _float height )
-{
-	mProjection3D = glm::perspective( glm::radians( 60.0f ), width / height, 0.1f, 100.0f );
-	mProjection2D = glm::ortho( 0.0f, width, height, 0.0f, -1.0f, 1.0f );
+	mCamera = _null;
 }
 
 _void Renderer::OnRender( _float elapse )

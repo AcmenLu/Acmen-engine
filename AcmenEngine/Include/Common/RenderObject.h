@@ -9,6 +9,8 @@ struct Vertex
 	glm::vec3 Normal;
 	glm::vec2 TexCoord;
 
+	inline Vertex( )
+		: Position( glm::vec3( ) ), Normal( glm::vec3( ) ), TexCoord( glm::vec2( ) ){ }
 	inline Vertex( _float px, _float py, _float pz, _float nx, _float ny, _float nz, _float tx, _float ty )
 	{
 		Position = glm::vec3( px, py, pz );

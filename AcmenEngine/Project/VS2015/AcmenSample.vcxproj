@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Sample\ImageSample.cpp" />
+    <ClCompile Include="..\..\Source\Sample\MeshSample.cpp" />
     <ClCompile Include="..\..\Source\Sample\test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -75,7 +76,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\..\Output</OutDir>
     <IncludePath>..\..\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\Dependencies\glfw\lib;..\..\Library;..\..\Dependencies\glew\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\Dependencies\lib;..\..\Library;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)..\..\Output\tmp</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -90,7 +91,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Include;..\..\Dependencies\glfw\include;..\..\Dependencies\glew\include;..\..\Dependencies\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Include;..\..\Dependencies\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>

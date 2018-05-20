@@ -1,16 +1,23 @@
 #include "Acmen.h"
 
+#pragma comment( lib, "glfw3" )
+#pragma comment( lib, "glew32s" )
+#pragma comment( lib, "opengl32" )
+
 _void OnKeyCallback( GLFWwindow* window, _long key, _long scancode, _long action, _long mode )
 {
+	if ( Windows::GetInstance( ) == _null )
+		return;
+
 	if ( action == GLFW_PRESS )
 	{
-		if ( Windows::GetInstance( ) != _null && Windows::GetInstance( )->mKeyDownFunc )
-			Windows::GetInstance( )->mKeyDownFunc( key );
+		if ( Windows::GetInstance( )->GetKeyDownCallback( ) != _null )
+			Windows::GetInstance( )->GetKeyDownCallback( )( key );
 	}
 	else if ( action == GLFW_RELEASE )
 	{
-		if ( Windows::GetInstance( ) != _null && Windows::GetInstance( )->mKeyUpFunc )
-			Windows::GetInstance( )->mKeyUpFunc( key );
+		if ( Windows::GetInstance( )->GetKeyUpCallback( ) != _null )
+			Windows::GetInstance( )->GetKeyUpCallback( )( key );
 	}
 }
 

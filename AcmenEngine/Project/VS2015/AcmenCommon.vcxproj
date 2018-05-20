@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Common\Material.cpp" />
+    <ClCompile Include="..\..\Source\Common\Mesh.cpp" />
     <ClCompile Include="..\..\Source\Common\Renderer.cpp" />
     <ClCompile Include="..\..\Source\Common\RenderObject.cpp" />
     <ClCompile Include="..\..\Source\Common\Shader.cpp" />
@@ -28,10 +30,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Camera.h" />
+    <ClInclude Include="..\..\Include\Common\Material.h" />
+    <ClInclude Include="..\..\Include\Common\Mesh.h" />
     <ClInclude Include="..\..\Include\Common\Renderer.h" />
     <ClInclude Include="..\..\Include\Common\RenderObject.h" />
     <ClInclude Include="..\..\Include\Common\Shader.h" />
     <ClInclude Include="..\..\Include\Common\shaderstr.h" />
+    <ClInclude Include="..\..\Include\Common\shader_glsl.h" />
     <ClInclude Include="..\..\Include\Common\stb_image.h" />
     <ClInclude Include="..\..\Include\Common\Spriter.h" />
     <ClInclude Include="..\..\Include\Common\Texture.h" />
@@ -95,7 +100,7 @@
     <IntDir>$(SolutionDir)..\..\Output\tmp\</IntDir>
     <TargetName>$(ProjectName)</TargetName>
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\Dependencies\glfw\lib;..\..\Dependencies\glew\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\Dependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\..\Library</OutDir>
@@ -104,7 +109,7 @@
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>..\..\Dependencies\glfw\lib;..\..\Dependencies\glew\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\Dependencies\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Library</OutDir>
     <IntDir>tmp\_$(ProjectName)_$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -113,7 +118,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Include;..\..\Include\Common;..\..\Dependencies\glfw\include;..\..\Dependencies\glew\include;..\..\Dependencies\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Dependencies\include;..\..\Include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -131,7 +137,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Include;..\..\Include\Common;..\..\Dependencies\glfw\include;..\..\Dependencies\glew\include;..\..\Dependencies\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Dependencies\include;..\..\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
