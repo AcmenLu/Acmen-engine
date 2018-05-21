@@ -26,7 +26,7 @@ _dword Texture::CreateGLTexture( Texture* texture ,_dword wrap_s, _dword wrap_t,
 	if ( texture->GetChannel( ) == 3 )
 		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, texture->GetWidth( ), texture->GetHeight( ), 0, GL_RGB, GL_UNSIGNED_BYTE, texture->GetData( ) );
 	else if ( texture->GetChannel( ) == 4 )
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, texture->GetWidth( ), texture->GetHeight( ), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture->GetData( ) );
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->GetWidth( ), texture->GetHeight( ), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture->GetData( ) );
 
 	glGenerateMipmap( GL_TEXTURE_2D );
 	return tex;

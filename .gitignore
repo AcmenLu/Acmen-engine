@@ -1,6 +1,6 @@
 
 *.tlog
-*.obj
+*/tmp/*.obj
 *.idb
 *.log
 *.pdb

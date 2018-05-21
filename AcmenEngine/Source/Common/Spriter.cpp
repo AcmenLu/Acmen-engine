@@ -107,6 +107,9 @@ _void Spriter::BindShaderData( )
 
 _void Spriter::Render( )
 {
+	if ( mShader == _null )
+		return;
+
 	mShader->Use( );
 	for ( _dword i = 0; i < mTextures.size( ); i ++ )
 	{
