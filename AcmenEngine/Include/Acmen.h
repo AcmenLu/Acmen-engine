@@ -18,6 +18,9 @@
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
 
+#include "Common/Vector3.h"
+#include "Common/Vector4.h"
+
 #include "Common/Shader.h"
 #include "Common/Texture.h"
 #include "Common/RenderObject.h"

@@ -10,3 +10,4 @@
 *.ilk
 *.exe
 AcmenEngine/Library/AcmenCommon.lib
+*.obj
