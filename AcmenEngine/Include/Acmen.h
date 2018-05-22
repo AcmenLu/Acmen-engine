@@ -20,6 +20,7 @@
 
 #include "Common/Vector3.h"
 #include "Common/Vector4.h"
+#include "Common/Matrix4.h"
 
 #include "Common/Shader.h"
 #include "Common/Texture.h"
