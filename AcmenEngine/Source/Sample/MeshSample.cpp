@@ -16,6 +16,10 @@ int main( )
 	renderer = new Renderer( );
 	window->BindRenderer( renderer );
 
+	Spriter* spriter = new Spriter( "resources/textures/awesomeface.png" );
+	renderer->AddRenderObject( spriter );
+	spriter->SetSize( 400, 400 );
+	//spriter->SetPosition( 200, 200 );
 	Mesh* mesh = new Mesh( "resources/objects/nanosuit/nanosuit.obj" );
 	renderer->AddRenderObject( mesh );
 	if ( window != _null )

@@ -1,11 +1,11 @@
 #include "Acmen.h"
 
-Spriter::Spriter( const string& filename ): mShader( _null ), mSize( glm::vec2( ) ), mTransform( glm::mat4( ) )
+Spriter::Spriter( const string& filename ): mShader( _null ), mTransform( glm::mat4( ) )
 {
 	InitData( filename );
 	InitVAO( );
 	InitShader( );
-	BindShaderData( );
+	//BindShaderData( );
 }
 
 Spriter::~Spriter( )
@@ -15,6 +15,18 @@ Spriter::~Spriter( )
 		mShader->~Shader( );
 		delete mShader;
 	}
+}
+
+_void Spriter::SetSize( _float x, _float y )
+{
+	mTransform[0][0] = x;
+	mTransform[1][1] = y;
+}
+
+_void Spriter::SetPosition( _float x, _float y )
+{
+	mTransform[3][0] = x;
+	mTransform[3][1] = y;
 }
 
 _void Spriter::InitData( const string& filename )
@@ -32,8 +44,12 @@ _void Spriter::InitData( const string& filename )
 	mIndices.push_back( 3 );
 
 	Texture texture = Texture( filename );
-	mSize = glm::vec2( texture.GetWidth( ), texture.GetHeight( ) );
-	_dword tex = Texture::CreateGLTexture( &texture );
+	SetSize( texture.GetWidth( ), texture.GetHeight( ) );
+	_dword warp = GL_REPEAT;
+	if ( texture.GetChannel( ) == 4 )
+		warp = GL_CLAMP_TO_EDGE;
+
+	_dword tex = Texture::CreateGLTexture( &texture, warp, warp );
 	mTextures.push_back( tex );
 }
 
@@ -87,7 +103,10 @@ _void Spriter::InitShader( )
 					"uniform sampler2D texture0;\n" \
 					"void main()\n" \
 					"{\n" \
-					"FragColor = texture(texture0, TexCoord);\n" \
+					"vec4 texColor = texture(texture0, TexCoord);\n" \
+					"if (texColor.a < 0.3)\n" \
+					"discard;\n" \
+					"FragColor = texColor;\n" \
 					"}\n";
 	mShader = new Shader( vsstr, psstr, _false );
 }
@@ -97,9 +116,7 @@ _void Spriter::BindShaderData( )
 	if ( mShader == _null )
 		return;
 
-	mTransform = glm::scale( mTransform, glm::vec3( mSize, 1.0f ) );
 	glm::mat4 pro = Renderer::GetProjection2D( );
-	mShader->Use( );
 	mShader->SetMatrix4( "projection", glm::value_ptr( pro ), _false );
 	mShader->SetMatrix4( "model", glm::value_ptr( mTransform ), _false );
 	mShader->SetInt( "texture0", 0 );
@@ -111,6 +128,7 @@ _void Spriter::Render( )
 		return;
 
 	mShader->Use( );
+	BindShaderData( );
 	for ( _dword i = 0; i < mTextures.size( ); i ++ )
 	{
 		glActiveTexture( GL_TEXTURE0 + i );

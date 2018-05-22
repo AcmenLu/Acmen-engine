@@ -11,7 +11,6 @@ private:
 	vector< _dword >		mTextures;
 	Shader*					mShader;
 	_dword					mVAO;
-	glm::vec2				mSize;
 	glm::mat4				mTransform;
 
 public:
@@ -19,7 +18,14 @@ public:
 	~Spriter( );
 
 	inline glm::vec2 GetSize( )
-		{ return mSize; }
+		{ return glm::vec2( mTransform[0][0], mTransform[1][1] ); }
+	_void SetSize( _float x, _float y );
+
+	inline glm::vec2 GetPosition( )
+		{ return glm::vec2( mTransform[3][0], mTransform[3][1] ); }
+	_void SetPosition( _float x, _float y );
+
+
 	inline glm::mat4 GetTransform( )
 		{ return mTransform; }
 

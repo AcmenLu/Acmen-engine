@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Common\Material.cpp" />
+    <ClCompile Include="..\..\Source\Common\Matrix4.cpp" />
     <ClCompile Include="..\..\Source\Common\Mesh.cpp" />
     <ClCompile Include="..\..\Source\Common\Renderer.cpp" />
     <ClCompile Include="..\..\Source\Common\RenderObject.cpp" />
@@ -31,6 +32,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Camera.h" />
     <ClInclude Include="..\..\Include\Common\Material.h" />
+    <ClInclude Include="..\..\Include\Common\Matrix4.h" />
     <ClInclude Include="..\..\Include\Common\Mesh.h" />
     <ClInclude Include="..\..\Include\Common\Renderer.h" />
     <ClInclude Include="..\..\Include\Common\RenderObject.h" />
@@ -42,6 +44,8 @@
     <ClInclude Include="..\..\Include\Common\Texture.h" />
     <ClInclude Include="..\..\Include\Common\Trace.h" />
     <ClInclude Include="..\..\Include\Common\Typedef.h" />
+    <ClInclude Include="..\..\Include\Common\Vector3.h" />
+    <ClInclude Include="..\..\Include\Common\Vector4.h" />
     <ClInclude Include="..\..\Include\Common\Windows.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

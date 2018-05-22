@@ -109,7 +109,8 @@ _void Windows::initWindows( )
 	glfwSetFramebufferSizeCallback( mWindow, OnReSize );
 	glfwSetKeyCallback( mWindow, OnKeyCallback );
 	glEnable( GL_DEPTH_TEST );
-
+	glEnable( GL_CULL_FACE );
+	glCullFace( GL_BACK );
 
 	_long width, height;
 	glfwGetFramebufferSize( mWindow, &width, &height );
