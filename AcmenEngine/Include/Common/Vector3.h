@@ -30,6 +30,8 @@ public:
 		: x( 0.0f ), y( 0.0f ), z( 0.0f ){ }
 	inline Vector3( _float nx, _float ny, _float nz )
 		: x( nx ), y( ny ), z( nz ){ }
+	inline Vector3( const Vector2& v, _float zz )
+		: x( v.x ), y( v.y ), z( zz ){ }
 	inline Vector3( const Vector3& v )
 		: x( v.x ), y( v.y ), z( v.z ){ }
 
