@@ -91,5 +91,8 @@
     <ClInclude Include="..\..\Include\Common\Vector4.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Vector2.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

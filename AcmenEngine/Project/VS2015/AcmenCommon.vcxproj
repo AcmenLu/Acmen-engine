@@ -44,6 +44,7 @@
     <ClInclude Include="..\..\Include\Common\Texture.h" />
     <ClInclude Include="..\..\Include\Common\Trace.h" />
     <ClInclude Include="..\..\Include\Common\Typedef.h" />
+    <ClInclude Include="..\..\Include\Common\Vector2.h" />
     <ClInclude Include="..\..\Include\Common\Vector3.h" />
     <ClInclude Include="..\..\Include\Common\Vector4.h" />
     <ClInclude Include="..\..\Include\Common\Windows.h" />

@@ -18,6 +18,7 @@
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
 
+#include "Common/Vector2.h"
 #include "Common/Vector3.h"
 #include "Common/Vector4.h"
 #include "Common/Matrix4.h"
