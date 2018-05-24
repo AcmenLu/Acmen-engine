@@ -17,8 +17,10 @@ private:
 	Material*				mMaterial;
 	Shader*					mShader;
 	_dword					mVAO;
-	Matrix4					mTransform;
 	string					mResName;
+
+public:
+	Matrix4					mTransform;
 
 public:
 	Mesh( const string& filename );

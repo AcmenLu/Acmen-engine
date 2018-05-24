@@ -11,6 +11,8 @@ private:
 	vector< _dword >		mTextures;
 	Shader*					mShader;
 	_dword					mVAO;
+
+public:
 	Matrix4				mTransform;
 
 public:

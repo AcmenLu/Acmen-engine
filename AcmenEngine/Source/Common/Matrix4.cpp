@@ -103,26 +103,18 @@ Matrix4& Matrix4::operator += ( const Matrix4& mat )
 Matrix4& Matrix4::operator *= ( const Matrix4& mat )
 {
 	Matrix4 tmp = Matrix4( *this );
-	m[0][0] = tmp( 0, 0 ) * mat( 0, 0 ) + tmp( 0, 1 ) * mat( 1, 0 ) + tmp( 0, 2 ) * mat( 2, 0 ) + tmp( 0, 3 ) * mat( 3, 0 );
-	m[0][1] = tmp( 0, 0 ) * mat( 0, 1 ) + tmp( 0, 1 ) * mat( 1, 1 ) + tmp( 0, 2 ) * mat( 2, 1 ) + tmp( 0, 3 ) * mat( 3, 1 );
-	m[0][2] = tmp( 0, 0 ) * mat( 0, 2 ) + tmp( 0, 1 ) * mat( 1, 2 ) + tmp( 0, 2 ) * mat( 2, 2 ) + tmp( 0, 3 ) * mat( 3, 2 );
-	m[0][3] = tmp( 0, 0 ) * mat( 0, 3 ) + tmp( 0, 1 ) * mat( 1, 3 ) + tmp( 0, 2 ) * mat( 2, 3 ) + tmp( 0, 3 ) * mat( 3, 3 );
-	
-	m[1][0] = tmp( 1, 0 ) * mat( 0, 0 ) + tmp( 1, 1 ) * mat( 1, 0 ) + tmp( 1, 2 ) * mat( 2, 0 ) + tmp( 1, 3 ) * mat( 3, 0 );
-	m[1][1] = tmp( 1, 0 ) * mat( 0, 1 ) + tmp( 1, 1 ) * mat( 1, 1 ) + tmp( 1, 2 ) * mat( 2, 1 ) + tmp( 1, 3 ) * mat( 3, 1 );
-	m[1][2] = tmp( 1, 0 ) * mat( 0, 2 ) + tmp( 1, 1 ) * mat( 1, 2 ) + tmp( 1, 2 ) * mat( 2, 2 ) + tmp( 1, 3 ) * mat( 3, 2 );
-	m[1][3] = tmp( 1, 0 ) * mat( 0, 3 ) + tmp( 1, 1 ) * mat( 1, 3 ) + tmp( 1, 2 ) * mat( 2, 3 ) + tmp( 1, 3 ) * mat( 3, 3 );
 
-	m[2][0] = tmp( 2, 0 ) * mat( 0, 0 ) + tmp( 2, 1 ) * mat( 1, 0 ) + tmp( 2, 2 ) * mat( 2, 0 ) + tmp( 2, 3 ) * mat( 3, 0 );
-	m[2][1] = tmp( 2, 0 ) * mat( 0, 1 ) + tmp( 2, 1 ) * mat( 1, 1 ) + tmp( 2, 2 ) * mat( 2, 1 ) + tmp( 2, 3 ) * mat( 3, 1 );
-	m[2][2] = tmp( 2, 0 ) * mat( 0, 2 ) + tmp( 2, 1 ) * mat( 1, 2 ) + tmp( 2, 2 ) * mat( 2, 2 ) + tmp( 2, 3 ) * mat( 3, 2 );
-	m[2][3] = tmp( 2, 0 ) * mat( 0, 3 ) + tmp( 2, 1 ) * mat( 1, 3 ) + tmp( 2, 2 ) * mat( 2, 3 ) + tmp( 2, 3 ) * mat( 3, 3 );
-
-	m[3][0] = tmp( 3, 0 ) * mat( 0, 0 ) + tmp( 3, 1 ) * mat( 1, 0 ) + tmp( 3, 2 ) * mat( 2, 0 ) + tmp( 3, 3 ) * mat( 3, 0 );
-	m[3][1] = tmp( 3, 0 ) * mat( 0, 1 ) + tmp( 3, 1 ) * mat( 1, 1 ) + tmp( 3, 2 ) * mat( 2, 1 ) + tmp( 3, 3 ) * mat( 3, 1 );
-	m[3][2] = tmp( 3, 0 ) * mat( 0, 2 ) + tmp( 3, 1 ) * mat( 1, 2 ) + tmp( 3, 2 ) * mat( 2, 2 ) + tmp( 3, 3 ) * mat( 3, 2 );
-	m[3][3] = tmp( 3, 0 ) * mat( 0, 3 ) + tmp( 3, 1 ) * mat( 1, 3 ) + tmp( 3, 2 ) * mat( 2, 3 ) + tmp( 3, 3 ) * mat( 3, 3 );
-
+	for ( _dword i = 0; i < 4; i ++ )
+	{
+		for ( _dword j = 0; j < 4; j ++ )
+		{
+			m[i][j] = 0.0f;
+			for( _dword k = 0; k < 4; k ++ )
+			{
+				m[i][j] += tmp( i, k ) * mat( k, j );
+			}
+		}
+	}
 	return *this;
 }
 
@@ -175,13 +167,9 @@ Matrix4& Matrix4::Transpose( )
 	return *this;
 }
 
-Matrix4& Matrix4::Translation( _float x, _float y, _float z )
+Matrix4& Matrix4::Translate( _float x, _float y, _float z )
 {
-	m[0][0] = 1.0f; m[0][1] = 0.0f; m[0][2] = 0.0f; m[0][3] = 0.0f;
-	m[1][0] = 0.0f; m[1][1] = 1.0f; m[1][2] = 0.0f; m[1][3] = 0.0f;
-	m[2][0] = 0.0f; m[2][1] = 0.0f; m[2][2] = 1.0f; m[2][3] = 0.0f;
-	m[3][0] =    x; m[3][1] =    y; m[3][2] =    z; m[3][3] = 1.0f;
-
+	m[3][0] += x;m[3][1] += y; m[3][2] += z;
 	return *this;
 }
 

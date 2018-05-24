@@ -110,7 +110,6 @@ _void Mesh::BindShaderData( )
 
 	Matrix4 pro = Renderer::GetProjection3D( );
 	Matrix4 view = Windows::GetInstance( )->GetRenderer( )->GetCamera( )->GetMatrix( );
-	mShader->Use( );
 	mShader->SetMatrix4( "projection", pro[0], _false );
 	mShader->SetMatrix4( "view", view[0], _false );
 	mShader->SetMatrix4( "model", mTransform[0], _false );
@@ -120,12 +119,16 @@ _void Mesh::BindShaderData( )
 _void Mesh::Render( )
 {
 	for ( _dword i = 0; i < mMeshs.size( ); i ++ )
+	{
+		mMeshs[i]->mTransform *= mTransform;
 		mMeshs[i]->Render( );
+	}
 
 	if ( mShader == _null )
 		return;
 
 	mShader->Use( );
+	BindShaderData( );
 	//for ( _dword i = 0; i < mTextures.size( ); i ++ )
 	//{
 		glActiveTexture( GL_TEXTURE0 );
