@@ -17,7 +17,7 @@ Matrix4 Matrix4::CreateOrthoLH( _float width, _float height, _float znear, _floa
 Matrix4 Matrix4::CreateOrthoRH( _float width, _float height, _float znear, _float zfar )
 {
 	_float xs = 2.0f / width;
-	_float ys = 2.0f / height;
+	_float ys = -2.0f / height;
 	_float zf = 2.0f / ( znear - zfar );
 	_float zn = -( zfar + znear ) / ( zfar - znear );
 
@@ -25,7 +25,7 @@ Matrix4 Matrix4::CreateOrthoRH( _float width, _float height, _float znear, _floa
 		xs, 0.0f, 0.0f, 0.0f,
 		0.0f,   ys, 0.0f, 0.0f,
 		0.0f, 0.0f,   zf, 0.0f,
-		-1.0f, -1.0f,   zn, 1.0f );
+		-1.0f, 1.0f,   zn, 1.0f );
 }
 
 Matrix4 Matrix4::CreatePerspectiveFovLH( _float fovy, _float aspect, _float znear, _float zfar )

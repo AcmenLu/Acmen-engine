@@ -106,7 +106,7 @@ _void Spriter::BindShaderData( )
 
 	glm::mat4 pros = glm::ortho( 0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f );
 	Matrix4 pro = Renderer::GetProjection2D(  );
-	mShader->SetMatrix4( "projection", glm::value_ptr( pros ), _false );
+	mShader->SetMatrix4( "projection", &pro[0][0], _false );
 	mShader->SetMatrix4( "model", &mTransform[0][0], _false );
 	glm::mat4 tran = glm::mat4( );
 	//glm::mat4 pros = glm::ortho( 0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f );
