@@ -1,6 +1,6 @@
 #include "Acmen.h"
 
-Spriter::Spriter( const string& filename ): mShader( _null ), mTransform( glm::mat4( ) )
+Spriter::Spriter( const string& filename ): mShader( _null ), mTransform( Matrix4( ) )
 {
 	InitData( filename );
 	InitVAO( );
@@ -15,18 +15,6 @@ Spriter::~Spriter( )
 		mShader->~Shader( );
 		delete mShader;
 	}
-}
-
-_void Spriter::SetSize( _float x, _float y )
-{
-	mTransform[0][0] = x;
-	mTransform[1][1] = y;
-}
-
-_void Spriter::SetPosition( _float x, _float y )
-{
-	mTransform[3][0] = x;
-	mTransform[3][1] = y;
 }
 
 _void Spriter::InitData( const string& filename )
@@ -44,11 +32,11 @@ _void Spriter::InitData( const string& filename )
 	mIndices.push_back( 3 );
 
 	Texture texture = Texture( filename );
-	SetSize( texture.GetWidth( ), texture.GetHeight( ) );
 	_dword warp = GL_REPEAT;
 	if ( texture.GetChannel( ) == 4 )
 		warp = GL_CLAMP_TO_EDGE;
 
+	mTransform.Scaling( texture.GetWidth( ), texture.GetHeight( ), 1.0f );
 	_dword tex = Texture::CreateGLTexture( &texture, warp, warp );
 	mTextures.push_back( tex );
 }
@@ -116,9 +104,15 @@ _void Spriter::BindShaderData( )
 	if ( mShader == _null )
 		return;
 
-	glm::mat4 pro = Renderer::GetProjection2D( );
-	mShader->SetMatrix4( "projection", glm::value_ptr( pro ), _false );
-	mShader->SetMatrix4( "model", glm::value_ptr( mTransform ), _false );
+	glm::mat4 pros = glm::ortho( 0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f );
+	Matrix4 pro = Renderer::GetProjection2D(  );
+	mShader->SetMatrix4( "projection", glm::value_ptr( pros ), _false );
+	mShader->SetMatrix4( "model", &mTransform[0][0], _false );
+	glm::mat4 tran = glm::mat4( );
+	//glm::mat4 pros = glm::ortho( 0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f );
+	tran = glm::scale(tran, glm::vec3(512.0f, 512.0f, 1.0f));
+	glm::mat4 bt = pros * tran;
+	Matrix4 vec = pro * mTransform;
 	mShader->SetInt( "texture0", 0 );
 }
 

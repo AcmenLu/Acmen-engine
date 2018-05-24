@@ -41,9 +41,9 @@ public:
 		{ return Vector3( -x, -y, -z ); }
 
 	inline Vector3 operator + ( const Vector3& v ) const
-		{ Vector3( x + v.x, y + v.y, z + v.z ); }
+		{ return Vector3( x + v.x, y + v.y, z + v.z ); }
 	inline Vector3 operator - ( const Vector3& v ) const
-		{ Vector3( x - v.x, y - v.y, z - v.z ); }
+		{ return Vector3( x - v.x, y - v.y, z - v.z ); }
 
 	inline Vector3& operator += ( const Vector3& v )
 		{ x += v.x; y += v.y; z += v.z; return *this; }

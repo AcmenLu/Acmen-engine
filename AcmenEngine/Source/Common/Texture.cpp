@@ -17,7 +17,6 @@ _dword Texture::CreateGLTexture( Texture* texture ,_dword wrap_s, _dword wrap_t,
 	_dword tex;
 	glGenTextures( 1, &tex );
 	glBindTexture( GL_TEXTURE_2D, tex );
-
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap_s );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap_t );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter );

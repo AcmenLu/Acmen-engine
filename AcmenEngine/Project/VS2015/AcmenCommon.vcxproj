@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Common\Material.cpp" />
+    <ClCompile Include="..\..\Source\Common\Math.cpp" />
     <ClCompile Include="..\..\Source\Common\Matrix4.cpp" />
     <ClCompile Include="..\..\Source\Common\Mesh.cpp" />
     <ClCompile Include="..\..\Source\Common\Renderer.cpp" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Camera.h" />
     <ClInclude Include="..\..\Include\Common\Material.h" />
+    <ClInclude Include="..\..\Include\Common\Math.h" />
     <ClInclude Include="..\..\Include\Common\Matrix4.h" />
     <ClInclude Include="..\..\Include\Common\Mesh.h" />
     <ClInclude Include="..\..\Include\Common\Renderer.h" />

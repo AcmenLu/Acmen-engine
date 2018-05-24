@@ -1,14 +1,14 @@
 
 #include "Acmen.h"
 
-glm::mat4 Renderer::GetProjection2D( )
+Matrix4 Renderer::GetProjection2D( )
 {
-	return glm::ortho( 0.0f, (_float)(Windows::GetInstance( )->GetWidth( ) ), (_float)( Windows::GetInstance( )->GetHeight( ) ), 0.0f, -1.0f, 1.0f );
+	return Matrix4::CreateOrthoRH( (_float)(Windows::GetInstance( )->GetWidth( ) ), (_float)( Windows::GetInstance( )->GetHeight( ) ), -1.0f, 1.0f );
 }
 
-glm::mat4 Renderer::GetProjection3D( )
+Matrix4 Renderer::GetProjection3D( )
 {
-	return glm::perspective( glm::radians( 60.0f ), (_float)(Windows::GetInstance( )->GetWidth( ) ) / (_float)( Windows::GetInstance( )->GetHeight( ) ), 0.1f, 100.0f );
+	return Matrix4::CreatePerspectiveFovRH( Math::Radians( 60.0f ), (_float)(Windows::GetInstance( )->GetWidth( ) ) / (_float)( Windows::GetInstance( )->GetHeight( ) ), 0.1f, 100.0f );
 }
 
 Renderer::~Renderer( )

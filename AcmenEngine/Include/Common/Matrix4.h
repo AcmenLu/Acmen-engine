@@ -7,10 +7,14 @@ class  Matrix4
 {
 
 public:
+	static Matrix4 CreateOrthoLH( _float width, _float height, _float znear, _float zfar );
+	static Matrix4 CreateOrthoRH( _float width, _float height, _float znear, _float zfar );
 	static Matrix4 CreatePerspectiveFovLH( _float fovy, _float aspect, _float znear, _float zfar );
 	static Matrix4 CreatePerspectiveFovRH( _float fovy, _float aspect, _float znear, _float zfar );
 
-private:
+	static Matrix4 CreateLookAtLH( const Vector3& eye, const Vector3& lookat, const Vector3& upaxis );
+	static Matrix4 CreateLookAtRH( const Vector3& eye, const Vector3& lookat, const Vector3& upaxis );
+public:
 	_float		m[4][4];
 
 public:
@@ -72,9 +76,14 @@ public:
 	inline _bool operator != ( const Matrix4& mat ) const
 		{ return ! operator == ( mat ); }
 
+	inline 	Matrix4& Scaling( const Vector3& v )
+		{  return Scaling( v.x, v.y, v.z ); }
+
+	Vector4		operator * ( const Vector4& vec );
 	Matrix4&	operator += ( const Matrix4& mat );
-	Matrix4&	operator *= ( _float s );
 	Matrix4&	operator *= ( const Matrix4& mat );
+	Matrix4&	operator *= ( _float s );
+
 	_bool		operator == ( const Matrix4& mat ) const;
 
 	Matrix4&	Identity( );
@@ -88,7 +97,7 @@ public:
 	Matrix4&	Rotation( const Vector3& a, _float r );
 
 	Matrix4&	Scaling( _float x, _float y, _float z );
-	Matrix4&	Scaling( const Vector3& v, _float f );
+
 };
 
 }

@@ -1,8 +1,36 @@
 #include "Acmen.h"
 
+Matrix4 Matrix4::CreateOrthoLH( _float width, _float height, _float znear, _float zfar )
+{
+	_float xs = 2.0f / width;
+	_float ys = 2.0f / height;
+	_float zf = 1.0f / ( zfar - znear );
+	_float zn = - znear * zf;
+
+	return Matrix4(
+		xs, 0.0f, 0.0f, 0.0f,
+		0.0f,   ys, 0.0f, 0.0f,
+		0.0f, 0.0f,   zf, 0.0f,
+		0.0f, 0.0f,   zn, 1.0f );
+}
+
+Matrix4 Matrix4::CreateOrthoRH( _float width, _float height, _float znear, _float zfar )
+{
+	_float xs = 2.0f / width;
+	_float ys = 2.0f / height;
+	_float zf = 2.0f / ( znear - zfar );
+	_float zn = -( zfar + znear ) / ( zfar - znear );
+
+	return Matrix4(
+		xs, 0.0f, 0.0f, 0.0f,
+		0.0f,   ys, 0.0f, 0.0f,
+		0.0f, 0.0f,   zf, 0.0f,
+		-1.0f, -1.0f,   zn, 1.0f );
+}
+
 Matrix4 Matrix4::CreatePerspectiveFovLH( _float fovy, _float aspect, _float znear, _float zfar )
 {
-	_float ys = 1.0f / tanf( fovy / 2.0f );
+	_float ys = 1.0f / ::tanf( fovy / 2.0f );
 	_float xs = ys / aspect;
 	_float zf = zfar / ( zfar - znear );
 	_float zn = - znear * zf;
@@ -12,6 +40,54 @@ Matrix4 Matrix4::CreatePerspectiveFovLH( _float fovy, _float aspect, _float znea
 		0.0f,   ys, 0.0f, 0.0f,
 		0.0f, 0.0f,   zf, 1.0f,
 		0.0f, 0.0f,   zn, 0.0f );
+}
+
+Matrix4 Matrix4::CreatePerspectiveFovRH( _float fovy, _float aspect, _float znear, _float zfar )
+{
+	_float ys = 1.0f / ::tanf( fovy / 2.0f );
+	_float xs = ys / aspect;
+	_float zf = zfar / ( znear - zfar );
+	_float zn = znear * zf;
+
+	return Matrix4(
+		xs, 0.0f, 0.0f,  0.0f,
+		0.0f,   ys, 0.0f,  0.0f,
+		0.0f, 0.0f,   zf, -1.0f,
+		0.0f, 0.0f,   zn,  0.0f );
+}
+
+Matrix4 Matrix4::CreateLookAtLH( const Vector3& eye, const Vector3& lookat, const Vector3& upaxis )
+{
+	Vector3 zaxis = ( lookat - eye ).Normalize( );
+	Vector3 xaxis = Vector3::Cross( upaxis, zaxis ).Normalize( );
+	Vector3 yaxis = Vector3::Cross( zaxis, xaxis );
+
+	_float xeye = - Vector3::Dot( xaxis, eye );
+	_float yeye = - Vector3::Dot( yaxis, eye );
+	_float zeye = - Vector3::Dot( zaxis, eye );
+
+	return Matrix4(
+		xaxis.x, yaxis.x, zaxis.x, 0.0f,
+		xaxis.y, yaxis.y, zaxis.y, 0.0f,
+		xaxis.z, yaxis.z, zaxis.z, 0.0f,
+		xeye,    yeye,    zeye, 1.0f );
+}
+
+Matrix4 Matrix4::CreateLookAtRH( const Vector3& eye, const Vector3& lookat, const Vector3& upaxis )
+{
+	Vector3 zaxis = ( eye - lookat ).Normalize( );
+	Vector3 xaxis = Vector3::Cross( upaxis, zaxis ).Normalize( );
+	Vector3 yaxis = Vector3::Cross( zaxis, xaxis );
+
+	_float xeye = - Vector3::Dot( xaxis, eye );
+	_float yeye = - Vector3::Dot( yaxis, eye );
+	_float zeye = - Vector3::Dot( zaxis, eye );
+
+	return Matrix4(
+		xaxis.x, yaxis.x, zaxis.x, 0.0f,
+		xaxis.y, yaxis.y, zaxis.y, 0.0f,
+		xaxis.z, yaxis.z, zaxis.z, 0.0f,
+		xeye,    yeye,    zeye, 1.0f );
 }
 
 Matrix4& Matrix4::operator += ( const Matrix4& mat )
@@ -58,6 +134,14 @@ Matrix4& Matrix4::operator *= ( _float s )
 	m[3][0] *= s; m[3][1] *= s; m[3][2] *= s; m[3][3] *= s;
 
 	return *this;
+}
+
+Vector4 Matrix4::operator * ( const Vector4& vec )
+{
+	return Vector4( m[0][0] * vec.x +  m[0][1] * vec.y +  m[0][2] * vec.w +  m[0][3] * vec.w,
+					m[1][0] * vec.x +  m[1][1] * vec.y +  m[1][2] * vec.w +  m[1][3] * vec.w,
+					m[2][0] * vec.x +  m[2][1] * vec.y +  m[2][2] * vec.w +  m[2][3] * vec.w,
+					m[3][0] * vec.x +  m[3][1] * vec.y +  m[3][2] * vec.w +  m[3][3] * vec.w );
 }
 
 _bool Matrix4::operator == ( const Matrix4& mat ) const
@@ -127,7 +211,7 @@ Matrix4& Matrix4::RotationY( _float r )
 
 Matrix4& Matrix4::RotationZ( _float r )
 {
-	_float sinvalue = sin( r ), cosvalue = cos( r );
+	_float sinvalue = ::sin( r ), cosvalue = ::cos( r );
 
 	m[0][0]	=   cosvalue; m[0][1] = sinvalue; m[0][2] = 0.0f; m[0][3] = 0.0f;
 	m[1][0] = - sinvalue; m[1][1] = cosvalue; m[1][2] = 0.0f; m[1][3] = 0.0f;
@@ -139,7 +223,7 @@ Matrix4& Matrix4::RotationZ( _float r )
 
 Matrix4& Matrix4::Rotation( const Vector3& a, _float r )
 {
-	_float sinvalue = sin( r ), cosvalue = cos( r ), cosreverse = 1.0f - cosvalue;
+	_float sinvalue = ::sin( r ), cosvalue = ::cos( r ), cosreverse = 1.0f - cosvalue;
 
 	Vector3 n( a );
 	n.Normalize( );
@@ -173,27 +257,6 @@ Matrix4& Matrix4::Scaling( _float x, _float y, _float z )
 	m[1][0] = 0.0f; m[1][1] =    y; m[1][2] = 0.0f; m[1][3] = 0.0f;
 	m[2][0] = 0.0f; m[2][1] = 0.0f; m[2][2] =    z; m[2][3] = 0.0f;
 	m[3][0] = 0.0f; m[3][1] = 0.0f; m[3][2] = 0.0f; m[3][3] = 1.0f;
-
-	return *this;
-}
-
-Matrix4& Matrix4::Scaling( const Vector3& v, _float f )
-{
-	Vector3 n( v );
-	n.Normalize( );
-
-	_float k  = f - 1.0f;
-	_float xx = n.x * n.x;
-	_float yy = n.y * n.y;
-	_float zz = n.z * n.z;
-	_float xy = n.x * n.y;
-	_float yz = n.y * n.z;
-	_float zx = n.z * n.x;
-
-	m[0][0]	= 1.0f + k * xx; m[0][1] =        k * xy; m[0][2] =        k * zx; m[0][3] = 0.0f;
-	m[1][0]	=        k * xy; m[1][1] = 1.0f + k * yy; m[1][2] =        k * yz; m[1][3] = 0.0f;
-	m[2][0]	=        k * zx; m[2][1] =        k * yz; m[2][2] = 1.0f + k * zz; m[2][3] = 0.0f;
-	m[3][0] =          0.0f; m[3][1] =          0.0f; m[3][2] =          0.0f; m[3][3] = 1.0f;
 
 	return *this;
 }

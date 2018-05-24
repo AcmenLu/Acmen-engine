@@ -8,42 +8,33 @@ class Camera
 {
 
 public:
-	glm::vec3 mPosition;
-	glm::vec3 mTarget;
-	glm::vec3 mUp;
+	Vector3 mPosition;
+	Vector3 mTarget;
+	Vector3 mUp;
 
-	inline Camera( ): mPosition( glm::vec3( 0.0f, 15.0f, 30.0f )), mTarget( 0.0f, 10.0f, 0.0f ), mUp( 0.0f, 1.0f, 0.0f )
+	inline Camera( ): mPosition( 0.0f, 15.0f, 30.0f ), mTarget( 0.0f, 10.0f, 0.0f ), mUp( 0.0f, 1.0f, 0.0f )
 		{ }
 
 	inline ~Camera( )
 		{ };
 
-	inline glm::vec3 Right( )
-		{ return glm::normalize(glm::cross(mTarget - mPosition, mUp)); }
+	inline Vector3 Right( )
+		{ return Vector3::Cross( mTarget - mPosition, mUp ).Normalize( ); }
 
-	inline glm::vec3 Front( )
-		{ return glm::normalize(mTarget - mPosition); }
+	inline Vector3 Front( )
+		{ return ( mTarget - mPosition ).Normalize( ); }
 
-	inline glm::mat4 GetMatrix( )
-		{ return glm::lookAt( mPosition, mTarget, mUp ); }
+	inline Matrix4 GetMatrix( )
+		{ return Matrix4::CreateLookAtRH( mPosition, mTarget, mUp ); }
 
-	inline void SetPostition( glm::vec3 position )
+	inline void SetPostition( Vector3 position )
 		{ mPosition = position; }
 
-	inline void SetPosition( float x, float y, float z )
-		{ mPosition = glm::vec3( x, y, z ); }
-
-	inline void SetTarget( glm::vec3 target )
+	inline void SetTarget( Vector3 target )
 		{ mTarget = target; }
 
-	inline void SetTarget( float x, float y, float z )
-		{ mTarget = glm::vec3(x, y, z); }
-
-	inline void SetUp( glm::vec3 up )
+	inline void SetUp( Vector3 up )
 		{ mUp = up; }
-
-	inline void SetUp( float x, float y, float z )
-		{ mUp = glm::vec3( x, y, z ); }
 };
 
 };

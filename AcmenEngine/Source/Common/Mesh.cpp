@@ -108,12 +108,12 @@ _void Mesh::BindShaderData( )
 	if ( mShader == _null )
 		return;
 
-	glm::mat4 pro = Renderer::GetProjection3D( );
-	glm::mat4 view = Windows::GetInstance( )->GetRenderer( )->GetCamera( )->GetMatrix( );
+	Matrix4 pro = Renderer::GetProjection3D( );
+	Matrix4 view = Windows::GetInstance( )->GetRenderer( )->GetCamera( )->GetMatrix( );
 	mShader->Use( );
-	mShader->SetMatrix4( "projection", glm::value_ptr( pro ), _false );
-	mShader->SetMatrix4( "view", glm::value_ptr( view ), _false );
-	mShader->SetMatrix4( "model", glm::value_ptr( mTransform ), _false );
+	mShader->SetMatrix4( "projection", pro[0], _false );
+	mShader->SetMatrix4( "view", view[0], _false );
+	mShader->SetMatrix4( "model", mTransform[0], _false );
 	mShader->SetInt( "texture0", 0 );
 }
 
@@ -160,12 +160,12 @@ Mesh* Mesh::ProcessMesh( aiMesh *mesh, const aiScene *scene )
 	for ( _dword i = 0; i < mesh->mNumVertices; i ++ )
 	{
 		Vertex vertex;
-		vertex.Position = glm::vec3( mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z );
-		vertex.Normal = glm::vec3( mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z );
+		vertex.Position = Vector3( mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z );
+		vertex.Normal = Vector3( mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z );
 		if ( mesh->mTextureCoords[0])
-			vertex.TexCoord = glm::vec2( mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y );
+			vertex.TexCoord = Vector2( mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y );
 		else
-			vertex.TexCoord = glm::vec2( 0.0f, 0.0f );
+			vertex.TexCoord = Vector2( 0.0f, 0.0f );
 
 		vertices.push_back( vertex );
 	}

@@ -14,8 +14,8 @@ public:
 	Camera*			mCamera;
 
 public:
-	static glm::mat4 GetProjection2D( );
-	static glm::mat4 GetProjection3D( );
+	static Matrix4 GetProjection2D( );
+	static Matrix4 GetProjection3D( );
 
 public:
 	Renderer( )

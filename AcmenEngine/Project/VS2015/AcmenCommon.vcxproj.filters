@@ -38,6 +38,9 @@
     <ClCompile Include="..\..\Source\Common\Matrix4.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Common\Math.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Typedef.h">
@@ -92,6 +95,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\Common\Vector2.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Math.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

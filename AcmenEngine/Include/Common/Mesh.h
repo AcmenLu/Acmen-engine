@@ -17,7 +17,7 @@ private:
 	Material*				mMaterial;
 	Shader*					mShader;
 	_dword					mVAO;
-	glm::mat4				mTransform;
+	Matrix4					mTransform;
 	string					mResName;
 
 public:
@@ -27,7 +27,7 @@ public:
 
 	inline string GetResName( )
 		{ return mResName; }
-	inline glm::mat4 GetTransform( )
+	inline Matrix4 GetTransform( )
 		{ return mTransform; }
 
 	_void InitData( const string& filename );

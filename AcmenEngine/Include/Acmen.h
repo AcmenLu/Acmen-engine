@@ -17,6 +17,7 @@
 // Common
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
+#include "Common/Math.h"
 
 #include "Common/Vector2.h"
 #include "Common/Vector3.h"
