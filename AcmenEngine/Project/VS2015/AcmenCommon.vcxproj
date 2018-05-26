@@ -24,7 +24,6 @@
     <ClCompile Include="..\..\Source\Common\Matrix4.cpp" />
     <ClCompile Include="..\..\Source\Common\Mesh.cpp" />
     <ClCompile Include="..\..\Source\Common\Renderer.cpp" />
-    <ClCompile Include="..\..\Source\Common\RenderObject.cpp" />
     <ClCompile Include="..\..\Source\Common\Shader.cpp" />
     <ClCompile Include="..\..\Source\Common\Spriter.cpp" />
     <ClCompile Include="..\..\Source\Common\Texture.cpp" />

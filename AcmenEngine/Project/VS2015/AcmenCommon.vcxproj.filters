@@ -20,9 +20,6 @@
     <ClCompile Include="..\..\Source\Common\Shader.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Common\RenderObject.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Common\Spriter.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
