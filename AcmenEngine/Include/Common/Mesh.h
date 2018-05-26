@@ -23,6 +23,8 @@ public:
 	Matrix4					mTransform;
 
 public:
+	inline Mesh( )
+		: mTransform( Matrix4( ) ),mShader( _null ){ }
 	Mesh( const string& filename );
 	Mesh( vector< Vertex > vertices, vector< _dword > indices, Material* material );
 	~Mesh( );
@@ -33,10 +35,10 @@ public:
 		{ return mTransform; }
 
 	_void InitData( const string& filename );
-	virtual _void InitVAO( );
+	_void InitVAO( );
 	_void InitShader( );
 	_void BindShaderData( );
-	virtual _void Render( );
+	_void Render( );
 
 private:
 	_void ProcessNode( aiNode *node, const aiScene *scene );

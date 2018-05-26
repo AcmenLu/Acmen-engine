@@ -15,17 +15,17 @@ Shader::Shader( const string& vertexPath, const string& fragmentPath, _bool isFi
 
 		try
 		{
-			vShaderFile.open( vertexPath );
-			fShaderFile.open( fragmentPath );
-			stringstream vShaderStream, fShaderStream;
-			vShaderStream << vShaderFile.rdbuf( );
-			fShaderStream << fShaderFile.rdbuf( );
+			//vShaderFile.open( vertexPath );
+			//fShaderFile.open( fragmentPath );
+			//stringstream vShaderStream, fShaderStream;
+			//vShaderStream << vShaderFile.rdbuf( );
+			//fShaderStream << fShaderFile.rdbuf( );
 
-			vShaderFile.close( );
-			fShaderFile.close( );
+			//vShaderFile.close( );
+			//fShaderFile.close( );
 
-			vertexCode = vShaderStream.str( );
-			fragmentCode = fShaderStream.str( );
+			//vertexCode = vShaderStream.str( );
+			//fragmentCode = fShaderStream.str( );
 		}
 		catch( ifstream::failure e )
 		{

@@ -11,7 +11,7 @@ private:
 	_long			mHeight;
 	_long			mChannel;
 	string			mResName;
-	_char*			mData;
+	_chara*			mData;
 
 public:
 	static _dword CreateGLTexture( Texture* texture, _dword wrap_s = GL_REPEAT, _dword wrap_t = GL_REPEAT, _dword min_filter = GL_LINEAR, _dword mag_filter = GL_LINEAR );
@@ -29,7 +29,7 @@ public:
 		{ return mChannel; }
 	inline string GetmResName( )
 		{ return mResName; }
-	inline _char* GetData( )
+	inline _chara* GetData( )
 		{ return mData; }
 
 private:

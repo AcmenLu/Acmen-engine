@@ -22,8 +22,10 @@ int main( )
 
 	//Spriter* spriter = new Spriter( "resources/textures/awesomeface.png" );
 	//renderer->AddRenderObject( spriter );
-	mesh = new Mesh( "resources/objects/nanosuit/nanosuit.obj" );
-	renderer->AddRenderObject( mesh );
+	//mesh = new Mesh( "resources/objects/nanosuit/nanosuit.obj" );
+	//renderer->AddRenderObject( mesh );
+	 Model model = Model( "resources/objects/nanosuit/nanosuit.obj" );
+
 	if ( window != _null )
 		window->Run( );
 
