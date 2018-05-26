@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Common\File.cpp" />
     <ClCompile Include="..\..\Source\Common\Material.cpp" />
     <ClCompile Include="..\..\Source\Common\Math.cpp" />
     <ClCompile Include="..\..\Source\Common\Matrix4.cpp" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Camera.h" />
+    <ClInclude Include="..\..\Include\Common\File.h" />
     <ClInclude Include="..\..\Include\Common\Material.h" />
     <ClInclude Include="..\..\Include\Common\Math.h" />
     <ClInclude Include="..\..\Include\Common\Matrix4.h" />

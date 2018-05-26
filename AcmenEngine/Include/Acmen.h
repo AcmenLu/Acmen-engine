@@ -3,8 +3,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <sstream>
-#include <iostream>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -18,6 +16,7 @@
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
 #include "Common/Math.h"
+#include "Common/File.h"
 
 #include "Common/Vector2.h"
 #include "Common/Vector3.h"

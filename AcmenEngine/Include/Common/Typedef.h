@@ -12,6 +12,7 @@ typedef float			_float;
 typedef void			_void;
 typedef bool			_bool;
 
+typedef char			_chara;
 typedef unsigned char	_char;
 typedef wchar_t			_wchar;
 
