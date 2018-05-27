@@ -26,21 +26,6 @@ class RenderObject
 {
 
 public:
-	vector< Vertex >		mVertices;
-	vector< _dword >		mIndices;
-	vector< _dword >		mTextures;
-	Shader*					mShader;
-	Matrix4					mTransform;
-	_dword					mVAO;
-
-public:
-	inline RenderObject( ){ }
-	inline ~RenderObject( ){ }
-
-	virtual _void InitVAO( ) = 0;
-
-	_void InitData( ){ };
-	_void InitShader( ){ };
 	virtual _void Render( ) = 0;
 };
 

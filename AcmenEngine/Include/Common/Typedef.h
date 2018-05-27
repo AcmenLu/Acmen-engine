@@ -16,4 +16,12 @@ typedef char			_char;
 typedef unsigned char	_chara;
 typedef wchar_t			_wchar;
 
+
+#define SAFE_RELESE( t ) \
+{ \
+	if ( t != _null ) \
+		delete t; \
+	t = _null; \
+}
+
 };

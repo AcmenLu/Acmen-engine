@@ -24,7 +24,8 @@ int main( )
 	//renderer->AddRenderObject( spriter );
 	//mesh = new Mesh( "resources/objects/nanosuit/nanosuit.obj" );
 	//renderer->AddRenderObject( mesh );
-	 Model model = Model( "resources/objects/nanosuit/nanosuit.obj" );
+	 Model* model = new Model( "resources/objects/nanosuit/nanosuit.obj" );
+	 renderer->AddRenderObject( model );
 
 	if ( window != _null )
 		window->Run( );
