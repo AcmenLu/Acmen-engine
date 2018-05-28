@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Sample\ImageSample.cpp" />
+    <ClCompile Include="..\..\Source\Sample\LuaJitTest.cpp" />
     <ClCompile Include="..\..\Source\Sample\MeshSample.cpp" />
     <ClCompile Include="..\..\Source\Sample\test.cpp" />
   </ItemGroup>

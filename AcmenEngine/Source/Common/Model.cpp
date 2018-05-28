@@ -2,6 +2,7 @@
 
 Model::Model( const String& filename )
 {
+	mResName = filename;
 	LoadMeshsFromFile( filename );
 }
 
@@ -12,7 +13,6 @@ _void Model::Render( )
 
 	for ( _dword i = 0; i < mMeshs.size( ); i ++ )
 		mMeshs[i]->Render( );
-
 }
 
 _void Model::LoadMeshsFromFile( const String& filename )
@@ -20,13 +20,12 @@ _void Model::LoadMeshsFromFile( const String& filename )
 	File file = File( );
 	file.Open( filename, "r" );
 	String* str = _null;
-	Mesh* mesh = _null;
 	while ( ( str = file.ReadLine( str ) ) != _null )
 	{
 		str->Trim( '\n' );
 		if ( String::StartWith( *str, "mtllib" ) )
 		{
-			Trace::TraceString( "Strat with mtllib" );
+			ReadValueFromStr( *str, MATERIALFILE );
 		}
 		else if ( String::StartWith( *str, "o" ) )
 		{
@@ -55,6 +54,22 @@ _void Model::LoadMeshsFromFile( const String& filename )
 	}
 
 	EndMesh( );
+	file.Close( );
+}
+
+_void Model::LoadMaterialsFromFile( const String& filename )
+{
+	File file = File( );
+	file.Open( filename, "r" );
+	String* str = _null;
+	while ( ( str = file.ReadLine( str ) ) != _null )
+	{
+		str->Trim( '\n' );
+		if ( String::StartWith( *str, "mtllib" ) )
+		{
+			
+		}
+	}
 	file.Close( );
 }
 
@@ -90,7 +105,22 @@ _void Model::ReadValueFromStr( String& strs, ObjType types )
 {
 	vector< String*> list;
 	strs.Split( ' ', list );
-	if ( types == OBJECT && list.size( ) == 2 )
+	if ( types == MATERIALFILE && list.size( ) == 2 )
+	{
+		_long index = mResName.LastIndexOf( '/');
+		String str = "";
+		if ( index > 0 )
+		{
+			String* str = mResName.SubString( 0, index + 1 );
+			*str += (*list[1]);
+		}
+		else
+		{
+			str = (*list[1]);
+		}
+		LoadMaterialsFromFile( str );
+	}
+	else if ( types == OBJECT && list.size( ) == 2 )
 	{
 		EndMesh( );
 		StartMesh( *list[1] );

@@ -113,22 +113,23 @@ String&	String::operator += ( const _char* str )
 	return *this;
 }
 
-String String::SubString( _long start, _long end )
+String* String::SubString( _long start, _long end )
 {
 	if ( start < 0 )
-		return String( );
+		return _null;
 
 	if ( end == -1 || end > mLength )
 		end = mLength;
 
 	if ( end < start )
-		return String( );
+		return _null;
 
 	_dword len = end - start;
 	_char* cha = new _char[len];
 	for ( _dword i = start; i < end; i ++ )
 		cha[i] = mString[i - start];
-	return String( cha );
+
+	return new String( cha );
 }
 
 String& String::TrimStart( const _char ch )
@@ -173,7 +174,7 @@ String& String::Trim( const _char ch )
 	return *this;
 }
 
-vector<String*> & String::Split( const _char str, vector<String*> &list )
+vector<String*>& String::Split( const _char str, vector<String*> &list )
 {
 	if ( str == _null )
 		return list;
@@ -197,4 +198,17 @@ vector<String*> & String::Split( const _char str, vector<String*> &list )
 
 	list.push_back( new String( mString + head ) );
 	return list;
+}
+
+_long String::LastIndexOf( _char ch )
+{
+	_long index = -1;
+	_dword i = 0;
+	while ( mString[i] != '\0' )
+	{
+		if ( mString[i] == ch )
+			index = i;
+		i ++;
+	}
+	return index;
 }

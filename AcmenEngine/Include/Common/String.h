@@ -40,10 +40,11 @@ public:
 	String&	operator = ( const _char* chrs );
 	String&	operator += ( _char ch );
 	String&	operator += ( const _char* str );
-	String	SubString( _long start, _long end = -1 );
+	String*	SubString( _long start, _long end = -1 );
 	String& TrimStart( const _char ch = ' ' );
 	String& TrimEnd( const _char ch = ' ' );
 	String& Trim( const _char ch = ' ' );
 	vector<String*>& Split( const _char str, vector<String*> &list );
+	_long	LastIndexOf( _char ch );
 };
 }
