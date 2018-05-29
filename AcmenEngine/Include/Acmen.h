@@ -32,5 +32,7 @@
 #include "Common/Mesh.h"
 #include "Common/Model.h"
 
+#include "LuaScript/LuaScriptManager.h"
+
 using namespace Acmen;
 using namespace std;
