@@ -60,7 +60,7 @@
     <ProjectGuid>{4B9FB2F0-3068-4703-9530-B9643B79B892}</ProjectGuid>
     <RootNamespace>AcmenEngine</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>AcmenCommon</ProjectName>
+    <ProjectName>Common</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

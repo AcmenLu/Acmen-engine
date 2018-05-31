@@ -1,9 +1,13 @@
 #include "Acmen.h"
 
+// ------------------------------------------------------------------------------
+// ------------------------------	Model	-------------------------------------
+// ------------------------------------------------------------------------------
 Model::Model( const String& filename )
 {
 	mResName = filename;
-	LoadMeshsFromFile( filename );
+	ModelLoader loader = ModelLoader( );
+	loader.LoadMeshsFromFile( filename, mMeshs );
 }
 
 _void Model::Render( )
@@ -15,7 +19,28 @@ _void Model::Render( )
 		mMeshs[i]->Render( );
 }
 
-_void Model::LoadMeshsFromFile( const String& filename )
+// ------------------------------------------------------------------------------
+// -------------------------	ModelLoader	-------------------------------------
+// ------------------------------------------------------------------------------
+ModelLoader::~ModelLoader( )
+{
+	if ( mPositions.size( ) > 0 )
+		mPositions.clear( );
+
+	if ( mNormals.size( ) > 0 )
+		mNormals.clear( );
+
+	if ( mTexcoords.size( ) > 0 )
+		mTexcoords.clear( );
+
+	if ( mFaces.size( ) > 0 )
+		mFaces.clear( );
+
+	if ( mMaterials.size( ) > 0 )
+		mMaterials.clear( );
+}
+
+_void ModelLoader::LoadMeshsFromFile( const String& filename, vector< Mesh* > meshs )
 {
 	File file = File( );
 	file.Open( filename, "r" );
@@ -57,7 +82,7 @@ _void Model::LoadMeshsFromFile( const String& filename )
 	file.Close( );
 }
 
-_void Model::LoadMaterialsFromFile( const String& filename )
+_void ModelLoader::LoadMaterialsFromFile( const String& filename )
 {
 	File file = File( );
 	file.Open( filename, "r" );
@@ -73,12 +98,7 @@ _void Model::LoadMaterialsFromFile( const String& filename )
 	file.Close( );
 }
 
-_void Model::StartMesh( String& loginname )
-{
-
-}
-
-_void Model::EndMesh( )
+_void ModelLoader::EndMesh( )
 {
 	if ( mFaces.size( ) > 0 )
 	{
@@ -101,7 +121,7 @@ _void Model::EndMesh( )
 	mTexcoords.clear( );
 }
 
-_void Model::ReadValueFromStr( String& strs, ObjType types )
+_void ModelLoader::ReadValueFromStr( String& strs, ObjType types )
 {
 	vector< String*> list;
 	strs.Split( ' ', list );

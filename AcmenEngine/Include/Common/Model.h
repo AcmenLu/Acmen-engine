@@ -1,6 +1,24 @@
 #pragma once
 namespace Acmen
 {
+
+class Model : public RenderObject
+{
+public:
+	vector< Mesh* > mMeshs;
+	String			mResName;
+
+public:
+	Model( const String& filename );
+	inline ~Model( )
+		{ }
+
+public:
+	_void Render( );
+};
+
+class ModelLoader
+{
 struct FaceVertex
 {
 	_dword mVIndex;
@@ -18,29 +36,22 @@ enum ObjType
 	FACE = 6,
 };
 
-class Model : public RenderObject
-{
 public:
-	vector< Mesh* > mMeshs;
-	String			mResName;
-
-	vector < Vector3 > mPositions;
-	vector < Vector3 > mNormals;
-	vector < Vector2 > mTexcoords;
-	vector <FaceVertex > mFaces;
+	vector < Vector3 >		mPositions;
+	vector < Vector3 >		mNormals;
+	vector < Vector2 >		mTexcoords;
+	vector < FaceVertex >	mFaces;
+	vector< Material >		mMaterials;
 
 public:
-	Model( const String& filename );
-	inline ~Model( )
-		{ }
-
-public:
-	_void Render( );
-	_void LoadMeshsFromFile( const String& filename );
+	inline ModelLoader( )
+		{}
+	~ModelLoader( );
+	_void LoadMeshsFromFile( const String& filename, vector< Mesh* > meshs );
 	_void LoadMaterialsFromFile( const String& filename );
-	_void StartMesh( String& loginname );
 	_void EndMesh( );
 	_void EndMaterial( );
 	_void ReadValueFromStr( String& strs, ObjType types );
+
 };
 };

@@ -11,6 +11,7 @@ private:
 	Texture*		mDiffuseMap;
 	Texture*		mSpecularMap;
 	Texture*		mHeightMap;
+	String			mResName;
 
 	_dword			mNormalMapId;
 	_dword			mDiffuseMapId;
