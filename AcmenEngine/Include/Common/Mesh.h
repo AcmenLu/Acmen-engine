@@ -12,7 +12,7 @@ private:
 	Material*				mMaterial;
 	Shader*					mShader;
 	_dword					mVAO;
-	String					mResName;
+	string					mResName;
 	_bool					mIsInited;
 
 public:

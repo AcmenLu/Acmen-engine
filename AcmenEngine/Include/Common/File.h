@@ -13,9 +13,10 @@ public:
 	inline File( )
 		{ }
 
-	_bool Open( const String &name, const String &model );
-	String* ReadLine( String* str );
-	String* Read( String* str );
+	_bool	Open( const string& name, const string& model );
+	string	ReadLine( );
+	string	Read( );
+	_bool	Write( string& str );
 	_bool Close( );
 };
 }

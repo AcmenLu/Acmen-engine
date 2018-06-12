@@ -1,51 +1,43 @@
 #include "Acmen.h"
 
-_bool File::Open( const String &name, const String &model )
+_bool File::Open( const string &name, const string &model )
 {
 	Close( );
-	mFile = fopen( name, model );
-	if ( mFile != _null )
-		return _true;
+	errno_t err = ::fopen_s( &mFile, name.c_str( ), model.c_str( ) );
+	if ( err != 0 || mFile == _null )
+		return _false;
 
-	return _false;
+	return _true;
 }
 
-String* File::ReadLine( String* str )
+string File::ReadLine( )
 {
-	if ( mFile == _null )
-		return str;
-
-	_char line[1024];
-	memset( line, 0, 1024 );
-	if ( !feof( mFile ) )
-		fgets( line, 1024, mFile );
-	else
-		return _null;
-
-	if ( str == _null )
-		str = new String( );
-
-	(*str) = line;
-	
-	return str;
-}
-
-String* File::Read( String* str )
-{
-	if ( mFile == _null )
-		return str;
-
-	if ( str == _null )
-		str = new String( );
-
-	_dword length = 1024;
-	_dword index = 0;
-	
+	string tmp = "";
 	_char ch;
 	while( EOF!=( ch = fgetc( mFile ) ) )
-		(*str) += ch;
+	{
+		if ( ch == '\n' )
+			break;
 
-	return str;
+		tmp += ch;
+	}
+
+	return tmp;
+}
+
+string File::Read( )
+{
+	string tmp = "";
+	_char ch;
+	while( EOF!=( ch = fgetc( mFile ) ) )
+		tmp += ch;
+
+	return tmp;
+}
+
+_bool File::Write( string& str )
+{
+	return ::fputs( str.c_str( ), mFile ) >= 0;
 }
 
 _bool File::Close( )
@@ -53,5 +45,5 @@ _bool File::Close( )
 	if ( mFile == _null )
 		return _false;
 
-	return fclose( mFile ) == 0;
+	return ::fclose( mFile ) == 0;
 }

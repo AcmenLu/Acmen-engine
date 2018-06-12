@@ -1,214 +1,35 @@
 #include "Acmen.h"
 
-_bool String::StartWith( const String& srcstr, const String& desstr )
+_bool String::StartWith( const string& srcstr, const string& desstr )
 {
-	if ( srcstr.Length( ) <= 0 || desstr.Length( ) <= 0 )
+	if ( srcstr.size( ) < desstr.size( ) )
 		return _false;
 
-	if ( srcstr.Length( ) < desstr.Length( ) )
-		return _false;
+	return srcstr.substr( 0, desstr.size( ) ) == desstr;
+}
 
-	for( _dword i = 0; i < desstr.Length( ); i ++ )
+_dword String::StrToDword( const string& srcstr )
+{
+	return ::atoi( srcstr.c_str( ) );
+}
+
+_float String::StrToFloat( const string& srcstr )
+{
+	return ::atof( srcstr.c_str( ) );
+}
+
+vector<string> String::Split( const string& srcstr, const string& pattern )
+{
+	vector<string> tmp;
+	_long pos = 0;
+	string str = srcstr + pattern;
+	while ( ( pos = str.find( pattern, 0 ) ) != string::npos )
 	{
-		if ( desstr[i] != srcstr[i] )
-			return _false;
-	}
-	return _true;
-}
-
-_dword String::StrToDword( const String& srcstr )
-{
-	_char* tmp = new _char[srcstr.Length( )];
-	for ( _dword i = 0; i < srcstr.Length( ); i ++ )
-		tmp[i] = srcstr[i];
-	return ::atoi( tmp );
-}
-
-_float String::StrToFloat( const String& srcstr )
-{
-	_char* tmp = new _char[srcstr.Length( )];
-	for ( _dword i = 0; i < srcstr.Length( ); i ++ )
-		tmp[i] = srcstr[i];
-	return ::atof( tmp );
-}
-
-String::String( const _char* str )
-	: mString( _null ), mLength( 0 ), mSize( 0 )
-{
-	_dword len = ::strlen( str );
-	if ( len <= 0 )
-		return;
-
-	Grow( len );
-	::memcpy( mString, str, len );
-	mString[len] = '\0';
-	mLength = len;
-}
-
-String::~String( )
-{
-	mLength = 0;
-	mSize = 0;
-	SAFE_RELESE( mString );
-}
-
-_void String::Grow( _dword length )
-{
-	if ( length <= 0 || mLength + length <= mSize )
-		return;
-
-	if ( mSize == 0 )
-		mSize = 32;
-
-	while ( mLength + length + 1 > mSize )
-		mSize *= 2;
-
-	_char* tmp = new _char[mSize];
-	::memset( tmp, 0, mSize );
-	if ( mString != _null )
-	{
-		::memcpy( mString, tmp, mLength );
-		SAFE_RELESE( mString );
-	}
-	mString = tmp;
-}
-
-String&	String::operator = ( const _char* chrs )
-{
-	SAFE_RELESE( mString );
-	mLength = 0;
-	mSize = 0;
-
-	_dword len = ::strlen( chrs );
-	if ( len > 0 )
-	{
-		Grow( len );
-		::memcpy( mString, chrs, len );
-		mString[len] = '\0';
-		mLength = len;
-	}
-	return *this;
-}
-
-String&	String::operator += ( _char ch )
-{
-	Grow( 1 );
-	mString[mLength++] = ch;
-	mString[mLength] = '\0';
-	return *this;
-}
-
-String&	String::operator += ( const _char* str )
-{
-	_dword len = ::strlen( str );
-	Grow( len );
-	for ( _dword i = 0; i < len; i ++ )
-	{
-		if ( str[i] == '\0' )
-			break;
-
-		mString[mLength++] = str[i];
-	}
-	mString[mLength] = '\0';
-	return *this;
-}
-
-String* String::SubString( _long start, _long end )
-{
-	if ( start < 0 )
-		return _null;
-
-	if ( end == -1 || end > mLength )
-		end = mLength;
-
-	if ( end < start )
-		return _null;
-
-	_dword len = end - start;
-	_char* cha = new _char[len];
-	for ( _dword i = start; i < end; i ++ )
-		cha[i] = mString[i - start];
-
-	return new String( cha );
-}
-
-String& String::TrimStart( const _char ch )
-{
-	_long index = -1;
-	for ( _dword i = 0; i < mLength; i ++ )
-	{
-		if ( mString[i] != ch )
-			break;
-
-		index = i;
-	}
-	if ( index >= 0 )
-	{
-		for ( _dword i = index; i < mLength; i ++ )
-			mString[i - index] = mString[i];
-		
-		mLength -= ( index + 1 );
-		mString[mLength] = '\0';
-	}
-	return *this;
-}
-
-String& String::TrimEnd( const _char ch )
-{
-	if ( mString != _null )
-	{
-		for ( _dword i = mLength - 1; i >= 0; i -- )
-		{
-			if ( mString[i] != ch )
-				break;
-			mString[--mLength] = '\0';
-		}
-	}
-	return *this;
-}
-
-String& String::Trim( const _char ch )
-{
-	TrimStart( ch );
-	TrimEnd( ch );
-	return *this;
-}
-
-vector<String*>& String::Split( const _char str, vector<String*> &list )
-{
-	if ( str == _null )
-		return list;
-
-	_dword head = 0, tail = 0;
-	while( mString[tail] != '\0')
-	{
-		if ( mString[tail] == str )
-		{
-			String* s = new String( );
-			while( head < tail )
-			{
-				(*s) += mString[head];
-				head ++;
-			}
-			list.push_back( s );
-			head = tail + 1;
-		}
-		tail ++;
+		string s = str.substr( 0, pos );
+		if ( s.size( ) > 0 )
+			tmp.push_back( s );
+		str = str.substr( pos + 1, str.size( ) );
 	}
 
-	list.push_back( new String( mString + head ) );
-	return list;
-}
-
-_long String::LastIndexOf( _char ch )
-{
-	_long index = -1;
-	_dword i = 0;
-	while ( mString[i] != '\0' )
-	{
-		if ( mString[i] == ch )
-			index = i;
-		i ++;
-	}
-	return index;
+	return tmp;
 }

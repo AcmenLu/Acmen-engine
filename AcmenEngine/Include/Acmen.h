@@ -23,16 +23,16 @@
 #include "Common/Shader.h"
 #include "Common/Texture.h"
 #include "Common/RenderObject.h"
-#include "Common/Camera.h"
-#include "Common/Renderer.h"
-#include "Common/Windows.h"
 
 #include "Common/Spriter.h"
 #include "Common/Material.h"
 #include "Common/Mesh.h"
 #include "Common/Model.h"
+#include "Common/ModelLoader.h"
 
-#include "LuaScript/LuaScriptManager.h"
+#include "Common/Camera.h"
+#include "Common/Renderer.h"
+#include "Common/Windows.h"
 
 using namespace Acmen;
 using namespace std;
