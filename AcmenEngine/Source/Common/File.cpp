@@ -27,12 +27,13 @@ string File::ReadLine( )
 
 string File::Read( )
 {
-	string tmp = "";
-	_char ch;
-	while( EOF!=( ch = fgetc( mFile ) ) )
-		tmp += ch;
-
-	return tmp;
+	::fseek( mFile, 0L, SEEK_END );
+	long len = ::ftell( mFile );
+	_char* chs = new _char[len + 1];
+	::memset( chs, 0, len + 1 );
+	::fseek( mFile, 0L, SEEK_SET );
+	::fread( chs, sizeof(_char), len, mFile );
+	return chs;
 }
 
 _bool File::Write( string& str )

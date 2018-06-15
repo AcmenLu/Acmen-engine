@@ -27,15 +27,16 @@ public:
 	vector < Vector2 >		mTexcoords;
 	vector < FaceVertex >	mFaces;
 	vector< Material >		mMaterials;
-	vector< Mesh* >			mMeshs;
+	string					mMeshName;
 
 public:
-	inline ModelLoader( )
+	inline ModelLoader( ): mMeshName( "" )
 	{ }
 	~ModelLoader( );
 	_void LoadMeshsFromFile( const string& filename, vector< Mesh* >& meshs );
+	Mesh* LoadMeshFromString( const string& str );
 	_void LoadMaterialsFromFile( const string& filename );
-	_void EndMesh( );
+	_void CreateSubMesh(  vector< Mesh* >& meshs, string name = "" );
 	//_void EndMaterial( );
 	_void ReadValueFromStr( const string& strs, ObjType types );
 

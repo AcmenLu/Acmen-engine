@@ -24,20 +24,34 @@ ModelLoader::~ModelLoader( )
 
 _void ModelLoader::LoadMeshsFromFile( const string& filename, vector< Mesh* >& meshs )
 {
-	mMeshs = meshs;
-
 	File file = File( );
-	file.Open( filename, "r" );
-	string str;
-	while ( ( str = file.ReadLine( ) ) != "" )
+	file.Open( filename, "rb" );
+	string str = file.Read( );
+	file.Close( );
+	vector<string> objs = String::Split( str, "\no " );
+	for ( _dword i = 0; i < objs.size( ); i ++ )
 	{
-		if ( String::StartWith( str, "mtllib" ) )
+		if ( String::StartWith( objs[i], "o " ) )
+		{
+			
+		}
+		else
+		{
+
+		}
+	}
+	//Trace::TraceString( str );
+	//while ( ( str = file.ReadLine( ) ) != "" )
+	//{
+		//strs.push_back( str );
+		/*if ( String::StartWith( str, "mtllib" ) )
 		{
 			ReadValueFromStr( str, MATERIALFILE );
 		}
 		else if ( String::StartWith( str, "o" ) )
 		{
-			ReadValueFromStr( str, OBJECT );
+			vector< string> list = String::Split( str, " " );
+			CreateSubMesh( meshs, list[1] );
 		}
 		else if ( String::StartWith( str, "vt" ) )
 		{
@@ -58,11 +72,38 @@ _void ModelLoader::LoadMeshsFromFile( const string& filename, vector< Mesh* >& m
 		else if ( String::StartWith( str, "f" ) )
 		{
 			ReadValueFromStr( str, FACE );
+		}*/
+	//}
+
+	CreateSubMesh( meshs );
+	//file.Close( );
+}
+
+
+Mesh* ModelLoader::LoadMeshFromString( const string& str )
+{
+	vector<string> linis = String::Split( str, "\r\n" );
+	vector < Vector3 >		positions;
+	vector < Vector3 >		normals;
+	vector < Vector2 >		mTexcoords;
+	vector < FaceVertex >	mFaces;
+	Mesh* mesh = new Mesh( );
+	for ( _dword i = 0; i < linis.size( ); i++ )
+	{
+		vector<string> tmps = String::Split( linis[i], " " );
+		if ( String::StartWith( linis[i], "o" ) )
+		{
+			mesh->SetResName( String::TrimWith( tmps[1], " " ) );
+		}
+		else if ( String::StartWith( linis[i], "v" ) )
+		{
+			Vector3 vec = Vector3( String::StrToFloat( tmps[1] ), String::StrToFloat( tmps[2] ), String::StrToFloat( tmps[3] ) );
+			if ( String::StartWith( linis[i], "vn" ) )
+				positions.push_back( vec );
+			else
+				normals.push_back( vec );
 		}
 	}
-
-	EndMesh( );
-	file.Close( );
 }
 
 _void ModelLoader::LoadMaterialsFromFile( const string& filename )
@@ -80,7 +121,7 @@ _void ModelLoader::LoadMaterialsFromFile( const string& filename )
 	file.Close( );
 }
 
-_void ModelLoader::EndMesh( )
+_void ModelLoader::CreateSubMesh(  vector< Mesh* >& meshs, string name )
 {
 	if ( mFaces.size( ) > 0 )
 	{
@@ -96,8 +137,9 @@ _void ModelLoader::EndMesh( )
 			vertex.TexCoord = mTexcoords[tIndex];
 			mesh->GetVertexs( ).push_back( vertex );
 		}
-		mMeshs.push_back( mesh );
+		meshs.push_back( mesh );
 	}
+	mMeshName = name;
 	mPositions.clear( );
 	mNormals.clear( );
 	mTexcoords.clear( );
@@ -121,10 +163,6 @@ _void ModelLoader::ReadValueFromStr( const string& strs, ObjType types )
 		//}
 		//LoadMaterialsFromFile( str );
 	}
-	else if ( types == OBJECT && list.size( ) == 2 )
-	{
-		EndMesh( );
-	}
 	else if ( ( types == POSITION || types == NORMAL ) && list.size( ) == 4 )
 	{
 		Vector3 vec = Vector3( String::StrToFloat( list[1] ), String::StrToFloat( list[2] ), String::StrToFloat( list[3] ) );
@@ -141,8 +179,7 @@ _void ModelLoader::ReadValueFromStr( const string& strs, ObjType types )
 	{
 		for ( _dword i = 1; i < list.size( ); i ++ )
 		{
-			vector< string > tmp;
-			String::Split( list[i], "/" );
+			vector< string > tmp = String::Split( list[i], "/" );
 			if ( tmp.size( ) == 3 )
 			{
 				FaceVertex face;

@@ -21,13 +21,18 @@ public:
 public:
 	inline Mesh( )
 		: mTransform( Matrix4( ) ),mShader( _null ), mVAO( 0 ), mResName( "" ), mIsInited( _false ){ }
+	inline Mesh( const string& name ): mResName( name )
+		{ }
 	Mesh( const String& filename )
 		: mMaterial( _null ), mShader( _null ), mVAO( 0 ), mResName( "" ), mIsInited( _false ){ }
 	Mesh( vector< Vertex > vertices, vector< _dword > indices, Material* material );
 	~Mesh( );
 
+	inline _void SetResName( string name )
+		{ mResName = name; }
 	inline string GetResName( )
 		{ return mResName; }
+
 	inline Matrix4 GetTransform( )
 		{ return mTransform; }
 

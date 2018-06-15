@@ -1,11 +1,11 @@
 #include "Acmen.h"
 
-_bool String::StartWith( const string& srcstr, const string& desstr )
+_bool String::StartWith( const string& srcstr, const string& pattern )
 {
-	if ( srcstr.size( ) < desstr.size( ) )
+	if ( srcstr.size( ) < pattern.size( ) )
 		return _false;
 
-	return srcstr.substr( 0, desstr.size( ) ) == desstr;
+	return srcstr.find( pattern, 0 ) == 0;
 }
 
 _dword String::StrToDword( const string& srcstr )
@@ -32,4 +32,14 @@ vector<string> String::Split( const string& srcstr, const string& pattern )
 	}
 
 	return tmp;
+}
+
+string String::TrimWith( string& srcstr, const string& pattern )
+{
+	if ( !srcstr.empty( ) )
+	{
+		srcstr.erase( 0, srcstr.find_first_not_of( pattern ) );
+		srcstr.erase( srcstr.find_last_not_of( pattern ) + 1 );
+	}
+	return srcstr;
 }
