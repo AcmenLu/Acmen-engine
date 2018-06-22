@@ -6,20 +6,6 @@
 // ------------------------------------------------------------------------------
 ModelLoader::~ModelLoader( )
 {
-	if ( mPositions.size( ) > 0 )
-		mPositions.clear( );
-
-	if ( mNormals.size( ) > 0 )
-		mNormals.clear( );
-
-	if ( mTexcoords.size( ) > 0 )
-		mTexcoords.clear( );
-
-	if ( mFaces.size( ) > 0 )
-		mFaces.clear( );
-
-	if ( mMaterials.size( ) > 0 )
-		mMaterials.clear( );
 }
 
 _void ModelLoader::LoadMeshsFromFile( const string& filename, vector< Mesh* >& meshs )
@@ -85,8 +71,8 @@ Mesh* ModelLoader::LoadMeshFromString( const string& str )
 	vector<string> linis = String::Split( str, "\r\n" );
 	vector < Vector3 >		positions;
 	vector < Vector3 >		normals;
-	vector < Vector2 >		mTexcoords;
-	vector < FaceVertex >	mFaces;
+	vector < Vector2 >		texcoords;
+	vector < Vector3 >		faces;
 	Mesh* mesh = new Mesh( );
 	for ( _dword i = 0; i < linis.size( ); i++ )
 	{
@@ -97,11 +83,20 @@ Mesh* ModelLoader::LoadMeshFromString( const string& str )
 		}
 		else if ( String::StartWith( linis[i], "v" ) )
 		{
-			Vector3 vec = Vector3( String::StrToFloat( tmps[1] ), String::StrToFloat( tmps[2] ), String::StrToFloat( tmps[3] ) );
 			if ( String::StartWith( linis[i], "vn" ) )
-				positions.push_back( vec );
-			else
-				normals.push_back( vec );
+				normals.push_back( Vector3( String::StrToFloat( tmps[1] ), String::StrToFloat( tmps[2] ), String::StrToFloat( tmps[3] ) ) );
+			else if ( String::StartWith( str, "vt" ) )
+				texcoords.push_back( Vector2( String::StrToFloat( tmps[1] ), String::StrToFloat( tmps[2] ) ) );
+			else if (  String::StartWith( str, "v " ) )
+				positions.push_back( Vector3( String::StrToFloat( tmps[1] ), String::StrToFloat( tmps[2] ), String::StrToFloat( tmps[3] ) ) );
+		}
+		else if ( String::StartWith( str, "f" ) )
+		{
+			faces.push_back( Vector3( String::StrToDword( tmps[1] ), String::StrToDword( tmps[2] ), String::StrToDword( tmps[3] ) ) );
+		}
+		else if ( String::StartWith( str, "usemtl" ) )
+		{
+			
 		}
 	}
 }
