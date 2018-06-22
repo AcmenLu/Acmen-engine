@@ -11,3 +11,8 @@
 *.exe
 AcmenEngine/Library/AcmenCommon.lib
 *.obj
+*.class
+AcmenEngine/Mobile/Android/bin/*
+AcmenEngine/Mobile/Android/gen/*
+AcmenEngine/Project/NDK/obj/*
+*.enc

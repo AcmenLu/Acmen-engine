@@ -4,20 +4,25 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsoluteLayout;
 
 public class AcmenActivity extends Activity 
 {
 
 	private AcmenGLSurfaceView	mGLView;
-	private AbsoluteLayout		mLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		Log.d( "Acmen", "This is test " );
-		AcmenJNI.TestJni( );
+		
+		// Set full screen.
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		// Set view to show.
 		mGLView = new AcmenGLSurfaceView(this);
 		setContentView(mGLView);
 	}

@@ -10,10 +10,11 @@
 
 extern "C" {
 
-JNIEXPORT jint JNICALL Java_com_Application_Acmen_AcmenJNI_PrintStr(JNIEnv* env, jobject obj, jstring crash_dump_path)
+JNIEXPORT jint JNICALL Java_com_Application_Acmen_AcmenJNI_OnRender(JNIEnv* env, jobject obj)
 {
-    LOGD("Acmen Test %s", crash_dump_path);
+    LOGD("Idle in cpp");
     return 0;
 }
+
 
 }

@@ -9,6 +9,28 @@ import android.util.Log;
 
 public class AcmenGLSurfaceView extends GLSurfaceView
 {
+	public class AcmenRenderer implements GLSurfaceView.Renderer
+	{
+		@Override
+		public void onDrawFrame(GL10 gl)
+		{
+			Log.d("Acmen", "onIdle");
+			AcmenJNI.Render( );
+		}
+
+		@Override
+		public void onSurfaceChanged(GL10 gl, int width, int height)
+		{
+		
+		}
+
+		@Override
+		public void onSurfaceCreated(GL10 gl, EGLConfig config)
+		{
+			
+		}
+	}
+
 	GLSurfaceView.Renderer mRenderer;
 	@Override
 	public void onPause()
@@ -25,28 +47,7 @@ public class AcmenGLSurfaceView extends GLSurfaceView
 	public AcmenGLSurfaceView(Context context)
 	{
 		super(context);
-		mRenderer = new GLSurfaceView.Renderer()
-		{
-			@Override
-			public void onDrawFrame(GL10 gl)
-			{
-				Log.d( "Acmen", "fffff " );
-			}
-
-			@Override
-			public void onSurfaceChanged(GL10 gl, int width, int height)
-			{
-				
-			}
-
-			@Override
-			public void onSurfaceCreated(GL10 gl, EGLConfig config)
-			{
-				
-			}	
-		};
+		mRenderer = new AcmenRenderer( );
 		this.setRenderer( mRenderer );
 	}
-
-	
 }
