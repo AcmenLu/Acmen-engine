@@ -15,54 +15,24 @@ _void ModelLoader::LoadMeshsFromFile( const string& filename, vector< Mesh* >& m
 	string str = file.Read( );
 	file.Close( );
 	vector<string> objs = String::Split( str, "\no " );
+
+	vector<string> linis = String::Split( objs[0], "\r\n" );
+	for ( _dword j = 0; j < linis.size( ); j ++ )
+	{
+		if ( String::StartWith( linis[j], "mtllib" ) )
+		{
+			vector<string> name = String::Split( linis[j], " " );
+			LoadMaterialsFromFile(name[1]);
+		}
+	}
+
 	for ( _dword i = 0; i < objs.size( ); i ++ )
 	{
 		if ( String::StartWith( objs[i], "o " ) )
 		{
-			
-		}
-		else
-		{
-
+			meshs.push_back( LoadMeshFromString( objs[i] ) );
 		}
 	}
-	//Trace::TraceString( str );
-	//while ( ( str = file.ReadLine( ) ) != "" )
-	//{
-		//strs.push_back( str );
-		/*if ( String::StartWith( str, "mtllib" ) )
-		{
-			ReadValueFromStr( str, MATERIALFILE );
-		}
-		else if ( String::StartWith( str, "o" ) )
-		{
-			vector< string> list = String::Split( str, " " );
-			CreateSubMesh( meshs, list[1] );
-		}
-		else if ( String::StartWith( str, "vt" ) )
-		{
-			ReadValueFromStr( str, TEXCOORD );
-		}
-		else if ( String::StartWith( str, "vn" ) )
-		{
-			ReadValueFromStr( str, NORMAL );
-		}
-		else if ( String::StartWith( str, "v" ) )
-		{
-			ReadValueFromStr( str, POSITION );
-		}
-		else if ( String::StartWith( str, "usemtl" ) )
-		{
-			Trace::TraceString( "Strat with usemtl" );
-		}
-		else if ( String::StartWith( str, "f" ) )
-		{
-			ReadValueFromStr( str, FACE );
-		}*/
-	//}
-
-	CreateSubMesh( meshs );
-	//file.Close( );
 }
 
 
@@ -73,6 +43,8 @@ Mesh* ModelLoader::LoadMeshFromString( const string& str )
 	vector < Vector3 >		normals;
 	vector < Vector2 >		texcoords;
 	vector < Vector3 >		faces;
+	string					mtlname = "";
+
 	Mesh* mesh = new Mesh( );
 	for ( _dword i = 0; i < linis.size( ); i++ )
 	{
@@ -96,9 +68,22 @@ Mesh* ModelLoader::LoadMeshFromString( const string& str )
 		}
 		else if ( String::StartWith( str, "usemtl" ) )
 		{
-			
+			mtlname = tmps[1];
 		}
 	}
+
+	for ( _dword i = 0; i < faces.size( ); i ++ )
+	{
+		Vertex vertex;
+		_dword posIndex = ( faces[i].x - 1 ) > ( positions.size( ) - 1 ) ? ( positions.size( ) - 1 ) : ( faces[i].x - 1 );
+		vertex.Position = positions[posIndex];
+		_dword nIndex = ( faces[i].y - 1 ) > ( normals.size( ) - 1 ) ? ( normals.size( ) - 1 ) : ( faces[i].y - 1 );
+		vertex.Normal = normals[nIndex];
+		_dword tIndex = ( faces[i].z - 1 ) > ( texcoords.size( ) - 1 ) ? ( texcoords.size( ) - 1 ) : ( faces[i].z - 1 );
+		vertex.TexCoord = texcoords[tIndex];
+		mesh->GetVertexs( ).push_back( vertex );
+	}
+	return mesh;
 }
 
 _void ModelLoader::LoadMaterialsFromFile( const string& filename )

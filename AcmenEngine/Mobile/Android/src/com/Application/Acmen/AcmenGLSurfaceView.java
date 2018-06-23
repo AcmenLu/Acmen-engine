@@ -9,6 +9,8 @@ import android.util.Log;
 
 public class AcmenGLSurfaceView extends GLSurfaceView
 {
+	AcmenRenderer mRenderer;
+
 	public class AcmenRenderer implements GLSurfaceView.Renderer
 	{
 		@Override
@@ -31,7 +33,6 @@ public class AcmenGLSurfaceView extends GLSurfaceView
 		}
 	}
 
-	GLSurfaceView.Renderer mRenderer;
 	@Override
 	public void onPause()
 	{
