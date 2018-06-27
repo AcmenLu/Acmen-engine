@@ -17,3 +17,4 @@ AcmenEngine/Mobile/Android/gen/*
 AcmenEngine/Project/NDK/obj/*
 *.enc
 AcmenEngine/Library/*
+AcmenEngine/Library/LuaScript.lib
