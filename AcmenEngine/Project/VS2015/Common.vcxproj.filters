@@ -47,6 +47,9 @@
     <ClCompile Include="..\..\Source\Common\Model.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Common\Shapes.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Typedef.h">
@@ -113,6 +116,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\Common\Model.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Shapes.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

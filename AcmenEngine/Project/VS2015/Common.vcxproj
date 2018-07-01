@@ -27,6 +27,7 @@
     <ClCompile Include="..\..\Source\Common\Model.cpp" />
     <ClCompile Include="..\..\Source\Common\Renderer.cpp" />
     <ClCompile Include="..\..\Source\Common\Shader.cpp" />
+    <ClCompile Include="..\..\Source\Common\Shapes.cpp" />
     <ClCompile Include="..\..\Source\Common\Spriter.cpp" />
     <ClCompile Include="..\..\Source\Common\String.cpp" />
     <ClCompile Include="..\..\Source\Common\Texture.cpp" />
@@ -45,6 +46,7 @@
     <ClInclude Include="..\..\Include\Common\Shader.h" />
     <ClInclude Include="..\..\Include\Common\shaderstr.h" />
     <ClInclude Include="..\..\Include\Common\shader_glsl.h" />
+    <ClInclude Include="..\..\Include\Common\Shapes.h" />
     <ClInclude Include="..\..\Include\Common\stb_image.h" />
     <ClInclude Include="..\..\Include\Common\Spriter.h" />
     <ClInclude Include="..\..\Include\Common\String.h" />

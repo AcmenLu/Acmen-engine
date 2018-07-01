@@ -24,6 +24,7 @@
 #include "Common/Texture.h"
 #include "Common/RenderObject.h"
 
+#include "Common/Shapes.h"
 #include "Common/Spriter.h"
 #include "Common/Material.h"
 #include "Common/Mesh.h"
