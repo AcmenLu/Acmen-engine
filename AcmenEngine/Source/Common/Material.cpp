@@ -2,55 +2,15 @@
 
 Material::~Material( )
 {
-	if ( mNormalMap != _null )
-		delete mNormalMap;
+	for ( _dword i = 0; i < mNormalMaps.size( ); i ++ )
+		SAFE_RELESE( mNormalMaps[i] );
 
-	if ( mDiffuseMap != _null )
-		delete mDiffuseMap;
+	for ( _dword i = 0; i < mDiffuseMaps.size( ); i ++ )
+		SAFE_RELESE( mDiffuseMaps[i] );
 
-	if ( mSpecularMap != _null )
-		delete mSpecularMap;
+	for ( _dword i = 0; i < mSpecularMaps.size( ); i ++ )
+		SAFE_RELESE( mSpecularMaps[i] );
 
-	if ( mHeightMap != _null )
-		delete mHeightMap;
-}
-
-_void Material::SetNormalMap( Texture* texture )
-{
-	if ( mNormalMap != _null )
-		delete mNormalMap;
-
-	mNormalMap = texture;
-	if ( texture != _null )
-		mNormalMapId = Texture::CreateGLTexture( mNormalMap );
-}
-
-_void Material::SetDiffuseMap( Texture* texture )
-{
-	if ( mDiffuseMap != _null )
-		delete mDiffuseMap;
-
-	mDiffuseMap = texture;
-	if ( texture != _null )
-		mDiffuseMapId = Texture::CreateGLTexture( mDiffuseMap );
-}
-
-_void Material::SetSpecularMap( Texture* texture )
-{
-	if ( mSpecularMap != _null )
-		delete mSpecularMap;
-
-	mSpecularMap = texture;
-	if ( texture != _null )
-		mSpecularMapId = Texture::CreateGLTexture( mSpecularMap );
-}
-
-_void Material::SetHeightMap( Texture* texture )
-{
-	if ( mHeightMap != _null )
-		delete mHeightMap;
-
-	mHeightMap = texture;
-	if ( texture != _null )
-		mHeightMapId = Texture::CreateGLTexture( mHeightMap );
+	for ( _dword i = 0; i < mHeightMaps.size( ); i ++ )
+		SAFE_RELESE( mHeightMaps[i] );
 }

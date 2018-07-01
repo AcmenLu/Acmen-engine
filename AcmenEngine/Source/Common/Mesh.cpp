@@ -86,7 +86,7 @@ _void Mesh::InitShader( )
 		"uniform sampler2D texture0;\n" \
 		"void main()\n" \
 		"{\n" \
-		"FragColor = vec4(0.0, 1.0, 0.0, 1.0);\n" \
+		"FragColor = texture(texture0, TexCoord);\n" \
 		"}\n";
 	mShader = new Shader( vsstr, psstr, _false );
 }
@@ -101,7 +101,7 @@ _void Mesh::BindShaderData( )
 	mShader->SetMatrix4( "projection", pro[0], _false );
 	mShader->SetMatrix4( "view", view[0], _false );
 	mShader->SetMatrix4( "model", mTransform[0], _false );
-	//mShader->SetInt( "texture0", 0 );
+	mShader->SetInt( "texture0", 0 );
 }
 
 _void Mesh::Render( )
@@ -115,8 +115,12 @@ _void Mesh::Render( )
 	mShader->Use( );
 	BindShaderData( );
 
-	//glActiveTexture( GL_TEXTURE0 );
-	//glBindTexture( GL_TEXTURE_2D, mMaterial->GetDiffuseMapId( ) );
+	if ( mMaterial->mDiffuseMaps.size( ) > 0 )
+	{
+		glActiveTexture( GL_TEXTURE0 );
+		glBindTexture( GL_TEXTURE_2D, mMaterial->mDiffuseMaps[0]->mGLId );
+	}
+
 	glBindVertexArray( mVAO );
 
 	if ( mIndices.size( ) > 0 )

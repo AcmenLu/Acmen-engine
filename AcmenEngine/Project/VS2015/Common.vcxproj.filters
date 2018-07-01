@@ -44,9 +44,6 @@
     <ClCompile Include="..\..\Source\Common\String.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Common\ModelLoader.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Common\Model.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -116,9 +113,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\Common\Model.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Include\Common\ModelLoader.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

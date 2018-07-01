@@ -5,52 +5,37 @@ namespace Acmen
 
 class Material
 {
-
-private:
-	Texture*		mNormalMap;
-	Texture*		mDiffuseMap;
-	Texture*		mSpecularMap;
-	Texture*		mHeightMap;
-	String			mResName;
-
-	_dword			mNormalMapId;
-	_dword			mDiffuseMapId;
-	_dword			mSpecularMapId;
-	_dword			mHeightMapId;
+public:
+	vector<Texture*>		mNormalMaps;
+	vector<Texture*>		mDiffuseMaps;
+	vector<Texture*>		mSpecularMaps;
+	vector<Texture*>		mHeightMaps;
 
 public:
-	inline Material( )
-		: mNormalMap( _null ), mDiffuseMap( _null ), mSpecularMap( _null ), mHeightMap( _null ),
-		mNormalMapId( 0 ), mDiffuseMapId( 0 ), mSpecularMapId( 0 ),mHeightMapId( 0 ){ }
+	inline Material( ){ }
+	inline Material( vector<Texture*> normals, vector<Texture*> diffuses, vector<Texture*> speculars, vector<Texture*> heights )
+		:mNormalMaps( normals ), mDiffuseMaps( diffuses ), mSpecularMaps( speculars ), mHeightMaps( heights ) { }
 	~Material( );
 
-	inline Texture* GetNormalMap( )
-		{ return mNormalMap; }
-	_void SetNormalMap( Texture* texture );
+	inline vector<Texture*> GetNormalMaps( )
+		{ return mNormalMaps; }
+	inline _void SetNormalMaps( vector<Texture*> testures )
+		{ mNormalMaps = testures; }
 
-	inline Texture* GetDiffuseMap( )
-		{ return mDiffuseMap; }
-	_void SetDiffuseMap( Texture* texture );
+	inline vector<Texture*> GetDiffuseMaps( )
+		{ return mDiffuseMaps; }
+	inline _void SetDiffuseMaps( vector<Texture*> testures )
+		{ mDiffuseMaps = testures; }
 
-	inline Texture* GetSpecularMap( )
-		{ return mSpecularMap; }
-	_void SetSpecularMap( Texture* texture );
+	inline vector<Texture*> GetSpecularMaps( )
+		{ return mSpecularMaps; }
+	inline _void SetSpecularMaps( vector<Texture*> testures )
+		{ mSpecularMaps = testures; }
 
-	inline Texture* GetHeightMap( )
-		{ return mHeightMap; }
-	_void SetHeightMap( Texture* texture );
-
-	inline _dword GetNormalMapId( )
-		{ return mNormalMapId; }
-
-	inline _dword GetDiffuseMapId( )
-	{ return mDiffuseMapId; }
-
-	inline _dword GetSpecularMapId( )
-		{ return mSpecularMapId; }
-
-	inline _dword GetHeightMapId( )
-		{ return mHeightMapId; }
+	inline vector<Texture*> GetHeightMaps( )
+		{ return mHeightMaps; }
+	inline _void SetHeightMaps( vector<Texture*> testures )
+		{ mHeightMaps = testures; }
 };
 
 };

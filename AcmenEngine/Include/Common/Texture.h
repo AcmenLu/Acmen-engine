@@ -6,18 +6,19 @@ namespace Acmen
 class Texture
 {
 
-private:
+public:
 	_long			mWidth;
 	_long			mHeight;
 	_long			mChannel;
 	string			mResName;
 	_chara*			mData;
+	_dword			mGLId;
 
 public:
 	static _dword CreateGLTexture( Texture* texture, _dword wrap_s = GL_REPEAT, _dword wrap_t = GL_REPEAT, _dword min_filter = GL_LINEAR, _dword mag_filter = GL_LINEAR );
 public:
 	inline Texture( )
-		: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( "" ){ }
+		: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( "" ), mGLId( 0 ){ }
 	Texture( const string& filename , _bool reversal = _false );
 	~Texture( );
 

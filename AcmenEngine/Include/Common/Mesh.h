@@ -6,7 +6,7 @@ namespace Acmen
 class Mesh : public RenderObject
 {
 
-private:
+public:
 	vector< Vertex >		mVertices;
 	vector< _dword >		mIndices;
 	Material*				mMaterial;

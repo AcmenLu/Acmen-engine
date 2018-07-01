@@ -4,7 +4,7 @@
 #include "Common/stb_image.h"
 
 Texture::Texture( const string& filename, _bool reversal )
-	: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( filename )
+	: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( filename ),mGLId( 0 )
 {
 	LoadTexture( filename, reversal );
 }
@@ -46,4 +46,18 @@ _void Texture::LoadTexture( const string& filename, _bool reversal )
 		stbi_set_flip_vertically_on_load( _true );
 
 	mData = stbi_load( filename.c_str( ), &mWidth, &mHeight, &mChannel, 0 );
+
+	glGenTextures( 1, &mGLId );
+	glBindTexture( GL_TEXTURE_2D, mGLId );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+	if ( mChannel == 3 )
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, mWidth, mHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, mData );
+	else if ( mChannel == 4 )
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, mData );
+
+	glGenerateMipmap( GL_TEXTURE_2D );
 }
