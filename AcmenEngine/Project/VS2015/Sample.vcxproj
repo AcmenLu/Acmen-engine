@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\Source\Sample\MeshSample.cpp" />
     <ClCompile Include="..\..\Source\Sample\test.cpp" />
     <ClCompile Include="InitGLSample.cpp" />
+    <ClCompile Include="TriangleSample.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{569CDEEF-635C-405F-A038-E79F0C31B823}</ProjectGuid>

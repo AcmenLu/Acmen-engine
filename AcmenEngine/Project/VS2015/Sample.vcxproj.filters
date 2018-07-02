@@ -26,5 +26,8 @@
     <ClCompile Include="InitGLSample.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="TriangleSample.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

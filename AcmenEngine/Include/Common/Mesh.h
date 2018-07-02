@@ -14,8 +14,6 @@ public:
 	_dword					mVAO;
 	string					mResName;
 	_bool					mIsInited;
-
-public:
 	Matrix4					mTransform;
 
 public:
