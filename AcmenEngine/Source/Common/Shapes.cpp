@@ -1,5 +1,15 @@
 #include "Acmen.h"
 
+Shapes::Shapes( vector< Vertex > vertices, vector< _dword > indices )
+	: mTransform( Matrix4( ) ), mIsInited( _false )
+{
+	if ( vertices.size( ) > 0 )
+		mVertices.assign( vertices.begin( ), vertices.end( ) );
+
+	if ( indices.size( ) > 0 )
+		mIndices.assign( indices.begin( ), indices.end( ) );
+}
+
 Shapes::~Shapes( )
 {
 	SAFE_RELESE( mShader );
@@ -12,40 +22,6 @@ _void Shapes::InitShape( )
 
 	InitVAO( );
 	InitShader( );
-}
-
-_void Shapes::InitVAO( )
-{
-	if ( mVertices.size( ) <= 0 )
-		return;
-
-	glGenVertexArrays( 1, &mVAO );
-	glBindVertexArray( mVAO );
-
-	_dword VBO;
-	glGenBuffers( 1, &VBO );
-	glBindBuffer( GL_ARRAY_BUFFER, VBO );
-	glBufferData( GL_ARRAY_BUFFER, mVertices.size( ) * sizeof( Vertex ), &mVertices[0], GL_STATIC_DRAW );
-
-	if ( mIndices.size( ) > 0 )
-	{
-		_dword EBO;
-		glGenBuffers( 1, &EBO );
-		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, EBO );
-		glBufferData( GL_ELEMENT_ARRAY_BUFFER, mIndices.size( ) * sizeof( _dword ), &mIndices[0], GL_STATIC_DRAW );
-	}
-	// Position
-	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)0 );
-	glEnableVertexAttribArray( 0 );
-	// Normal
-	glVertexAttribPointer( 1, 3, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)offsetof( Vertex, Normal ) );
-	glEnableVertexAttribArray( 1 );
-	// Texcoord
-	glVertexAttribPointer( 2, 2, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)offsetof( Vertex, TexCoord ) );
-	glEnableVertexAttribArray( 2 );
-
-	glBindBuffer( GL_ARRAY_BUFFER, 0 );
-	glBindVertexArray( 0 );
 }
 
 _void Shapes::InitShader( )

@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\Source\Common\Mesh.cpp" />
     <ClCompile Include="..\..\Source\Common\Model.cpp" />
     <ClCompile Include="..\..\Source\Common\Renderer.cpp" />
+    <ClCompile Include="..\..\Source\Common\RenderObject.cpp" />
     <ClCompile Include="..\..\Source\Common\Shader.cpp" />
     <ClCompile Include="..\..\Source\Common\Shapes.cpp" />
     <ClCompile Include="..\..\Source\Common\Spriter.cpp" />

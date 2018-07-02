@@ -50,6 +50,9 @@
     <ClCompile Include="..\..\Source\Common\Shapes.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Common\RenderObject.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Typedef.h">

@@ -7,10 +7,13 @@ class Shader
 {
 public:
 	_dword mShaderProgram;
+	_dword mVertex;
+	_dword mFragment;
 
+	inline Shader( )
+		: mShaderProgram( 0 ), mVertex( 0 ), mFragment( 0 ) { }
 	Shader( const string& vertexPath, const string& fragmentPath, _bool isFile );
-	inline ~Shader( )
-		{ }
+	~Shader( );
 
 	_void Use( );
 	_void SetBool( const string &name, _bool value );

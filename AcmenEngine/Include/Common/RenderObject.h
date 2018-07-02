@@ -24,8 +24,20 @@ struct Vertex
 
 class RenderObject
 {
+protected:
+	vector< Vertex >		mVertices;
+	vector< _dword >		mIndices;
+	Shader*					mShader;
+	_dword					mVAO;
+	_dword					mVBO;
+	_dword					mEBO;
 
 public:
+	inline RenderObject( ) 
+		: mShader( _null ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 ){ }
+	~RenderObject( );
+
+	_bool CreatGeometry( );
 	virtual _void Render( ) = 0;
 };
 

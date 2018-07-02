@@ -1,6 +1,9 @@
 #include "Acmen.h"
 
 Shader::Shader( const string& vertexPath, const string& fragmentPath, _bool isFile )
+	: mShaderProgram( 0 ),
+	mVertex( 0 ),
+	mFragment( 0 )
 {
 	const char* vShaderCode;
 	const char* fShaderCode;
@@ -40,34 +43,34 @@ Shader::Shader( const string& vertexPath, const string& fragmentPath, _bool isFi
 		vShaderCode = vertexPath.c_str( );
 		fShaderCode = fragmentPath.c_str( );
 	}
-	unsigned int vertex, fragment;
+
 	int success;
 	char infoLog[512];
 
-	vertex = glCreateShader( GL_VERTEX_SHADER );
-	glShaderSource( vertex, 1, &vShaderCode, NULL );
-	glCompileShader( vertex );
+	mVertex = glCreateShader( GL_VERTEX_SHADER );
+	glShaderSource( mVertex, 1, &vShaderCode, NULL );
+	glCompileShader( mVertex );
 
-	glGetShaderiv( vertex, GL_COMPILE_STATUS, &success );
+	glGetShaderiv( mVertex, GL_COMPILE_STATUS, &success );
 	if ( !success )
 	{
-		glGetShaderInfoLog( vertex, 512, NULL, infoLog );
+		glGetShaderInfoLog( mVertex, 512, NULL, infoLog );
 		cout << "[ERROR]: Compile vertex shader failed:\n" << infoLog << endl;
 	}
 
-	fragment = glCreateShader( GL_FRAGMENT_SHADER );
-	glShaderSource( fragment, 1, &fShaderCode, NULL );
-	glCompileShader( fragment );
-	glGetShaderiv( fragment, GL_COMPILE_STATUS, &success );
+	mFragment = glCreateShader( GL_FRAGMENT_SHADER );
+	glShaderSource( mFragment, 1, &fShaderCode, NULL );
+	glCompileShader( mFragment );
+	glGetShaderiv( mFragment, GL_COMPILE_STATUS, &success );
 	if ( !success )
 	{
-		glGetShaderInfoLog( fragment, 512, NULL, infoLog );
+		glGetShaderInfoLog( mFragment, 512, NULL, infoLog );
 		cout << "[ERROR]: Compile fragment shader failed!\n" << infoLog << endl;
 	}
 
 	mShaderProgram = glCreateProgram( );
-	glAttachShader( mShaderProgram, vertex );
-	glAttachShader( mShaderProgram, fragment );
+	glAttachShader( mShaderProgram, mVertex );
+	glAttachShader( mShaderProgram, mFragment );
 	glLinkProgram( mShaderProgram );
 
 	glGetProgramiv( mShaderProgram, GL_LINK_STATUS, &success );
@@ -76,54 +79,87 @@ Shader::Shader( const string& vertexPath, const string& fragmentPath, _bool isFi
 		glGetProgramInfoLog( mShaderProgram, 512, NULL, infoLog );
 		cout << "[ERROR]:Link progrma failed!\n" << infoLog << endl;
 	}
+}
 
-	glDeleteShader( vertex );
-	glDeleteShader( fragment );
+Shader::~Shader( )
+{
+	glUseProgram( 0 );
+	if ( mShaderProgram > 0 )
+		glDeleteProgram( mShaderProgram );
+
+	if ( mFragment > 0 )
+		glDeleteShader( mFragment );
+
+	if ( mVertex > 0 )
+		glDeleteShader( mVertex );
+
+	mShaderProgram = 0;
+	mFragment = 0;
+	mVertex = 0;
 }
 
 _void Shader::Use( )
 {
-	glUseProgram( mShaderProgram );
+	if ( mShaderProgram > 0 )
+		glUseProgram( mShaderProgram );
 }
 
 _void Shader::SetBool( const string &name, _bool value )
 {
-	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
+	if ( mShaderProgram <= 0 )
+		return;
+
+	_long location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location > 0 )
 		glUniform1i( location, int( value ) );
 }
 
 _void Shader::SetInt( const string &name, _long value )
 {
-	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
+	if ( mShaderProgram <= 0 )
+		return;
+
+	_long location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location > 0 )
 		glUniform1i( location, value );
 }
 
 _void Shader::SetFloat( const string &name, _float value )
 {
-	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
+	if ( mShaderProgram <= 0 )
+		return;
+
+	_long location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location > 0 )
 		glUniform1f( location, value );
 }
 
 _void Shader::SetVector3( const string &name, _float x, _float y, _float z )
 {
-	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
+	if ( mShaderProgram <= 0 )
+		return;
+
+	_long location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )
 		glUniform3f( location, x, y, z );
 }
 
 _void Shader::SetVector3( const string &name, Vector3 vec )
 {
-	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
+	if ( mShaderProgram <= 0 )
+		return;
+
+	_long location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )
 		glUniform3f( location, vec.x, vec.y, vec.z );
 }
 
 _void Shader::SetMatrix4( const string &name, _float* value, _bool transpose )
 {
-	int location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
+	if ( mShaderProgram <= 0 )
+		return;
+
+	_long location = glGetUniformLocation( mShaderProgram, name.c_str( ) );
 	if ( location >= 0 )
 		glUniformMatrix4fv( location, 1, transpose, value );
 }
