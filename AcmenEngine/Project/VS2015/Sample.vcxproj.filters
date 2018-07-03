@@ -23,10 +23,10 @@
     <ClCompile Include="..\..\Source\Sample\LuaJitTest.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="InitGLSample.cpp">
+    <ClCompile Include="..\..\Source\Sample\InitGLSample.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="TriangleSample.cpp">
+    <ClCompile Include="..\..\Source\Sample\TriangleSample.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

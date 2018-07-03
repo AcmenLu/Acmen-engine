@@ -1,33 +1,9 @@
 #include "Acmen.h"
 
-Shapes::Shapes( vector< Vertex > vertices, vector< _dword > indices )
-	: mTransform( Matrix4( ) ), mIsInited( _false )
-{
-	if ( vertices.size( ) > 0 )
-		mVertices.assign( vertices.begin( ), vertices.end( ) );
-
-	if ( indices.size( ) > 0 )
-		mIndices.assign( indices.begin( ), indices.end( ) );
-}
-
-Shapes::~Shapes( )
-{
-	SAFE_RELESE( mShader );
-}
-
-_void Shapes::InitShape( )
-{
-	if ( mIsInited )
-		return;
-
-	InitVAO( );
-	InitShader( );
-}
-
-_void Shapes::InitShader( )
+_bool Shapes::CreateShader( )
 {
 	if ( mVertices.size( ) <= 0 )
-		return;
+		return _false;
 
 	string vsstr = "#version 330 core\n" \
 		"layout (location = 0) in vec3 position;\n" \
@@ -52,30 +28,32 @@ _void Shapes::InitShader( )
 		"FragColor = vec4(colors, 1.0);\n" \
 		"}\n";
 	mShader = new Shader( vsstr, psstr, _false );
+	return _true;
 }
 
-_void Shapes::BindShaderData( )
+_bool Shapes::SetUniform( )
 {
 	if ( mShader == _null )
-		return;
+		return _false;
 
 	Matrix4 pro = Renderer::GetProjection3D( );
 	Matrix4 view = Windows::GetInstance( )->GetRenderer( )->GetCamera( )->GetMatrix( );
 	mShader->SetMatrix4( "projection", pro[0], _false );
 	mShader->SetMatrix4( "view", view[0], _false );
 	mShader->SetMatrix4( "model", mTransform[0], _false );
+	return _true;
 }
 
-_void Shapes::Render( )
+_void Shapes::Render( _float elapse )
 {
 	if ( mIsInited == _false )
-		InitShape( );
+		Init( );
 
 	if ( mShader == _null )
 		return;
 
 	mShader->Use( );
-	BindShaderData( );
+	SetUniform( );
 
 	glBindVertexArray( mVAO );
 

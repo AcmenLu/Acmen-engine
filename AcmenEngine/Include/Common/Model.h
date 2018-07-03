@@ -12,7 +12,8 @@ public:
 	Model( ) = default;
 	Model( const string& filename );
 	~Model( ) = default;
-	virtual _void Render( );
+	inline _void Update( _float elapse ){ }
+	_void Render( _float elapse );
 	_void LoadModel( const string& filename );
 
 private:

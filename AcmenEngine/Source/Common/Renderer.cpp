@@ -24,7 +24,7 @@ _void Renderer::OnRender( _float elapse )
 	glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	for ( _dword i = 0; i < mRenderList.size( ); i++ )
-		mRenderList[i]->Render( );
+		mRenderList[i]->Render( elapse );
 }
 
 _void Renderer::ClearRenderList( )

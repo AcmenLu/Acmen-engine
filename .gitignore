@@ -18,3 +18,10 @@ AcmenEngine/Project/NDK/obj/*
 *.enc
 AcmenEngine/Library/*
 AcmenEngine/Library/LuaScript.lib
+AcmenEngine/Output/Sample.exp
+AcmenEngine/Library/Common.lib
+AcmenEngine/Dependencies/lib/assimpd.lib
+AcmenEngine/Output/Sample.lib
+AcmenEngine/Library/LuaScript.lib
+AcmenEngine/Library/Common.lib
+AcmenEngine/Library/LuaScript.lib

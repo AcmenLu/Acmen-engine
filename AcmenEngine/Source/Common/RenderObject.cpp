@@ -1,5 +1,16 @@
 #include "Acmen.h"
 
+RenderObject::RenderObject( vector< Vertex > vertices, vector< _dword > indices )
+	:mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ),
+	mShader( _null ),mIsInited( _false ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 )
+{
+	if ( vertices.size( ) > 0 )
+		mVertices.assign( vertices.begin( ), vertices.end( ) );
+
+	if ( indices.size( ) > 0 )
+		mIndices.assign( indices.begin( ), indices.end( ) );
+}
+
 RenderObject::~RenderObject( )
 {
 	if ( mVBO > 0 )
@@ -21,7 +32,19 @@ RenderObject::~RenderObject( )
 		SAFE_RELESE( mShader )
 }
 
-_bool RenderObject::CreatGeometry( )
+_bool RenderObject::Init( )
+{
+	if ( CreateGeometry( ) == _false )
+		return _false;
+
+	if ( CreateShader( ) == _false )
+		return _false;
+
+	mIsInited = _true;
+	return _true;
+}
+
+_bool RenderObject::CreateGeometry( )
 {
 	if ( mVertices.size( ) <= 0 )
 		return _false;

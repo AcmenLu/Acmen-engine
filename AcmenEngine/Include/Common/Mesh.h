@@ -48,7 +48,8 @@ public:
 	_void InitVAO( );
 	_void InitShader( );
 	_void BindShaderData( );
-	_void Render( );
+	inline _void Update( _float elapse ){ }
+	_void Render( _float elapse );
 };
 
 };

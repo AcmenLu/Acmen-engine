@@ -12,13 +12,13 @@ Model::Model( const string& filename ): mResName( filename )
 	LoadModel( filename );
 }
 
-_void Model::Render( )
+_void Model::Render( _float elapse )
 {
 	if ( mMeshs.size( ) <= 0 )
 		return;
 
 	for ( _dword i = 0; i < mMeshs.size( ); i ++ )
-		mMeshs[i]->Render( );
+		mMeshs[i]->Render( elapse );
 }
 
 _void Model::LoadModel( const string& filename )

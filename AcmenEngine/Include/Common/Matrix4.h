@@ -83,7 +83,7 @@ public:
 	Matrix4&	operator += ( const Matrix4& mat );
 	Matrix4&	operator *= ( const Matrix4& mat );
 	Matrix4&	operator *= ( _float s );
-
+	Matrix4&	operator = ( const Matrix4& mat );
 	_bool		operator == ( const Matrix4& mat ) const;
 
 	Matrix4&	Identity( );

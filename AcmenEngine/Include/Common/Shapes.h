@@ -5,17 +5,21 @@ class Shapes: public RenderObject
 {
 public:
 	Matrix4					mTransform;
-	_bool					mIsInited;
 
 public:
-	inline Shapes( ):mTransform( Matrix4( ) ), mIsInited( _false ){ }
-	Shapes( vector< Vertex > vertices, vector< _dword > indices );
+	inline Shapes( ):mTransform( Matrix4( ) ){ }
+	inline Shapes::Shapes( vector< Vertex > vertices, vector< _dword > indices )
+		: RenderObject( vertices, indices ),mTransform( Matrix4( ) ) { }
+	inline ~Shapes( ) { };
 
-	~Shapes( );
+	inline Matrix4& GetTransform( )
+		{ return mTransform; }
+	inline _void SetTransform( Matrix4 transform )
+		{ mTransform = transform; }
 
-	_void InitShape( );
-	_void InitShader( );
-	_void BindShaderData( );
-	_void Render( );
+	_bool CreateShader( );
+	_bool SetUniform( );
+	inline _void Update( _float elapse ){ };
+	_void Render( _float elapse );
 };
 }

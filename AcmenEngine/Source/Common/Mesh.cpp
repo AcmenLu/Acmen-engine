@@ -104,7 +104,7 @@ _void Mesh::BindShaderData( )
 	mShader->SetInt( "texture0", 0 );
 }
 
-_void Mesh::Render( )
+_void Mesh::Render( _float elapse )
 {
 	if ( mIsInited == _false )
 		InitMesh( );
