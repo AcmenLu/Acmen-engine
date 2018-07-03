@@ -11,6 +11,7 @@
 // Common
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
+#include "Common/Timer.h"
 #include "Common/Math.h"
 #include "Common/String.h"
 #include "Common/File.h"

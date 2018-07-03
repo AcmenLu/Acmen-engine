@@ -25,3 +25,4 @@ AcmenEngine/Output/Sample.lib
 AcmenEngine/Library/LuaScript.lib
 AcmenEngine/Library/Common.lib
 AcmenEngine/Library/LuaScript.lib
+*.sdf

@@ -68,11 +68,13 @@ _void Windows::Run( )
 	while ( !glfwWindowShouldClose( mWindow ) )
 	{
 		glfwPollEvents( );
+		Timer::Run( );
+		_double elapse = Timer::GetElapse( );
 		if ( mRenderer != _null )
-			mRenderer->OnRender( 0.0f );
+			mRenderer->OnRender( elapse );
 
 		if ( mIdleFunc != _null )
-			mIdleFunc( 0 );
+			mIdleFunc( elapse );
 
 		glfwSwapBuffers( mWindow );
 	}

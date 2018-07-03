@@ -32,6 +32,7 @@
     <ClCompile Include="..\..\Source\Common\Spriter.cpp" />
     <ClCompile Include="..\..\Source\Common\String.cpp" />
     <ClCompile Include="..\..\Source\Common\Texture.cpp" />
+    <ClCompile Include="..\..\Source\Common\Timer.cpp" />
     <ClCompile Include="..\..\Source\Common\Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +53,7 @@
     <ClInclude Include="..\..\Include\Common\Spriter.h" />
     <ClInclude Include="..\..\Include\Common\String.h" />
     <ClInclude Include="..\..\Include\Common\Texture.h" />
+    <ClInclude Include="..\..\Include\Common\Timer.h" />
     <ClInclude Include="..\..\Include\Common\Trace.h" />
     <ClInclude Include="..\..\Include\Common\Typedef.h" />
     <ClInclude Include="..\..\Include\Common\Vector2.h" />
