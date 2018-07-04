@@ -5,28 +5,20 @@ namespace Acmen
 class Spriter : public RenderObject
 {
 
-private:
-	vector< Vertex >		mVertices;
-	vector< _dword >		mIndices;
-	vector< _dword >		mTextures;
-	Shader*					mShader;
-	_dword					mVAO;
+public:
+	Texture*			mTexture;
 
 public:
-	Matrix4				mTransform;
-
-public:
-	Spriter( const string& filename );
+	Spriter( );
+	Spriter::Spriter( Texture* texture );
 	~Spriter( );
 
-	inline Matrix4 GetTransform( )
-		{ return mTransform; }
+	_bool CreateShader( );
+	_bool SetUniform( );
+	_void Render( _float elapse );
 
-	_void InitData( const string& filename );
-	virtual _void InitVAO( );
-	_void InitShader( );
-	_void BindShaderData( );
-	virtual _void Render( );
+private:
+	_void createVertices( );
 };
 
 }

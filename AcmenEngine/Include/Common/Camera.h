@@ -12,7 +12,7 @@ public:
 	Vector3 mTarget;
 	Vector3 mUp;
 
-	inline Camera( ): mPosition( 0.0f, 15.0f, 30.0f ), mTarget( 0.0f, 10.0f, 0.0f ), mUp( 0.0f, 1.0f, 0.0f )
+	inline Camera( ): mPosition( 0.0f, 0.0f, 30.0f ), mTarget( 0.0f, 0.0f, 0.0f ), mUp( 0.0f, 1.0f, 0.0f )
 		{ }
 
 	inline ~Camera( )

@@ -15,7 +15,7 @@ public:
 	_dword			mGLId;
 
 public:
-	static _dword CreateGLTexture( Texture* texture, _dword wrap_s = GL_REPEAT, _dword wrap_t = GL_REPEAT, _dword min_filter = GL_LINEAR, _dword mag_filter = GL_LINEAR );
+	static _dword CreateGLTexture( const string& filename, _dword wrap_s = GL_REPEAT, _dword wrap_t = GL_REPEAT, _dword min_filter = GL_LINEAR, _dword mag_filter = GL_LINEAR );
 public:
 	inline Texture( )
 		: mWidth( 0 ), mHeight( 0 ), mChannel( 0 ), mData( _null ), mResName( "" ), mGLId( 0 ){ }

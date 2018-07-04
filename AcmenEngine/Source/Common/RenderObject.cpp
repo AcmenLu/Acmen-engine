@@ -2,7 +2,7 @@
 
 RenderObject::RenderObject( vector< Vertex > vertices, vector< _dword > indices )
 	:mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ),
-	mShader( _null ),mIsInited( _false ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 )
+	mShader( _null ), mTransform( Matrix4( ) ), mIsInited( _false ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 )
 {
 	if ( vertices.size( ) > 0 )
 		mVertices.assign( vertices.begin( ), vertices.end( ) );
@@ -77,4 +77,22 @@ _bool RenderObject::CreateGeometry( )
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 	glBindVertexArray( 0 );
 	return _true;
+}
+
+_void RenderObject::Render( _float elapse )
+{
+	if ( mShader == _null )
+		return;
+
+	mShader->Use( );
+	SetUniform( );
+
+	glBindVertexArray( mVAO );
+
+	if ( mIndices.size( ) > 0 )
+		glDrawElements( GL_TRIANGLES, mIndices.size( ), GL_UNSIGNED_INT, 0 );
+	else
+		glDrawArrays( GL_TRIANGLES, 0, mVertices.size( ) );
+
+	glBindVertexArray( 0 );
 }

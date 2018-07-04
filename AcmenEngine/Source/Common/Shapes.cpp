@@ -16,7 +16,7 @@ _bool Shapes::CreateShader( )
 		"void main()\n" \
 		"{\n" \
 		"colors = normal;\n" \
-		"gl_Position = vec4(position, 1.0);\n" \
+		"gl_Position = projection * view * model * vec4(position, 1.0);\n" \
 		"}";
 
 	string psstr = "#version 330 core\n" \
@@ -49,18 +49,5 @@ _void Shapes::Render( _float elapse )
 	if ( mIsInited == _false )
 		Init( );
 
-	if ( mShader == _null )
-		return;
-
-	mShader->Use( );
-	SetUniform( );
-
-	glBindVertexArray( mVAO );
-
-	if ( mIndices.size( ) > 0 )
-		glDrawElements( GL_TRIANGLES, mIndices.size( ), GL_UNSIGNED_INT, 0 );
-	else
-		glDrawArrays( GL_TRIANGLES, 0, mVertices.size( ) );
-
-	glBindVertexArray( 0 );
+	RenderObject::Render( elapse );
 }

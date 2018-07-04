@@ -9,10 +9,12 @@ Texture::Texture( const string& filename, _bool reversal )
 	LoadTexture( filename, reversal );
 }
 
-_dword Texture::CreateGLTexture( Texture* texture ,_dword wrap_s, _dword wrap_t, _dword min_filter, _dword mag_filter )
+_dword Texture::CreateGLTexture( const string& filename, _dword wrap_s, _dword wrap_t, _dword min_filter, _dword mag_filter )
 {
-	if ( texture->mData == _null )
-		return -1;
+	_long width, height, channel;
+	_chara* data = stbi_load( filename.c_str( ), &width, &height, &channel, 0 );
+	if ( data == _null )
+		return 0;
 
 	_dword tex;
 	glGenTextures( 1, &tex );
@@ -22,12 +24,13 @@ _dword Texture::CreateGLTexture( Texture* texture ,_dword wrap_s, _dword wrap_t,
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter );
 
-	if ( texture->GetChannel( ) == 3 )
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, texture->GetWidth( ), texture->GetHeight( ), 0, GL_RGB, GL_UNSIGNED_BYTE, texture->GetData( ) );
-	else if ( texture->GetChannel( ) == 4 )
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->GetWidth( ), texture->GetHeight( ), 0, GL_RGBA, GL_UNSIGNED_BYTE, texture->GetData( ) );
+	if ( channel == 3 )
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data );
+	else if ( channel == 4 )
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data );
 
 	glGenerateMipmap( GL_TEXTURE_2D );
+	stbi_image_free( data );
 	return tex;
 }
 

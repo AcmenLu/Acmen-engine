@@ -28,14 +28,16 @@ protected:
 	vector< Vertex >		mVertices;
 	vector< _dword >		mIndices;
 	Shader*					mShader;
+	Matrix4					mTransform;
 	_bool					mIsInited;
 	_dword					mVAO;
 	_dword					mVBO;
 	_dword					mEBO;
+	
 
 public:
 	inline RenderObject( ) 
-		: mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ), mShader( _null ),mIsInited( _false ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 ){ }
+		: mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ), mShader( _null ), mTransform( Matrix4( ) ), mIsInited( _false ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 ){ }
 	RenderObject( vector< Vertex > vertices, vector< _dword > indices );
 	~RenderObject( );
 
@@ -61,12 +63,12 @@ public:
 	inline _dword GetEBO( )
 		{ return mEBO; }
 
-	_bool Init( );
-	_bool CreateGeometry( );
-	virtual _bool CreateShader( ){ return _true; };
-	virtual _bool SetUniform( ){ return _true; };
-	virtual _void Update( _float elapse ) = 0;
-	virtual _void Render( _float elapse ) = 0;
+	virtual _bool Init( );
+	virtual _bool CreateGeometry( );
+	virtual _bool CreateShader( ){ return _true; }
+	virtual _bool SetUniform( ){ return _true; }
+	virtual _void Update( _float elapse ){ }
+	virtual _void Render( _float elapse );
 };
 
 };
