@@ -10,9 +10,10 @@ public:
 	_long			mWidth;
 	_long			mHeight;
 	_long			mChannel;
+	_dword			mGLId;
 	string			mResName;
 	_chara*			mData;
-	_dword			mGLId;
+
 
 public:
 	static _dword CreateGLTexture( const string& filename, _dword wrap_s = GL_REPEAT, _dword wrap_t = GL_REPEAT, _dword min_filter = GL_LINEAR, _dword mag_filter = GL_LINEAR );
@@ -28,6 +29,8 @@ public:
 		{ return mHeight; }
 	inline _long GetChannel( )
 		{ return mChannel; }
+	inline _dword GetGLId( )
+		{ return mGLId; }
 	inline string GetmResName( )
 		{ return mResName; }
 	inline _chara* GetData( )

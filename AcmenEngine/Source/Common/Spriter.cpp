@@ -61,7 +61,27 @@ _void Spriter::Render( _float elapse )
 {
 	if ( mIsInited == _false )
 		Init( );
-	RenderObject::Render( elapse );
+
+	if ( mShader == _null )
+		return;
+
+	mShader->Use( );
+	SetUniform( );
+
+	if ( mTexture->GetGLId( ) > 0 )
+	{
+		glActiveTexture( GL_TEXTURE0 );
+		glBindTexture( GL_TEXTURE_2D, mTexture->GetGLId( ) );
+	}
+
+	glBindVertexArray( mVAO );
+
+	if ( mIndices.size( ) > 0 )
+		glDrawElements( GL_TRIANGLES, mIndices.size( ), GL_UNSIGNED_INT, 0 );
+	else
+		glDrawArrays( GL_TRIANGLES, 0, mVertices.size( ) );
+
+	glBindVertexArray( 0 );
 }
 
 _void Spriter::createVertices( )

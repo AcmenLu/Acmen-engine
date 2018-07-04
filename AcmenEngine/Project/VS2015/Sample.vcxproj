@@ -23,6 +23,7 @@
     <ClCompile Include="..\..\Source\Sample\InitGLSample.cpp" />
     <ClCompile Include="..\..\Source\Sample\LuaJitTest.cpp" />
     <ClCompile Include="..\..\Source\Sample\MeshSample.cpp" />
+    <ClCompile Include="..\..\Source\Sample\SpireSample.cpp" />
     <ClCompile Include="..\..\Source\Sample\test.cpp" />
     <ClCompile Include="..\..\Source\Sample\TriangleSample.cpp" />
   </ItemGroup>

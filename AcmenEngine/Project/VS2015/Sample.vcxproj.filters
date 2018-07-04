@@ -29,5 +29,8 @@
     <ClCompile Include="..\..\Source\Sample\TriangleSample.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Sample\SpireSample.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
