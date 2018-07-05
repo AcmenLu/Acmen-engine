@@ -43,6 +43,7 @@
     <ClInclude Include="..\..\Include\Common\Matrix4.h" />
     <ClInclude Include="..\..\Include\Common\Mesh.h" />
     <ClInclude Include="..\..\Include\Common\Model.h" />
+    <ClInclude Include="..\..\Include\Common\Rect.h" />
     <ClInclude Include="..\..\Include\Common\Renderer.h" />
     <ClInclude Include="..\..\Include\Common\RenderObject.h" />
     <ClInclude Include="..\..\Include\Common\Shader.h" />

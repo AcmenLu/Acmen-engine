@@ -130,5 +130,8 @@
     <ClInclude Include="..\..\Include\Common\Timer.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Rect.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

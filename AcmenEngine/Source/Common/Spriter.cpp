@@ -1,15 +1,5 @@
 #include "Acmen.h"
 
-Spriter::Spriter( ): mTexture( _null )
-{
-	createVertices( );
-}
-
-Spriter::Spriter( Texture* texture ): mTexture( texture )
-{
-	createVertices( );
-}
-
 Spriter::~Spriter( )
 {
 	SAFE_RELESE( mTexture );
@@ -57,39 +47,25 @@ _bool Spriter::SetUniform( )
 	return _true;
 }
 
-_void Spriter::Render( _float elapse )
+_void Spriter::Update( _float elapse )
 {
-	if ( mIsInited == _false )
-		Init( );
-
-	if ( mShader == _null )
-		return;
-
-	mShader->Use( );
-	SetUniform( );
-
-	if ( mTexture->GetGLId( ) > 0 )
+	if ( mIsReady == _false )
 	{
-		glActiveTexture( GL_TEXTURE0 );
-		glBindTexture( GL_TEXTURE_2D, mTexture->GetGLId( ) );
+		if ( mVertices.size( ) <= 0 )
+			createVertices( );
+
+		InitRenderData( );
+		mIsReady = _true;
 	}
-
-	glBindVertexArray( mVAO );
-
-	if ( mIndices.size( ) > 0 )
-		glDrawElements( GL_TRIANGLES, mIndices.size( ), GL_UNSIGNED_INT, 0 );
-	else
-		glDrawArrays( GL_TRIANGLES, 0, mVertices.size( ) );
-
-	glBindVertexArray( 0 );
 }
 
 _void Spriter::createVertices( )
 {
-	mVertices.push_back( Vertex( 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f ) );
-	mVertices.push_back( Vertex( 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f ) );
-	mVertices.push_back( Vertex( 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f ) );
-	mVertices.push_back( Vertex( 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f ) );
+	mRect = Rect( 0.0f, 0.0f, mTexture->GetWidth( ), mTexture->GetHeight( ) );
+	mVertices.push_back( Vertex( mRect.GetX( ), mRect.GetY( ), 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f ) );
+	mVertices.push_back( Vertex( mRect.GetX( ), mRect.GetY1( ), 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f ) );
+	mVertices.push_back( Vertex(  mRect.GetX1( ),  mRect.GetY1( ), 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f ) );
+	mVertices.push_back( Vertex(  mRect.GetX1( ),  mRect.GetY( ), 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f ) );
 
 	mIndices.push_back( 0 );
 	mIndices.push_back( 1 );
@@ -97,4 +73,13 @@ _void Spriter::createVertices( )
 	mIndices.push_back( 1 );
 	mIndices.push_back( 2 );
 	mIndices.push_back( 3 );
+}
+
+_void Spriter::SetRenderData( )
+{
+	if ( mTexture != _null )
+	{
+		glActiveTexture( GL_TEXTURE0 );
+		glBindTexture( GL_TEXTURE_2D, mTexture->GetGLId( ) );
+	}
 }

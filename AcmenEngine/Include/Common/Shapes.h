@@ -3,15 +3,17 @@ namespace Acmen
 {
 class Shapes: public RenderObject
 {
+public:
+	_bool	mIsReady;
 
 public:
-	inline Shapes( ){ }
+	inline Shapes( ): mIsReady( _false ){ }
 	inline Shapes::Shapes( vector< Vertex > vertices, vector< _dword > indices )
-		: RenderObject( vertices, indices ) { }
+		: RenderObject( vertices, indices ), mIsReady( _false ) { }
 	inline ~Shapes( ) { };
 
 	_bool CreateShader( );
 	_bool SetUniform( );
-	_void Render( _float elapse );
+	_void Update( _float elapse );
 };
 }

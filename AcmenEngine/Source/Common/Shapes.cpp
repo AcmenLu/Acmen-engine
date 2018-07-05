@@ -44,10 +44,11 @@ _bool Shapes::SetUniform( )
 	return _true;
 }
 
-_void Shapes::Render( _float elapse )
+_void Shapes::Update( _float elapse )
 {
-	if ( mIsInited == _false )
-		Init( );
-
-	RenderObject::Render( elapse );
+	if ( mIsReady == _false )
+	{
+		InitRenderData( );
+		mIsReady = _true;
+	}
 }
