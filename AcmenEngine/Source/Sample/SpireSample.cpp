@@ -17,8 +17,8 @@ int main( )
 	renderer = new Renderer( );
 	window->BindRenderer( renderer );
 
-	Texture* texture = new Texture( "resources/textures/toy_box_diffuse.png" );
-	Spriter* sprite = new Spriter( texture );
+	Spriter* sprite = new Spriter( "resources/textures/toy_box_diffuse.png" );
+	sprite->GetTransform( ).Translate( Vector3( 100, 200, 0 ) );
 	renderer->AddRenderObject( sprite );
 
 	if ( window != _null )

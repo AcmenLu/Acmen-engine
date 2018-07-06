@@ -11,6 +11,7 @@ public:
 	_bool				mIsReady;
 public:
 	inline Spriter( ) :mTexture( _null ), mIsReady( _false ), mRect( Rect( ) ){ }
+	Spriter( const string filename );
 	inline Spriter( Texture* texture ): mTexture( texture ), mIsReady( _false ), mRect( Rect( ) ){ }
 	~Spriter( );
 

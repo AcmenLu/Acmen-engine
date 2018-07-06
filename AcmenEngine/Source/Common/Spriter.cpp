@@ -1,5 +1,10 @@
 #include "Acmen.h"
 
+Spriter::Spriter( const string filename ) : mIsReady( _false ), mRect( Rect( ) )
+{
+	mTexture = new Texture( filename );
+}
+
 Spriter::~Spriter( )
 {
 	SAFE_RELESE( mTexture );
