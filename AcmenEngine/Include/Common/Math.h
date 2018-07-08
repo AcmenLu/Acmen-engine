@@ -23,5 +23,8 @@ public:
 		{ return ::tanf( radian ); }
 	static inline _float Cotan( _float radian )
 		{ return 1.0f / ::tanf( radian ); }
+
+	static inline _float Pow( _float n, _long e )
+		{ return ::pow( n, e ); }
 };
 };

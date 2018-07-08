@@ -27,7 +27,7 @@ _bool Shapes::CreateShader( )
 		"{\n" \
 		"FragColor = vec4(colors, 1.0);\n" \
 		"}\n";
-	mShader = new Shader( vsstr, psstr, _false );
+	mShader = new Shader( vsstr, psstr );
 	return _true;
 }
 

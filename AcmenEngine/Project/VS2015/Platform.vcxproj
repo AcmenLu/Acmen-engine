@@ -18,26 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Include\Common\Math.h" />
-    <ClInclude Include="..\..\Include\Common\Matrix4.h" />
-    <ClInclude Include="..\..\Include\Common\Trace.h" />
-    <ClInclude Include="..\..\Include\Common\Typedef.h" />
-    <ClInclude Include="..\..\Include\Common\Vector2.h" />
-    <ClInclude Include="..\..\Include\Common\Vector3.h" />
-    <ClInclude Include="..\..\Include\Common\Vector4.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\Common\Math.cpp" />
-    <ClCompile Include="..\..\Source\Common\Matrix4.cpp" />
-    <ClCompile Include="..\..\Source\Common\Trace.cpp" />
-    <ClCompile Include="..\..\Source\Common\Vector3.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4B9FB2F0-3068-4703-9530-B9643B79B892}</ProjectGuid>
-    <RootNamespace>AcmenEngine</RootNamespace>
+    <ProjectGuid>{46371E40-29A0-4EF3-8782-2568DF510724}</ProjectGuid>
+    <RootNamespace>Platform</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>Common</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -47,14 +31,14 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -85,31 +69,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>..\..\Include;..\..\Dependencies\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\Dependencies\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Library</OutDir>
     <IntDir>$(SolutionDir)..\..\Output\tmp\</IntDir>
-    <TargetName>$(ProjectName)</TargetName>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\Dependencies\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\..\Library</OutDir>
-    <IntDir>tmp\_$(ProjectName)_$(Configuration)$(Platform)\</IntDir>
-    <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>..\..\Dependencies\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(ProjectDir)..\..\Library</OutDir>
-    <IntDir>tmp\_$(ProjectName)_$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Dependencies\include;..\..\Include</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,7 +86,6 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Include\Common;..\..\Include;..\..\Dependencies\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +95,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Dependencies\include;..\..\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -147,6 +114,14 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Platform\Application.cpp" />
+    <ClCompile Include="..\..\Source\Platform\Windows.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Include\Platform\Application.h" />
+    <ClInclude Include="..\..\Include\Platform\Windows.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
