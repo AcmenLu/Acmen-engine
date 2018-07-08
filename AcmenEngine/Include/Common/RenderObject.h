@@ -55,6 +55,9 @@ public:
 	inline _void SetShader( Shader* shader )
 		{ mShader = shader; }
 
+	inline Matrix4& GetTransform( )
+		{ return mTransform; }
+
 	inline _dword GetVAO( )
 		{ return mVAO; }
 	inline _dword GetVBO( )
