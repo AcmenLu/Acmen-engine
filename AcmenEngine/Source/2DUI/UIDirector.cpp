@@ -48,14 +48,12 @@ _void UIDirector::Vsit( )
 	for( UIScene* scene : mScenes )
 	{
 		if ( scene->IsVisible( ) == _true )
-			scene->Visit( mRenderer, Matrix4( ) );
+			scene->Visit( Renderer::GetInstance( ), Matrix4( ) );
 	}
 }
 
 _void UIDirector::MainLoop( _float elapse )
 {
-	if ( mRenderer == _null )
-		return;
-
-	mRenderer->OnRender( elapse );
+	Vsit( );
+	Renderer::GetInstance( )->OnRender( elapse );
 }

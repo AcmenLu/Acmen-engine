@@ -23,6 +23,7 @@
 #include "Common/Vector3.h"
 #include "Common/Vector4.h"
 #include "Common/Matrix4.h"
+#include "Common/Texture.h"
 
 // Renderer
 #include "Renderer/RenderObject.h"
@@ -39,6 +40,7 @@
 #include "2DUI/UINode.h"
 #include "2DUI/UIScene.h"
 #include "2DUI/UIDirector.h"
+#include "2DUI/UIComponent.h"
 
 using namespace Acmen;
 using namespace std;

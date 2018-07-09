@@ -16,6 +16,20 @@ UINode::~UINode( )
 		SAFE_RELESE( mChildren[i] );
 }
 
+_void UINode::SetPosition( _float x, _float y )
+{
+	mPosition.x = x;
+	mPosition.y = y;
+	PositionChanged( );
+}
+
+_void UINode::SetSize( _float x, _float y )
+{
+	mSize.x = x;
+	mSize.y = y;
+	SizeChanged( );
+}
+
 _void UINode::UpdateTransform( Matrix4 partenmat )
 {
 	//mTransform *= partenmat;

@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\Include\Common\Math.h" />
     <ClInclude Include="..\..\Include\Common\Matrix4.h" />
+    <ClInclude Include="..\..\Include\Common\stb_image.h" />
+    <ClInclude Include="..\..\Include\Common\Texture.h" />
     <ClInclude Include="..\..\Include\Common\Timer.h" />
     <ClInclude Include="..\..\Include\Common\Trace.h" />
     <ClInclude Include="..\..\Include\Common\Typedef.h" />
@@ -31,6 +33,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\Common\Math.cpp" />
     <ClCompile Include="..\..\Source\Common\Matrix4.cpp" />
+    <ClCompile Include="..\..\Source\Common\Texture.cpp" />
     <ClCompile Include="..\..\Source\Common\Timer.cpp" />
     <ClCompile Include="..\..\Source\Common\Vector3.cpp" />
   </ItemGroup>

@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\2DUI\UIComponent.cpp" />
     <ClCompile Include="..\..\Source\2DUI\UIDirector.cpp" />
     <ClCompile Include="..\..\Source\2DUI\UINode.cpp" />
     <ClCompile Include="..\..\Source\2DUI\UIScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Include\2DUI\UIComponent.h" />
     <ClInclude Include="..\..\Include\2DUI\UIDirector.h" />
     <ClInclude Include="..\..\Include\2DUI\UINode.h" />
     <ClInclude Include="..\..\Include\2DUI\UIScene.h" />

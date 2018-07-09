@@ -36,7 +36,6 @@ public:
 
 public:
 	vector<UIScene*> mScenes;
-	Renderer*		mRenderer;
 
 public:
 	inline UIDirector( ){ }

@@ -24,41 +24,41 @@ public:
 		mParent( _null ), mName( "" ), mTransform( Matrix4( ) ) { }
 	~UINode( );
 
-	inline virtual _bool IsVisible( )
+	virtual _bool IsVisible( )
 		{ return mVisible; }
-	inline virtual _void SetVisible( _bool value )
+	virtual _void SetVisible( _bool value )
 		{ mVisible = value; }
 
-	inline virtual _bool IsEnableTouch( )
+	virtual _bool IsEnableTouch( )
 		{ return mEnableTouch; }
-	inline virtual _void SetEnableTouch( _bool value )
+	virtual _void SetEnableTouch( _bool value )
 		{ mEnableTouch = value; }
 
-	inline virtual _bool GetZOrder( )
+	virtual _bool GetZOrder( )
 		{ return mZOrder; }
-	inline virtual _void SetZOrder( _long value )
+	virtual _void SetZOrder( _long value )
 		{ mZOrder = value; }
 
-	inline virtual Vector2& GetPosition( )
+	virtual Vector2& GetPosition( )
 		{ return mPosition; }
-	inline virtual _void SetPosition( _float x, _float y )
-		{ mPosition.x = x; mPosition.y = y; }
+	virtual _void SetPosition( _float x, _float y );
 
-	inline virtual Vector2& GetSize( )
+	virtual Vector2& GetSize( )
 		{ return mSize; }
-	inline virtual _void SetSize( _float x, _float y )
-		{ mSize.x = x; mSize.y = y; }
+	virtual _void SetSize( _float x, _float y );
 
-	inline virtual string& GetName( )
+	virtual string& GetName( )
 		{ return mName; }
-	inline virtual _void SetTransform( string name )
+	virtual _void SetTransform( string name )
 		{ mName = name; }
 
-	inline virtual Matrix4& GetTransform( )
+	virtual Matrix4& GetTransform( )
 		{ return mTransform; }
-	inline virtual _void SetTransform( Matrix4 transform )
+	virtual _void SetTransform( Matrix4 transform )
 		{ mTransform = transform; }
 
+	virtual _void PositionChanged( ) { }
+	virtual _void SizeChanged( ){ }
 	virtual _bool VisibleByCamera( ){ return _true; }
 	virtual _void UpdateTransform( Matrix4 partenmat );
 	virtual _void Visit( Renderer* renderer, Matrix4 parentmat );
