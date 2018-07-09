@@ -2,7 +2,7 @@
 namespace Acmen
 {
 
-class UINode
+class UINode: public RenderObject
 {
 public:
 	static _void SortByZOrder( vector<UINode* >& nodes );
@@ -24,45 +24,46 @@ public:
 		mParent( _null ), mName( "" ), mTransform( Matrix4( ) ) { }
 	~UINode( );
 
-	inline _bool IsVisible( )
+	inline virtual _bool IsVisible( )
 		{ return mVisible; }
-	inline _void SetVisible( _bool value )
+	inline virtual _void SetVisible( _bool value )
 		{ mVisible = value; }
 
-	inline _bool IsEnableTouch( )
+	inline virtual _bool IsEnableTouch( )
 		{ return mEnableTouch; }
-	inline _void SetEnableTouch( _bool value )
+	inline virtual _void SetEnableTouch( _bool value )
 		{ mEnableTouch = value; }
 
-	inline _bool GetZOrder( )
+	inline virtual _bool GetZOrder( )
 		{ return mZOrder; }
-	inline _void SetZOrder( _long value )
+	inline virtual _void SetZOrder( _long value )
 		{ mZOrder = value; }
 
-	inline Vector2& GetPosition( )
+	inline virtual Vector2& GetPosition( )
 		{ return mPosition; }
-	inline _void SetPosition( _float x, _float y )
+	inline virtual _void SetPosition( _float x, _float y )
 		{ mPosition.x = x; mPosition.y = y; }
 
-	inline Vector2& GetSize( )
+	inline virtual Vector2& GetSize( )
 		{ return mSize; }
-	inline _void SetSize( _float x, _float y )
+	inline virtual _void SetSize( _float x, _float y )
 		{ mSize.x = x; mSize.y = y; }
 
-	inline string& GetName( )
+	inline virtual string& GetName( )
 		{ return mName; }
-	inline _void SetTransform( string name )
+	inline virtual _void SetTransform( string name )
 		{ mName = name; }
 
-	inline Matrix4& GetTransform( )
+	inline virtual Matrix4& GetTransform( )
 		{ return mTransform; }
-	inline _void SetTransform( Matrix4 transform )
+	inline virtual _void SetTransform( Matrix4 transform )
 		{ mTransform = transform; }
 
 	virtual _bool VisibleByCamera( ){ return _true; }
 	virtual _void UpdateTransform( Matrix4 partenmat );
-	virtual _void Visit( Renderer renderer, Matrix4 parentmat );
-	virtual _void Draw( Renderer renderer ) = 0;
+	virtual _void Visit( Renderer* renderer, Matrix4 parentmat );
+	virtual _void Draw( Renderer* renderer ) = 0;
+	virtual _void OnRender( _float elapse ){ }
 };
 
 }

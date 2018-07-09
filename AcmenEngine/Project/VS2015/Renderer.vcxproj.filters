@@ -25,5 +25,8 @@
     <ClInclude Include="..\..\Include\Renderer\Shader.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\Renderer\RenderObject.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

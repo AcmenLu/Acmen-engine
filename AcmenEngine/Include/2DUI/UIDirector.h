@@ -9,24 +9,23 @@ struct InputParams
 		:mKeyCode( key ), mPosition( Vector2( posx, posy ) ){ }
 
 };
-enum InputEvent
+enum InputType
 {
 	KEYDOWN,
 	KEYUP,
-	MOUSEDOWN,
-	MOUSEMOVE,
-	MOUSEUP,
-	TOUCHBEGIN,
-	TOUCHMOVE,
-	TOUCHEND
+	CLICK,
+	DBCLICK,
+	DRAGBEGIN,
+	BRAGEND
 };
 
 
 typedef _void (*OnKeyDown)( const _dword keyCode );
 typedef _void (*OnKeyUp)( const _dword keyCode );
-typedef _void (*OnMouseDown)( const _dword keyCode, const Vector2& vec2 );
-typedef _void (*OnMouseMove)( const Vector2& vec2 );
-typedef _void (*OnMouseUp)( const _dword keyCode, const Vector2& vec2 );
+typedef _void (*OnClick)( const Vector2& vec2 );
+typedef _void (*OnDBClick)( const Vector2& vec2 );
+typedef _void (*OnDragBegin)( const Vector2& vec2 );
+typedef _void (*OnDragEnd)( const Vector2& vec2 );
 
 class UIDirector
 {
@@ -37,6 +36,7 @@ public:
 
 public:
 	vector<UIScene*> mScenes;
+	Renderer*		mRenderer;
 
 public:
 	inline UIDirector( ){ }
@@ -47,7 +47,10 @@ public:
 	_void MouseDown( const _dword keycode, const Vector2& vec2 );
 	_void MouseMove( const Vector2& vec2 );
 	_void MouseUp( const _dword keycode, const Vector2& vec2 );
-	_void DispatchEvent( InputEvent event, InputParams params );
+	_void DispatchEvent( InputType event, InputParams params );
+
+	_void Vsit( );
+	_void MainLoop( _float elapse );
 
 };
 

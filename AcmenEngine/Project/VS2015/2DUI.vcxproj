@@ -81,7 +81,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)..\..\Library</OutDir>
     <IntDir>$(SolutionDir)..\..\Output\tmp\</IntDir>
-    <IncludePath>..\..\Include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\Include;..\..\Dependencies\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

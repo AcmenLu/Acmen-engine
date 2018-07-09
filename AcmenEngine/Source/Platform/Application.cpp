@@ -10,12 +10,6 @@ Application* Application::GetInstance( )
 	return sApplication;
 }
 
-Application::Application( )
-	:mElapse( 0.0f ), mMouseState( 0 )
-{
-	sApplication = this;
-}
-
 _void Application::FinishLaunched( )
 {
 	if ( mLaunchedFunc != _null )
@@ -71,11 +65,12 @@ _void Application::InitGLContextAttrs( )
 
 }
 
-_void Application::Run( _float elapse )
+_void Application::Run( )
 {
-	//Timer::Run( );
-	//_double elapse = Timer::GetElapse( );
+	mTimer->Run( );
+	_double elapse = mTimer->GetElapse( );
 
+	UIDirector::GetInstance( )->MainLoop( elapse );
 	if ( mIdleFunc!= _null )
 		mIdleFunc( elapse );
 }

@@ -20,7 +20,6 @@ public:
 	static Application* GetInstance( );
 
 private:
-	_float				mElapse;
 	OnIdle				mIdleFunc;
 	OnKeyDown			mKeyDownFunc;
 	OnKeyUp				mKeyUpFunc;
@@ -31,14 +30,15 @@ private:
 	OnEnterBack			mEnterBackFunc;
 	OnEnterFore			mEnterForeFunc;
 	_char				mMouseState;
-
+	Timer*				mTimer;
 
 public:
-	Application( );
+	Application( )
+		: mMouseState( 0 ), mTimer( new Timer( ) ){ }
 	inline ~Application( ){ }
 
 	inline _float GetElapse( )
-		{ return mElapse; }
+		{ return mTimer->GetElapse( ); }
 
 	inline _void SetIdleCallback( OnIdle funcptr )
 		{ mIdleFunc = funcptr; }
@@ -69,7 +69,7 @@ public:
 	virtual _void EnterFore( );
 
 	virtual _void InitGLContextAttrs( );
-	virtual _void Run( _float elapse );
+	virtual _void Run( );
 
 };
 

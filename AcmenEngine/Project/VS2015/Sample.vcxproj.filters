@@ -14,5 +14,8 @@
     <ClCompile Include="..\..\Source\Sample\InitWinSample.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Sample\UISceneSample.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

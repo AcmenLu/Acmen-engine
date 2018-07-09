@@ -32,18 +32,21 @@
     <ClInclude Include="..\..\Include\Common\Vector4.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\Common\Timer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Common\Vector3.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Common\Trace.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Common\Matrix4.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Common\Math.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Common\Timer.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,16 +5,17 @@ namespace Acmen
 {
 class Timer
 {
-public:
-	static clock_t sStart;
-	static clock_t sEnd;
-	static _double sElapse;
+private:
+	clock_t mStart;
+	clock_t mEnd;
+	_double mElapse;
 
 public:
-	inline Timer( ){ }
+	inline Timer( )
+		:mStart( 0.0f ), mEnd( 0.0f ), mElapse( 0.0f ) { }
 	inline ~Timer( ){ }
-	static _void Run( );
-	static _double GetElapse( );
+	_void Run( );
+	_double GetElapse( );
 
 };
 

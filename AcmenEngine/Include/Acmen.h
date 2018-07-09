@@ -1,6 +1,5 @@
 #pragma once
 
-#include <algorithm> 
 #include <vector>
 #include <string>
 #include <iostream>
@@ -19,12 +18,14 @@
 #include "Common/Typedef.h"
 #include "Common/Trace.h"
 #include "Common/Math.h"
+#include "Common/Timer.h"
 #include "Common/Vector2.h"
 #include "Common/Vector3.h"
 #include "Common/Vector4.h"
 #include "Common/Matrix4.h"
 
 // Renderer
+#include "Renderer/RenderObject.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
 

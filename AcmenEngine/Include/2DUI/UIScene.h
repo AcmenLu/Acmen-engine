@@ -3,7 +3,7 @@
 namespace Acmen
 {
 
-class UIScene
+class UIScene : public UINode
 {
 public:
 	inline UIScene( ){ }

@@ -1,5 +1,5 @@
 #include "Acmen.h"
-
+#include <algorithm> 
 _bool LessSort( UINode* node1, UINode* node2 )
 {
 	return node1->GetZOrder( ) < node2->GetZOrder( );
@@ -7,7 +7,7 @@ _bool LessSort( UINode* node1, UINode* node2 )
 
 _void UINode::SortByZOrder( vector<UINode* >& nodes )
 {
-	sort( nodes.cbegin( ), nodes.cend( ), LessSort );
+	sort( nodes.begin( ), nodes.end( ), LessSort );
 }
 
 UINode::~UINode( )
@@ -21,7 +21,7 @@ _void UINode::UpdateTransform( Matrix4 partenmat )
 	//mTransform *= partenmat;
 }
 
-_void UINode::Visit( Renderer renderer, Matrix4 parentmat )
+_void UINode::Visit( Renderer* renderer, Matrix4 parentmat )
 {
 	if ( mVisible == _false )
 		return;

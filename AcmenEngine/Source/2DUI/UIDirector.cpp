@@ -35,7 +35,27 @@ _void UIDirector::MouseUp( const _dword keycode, const Vector2& vec2 )
 	
 }
 
-_void UIDirector::DispatchEvent( InputEvent event, InputParams params )
+_void UIDirector::DispatchEvent( InputType event, InputParams params )
 {
-	
+	for( UIScene* node : mScenes )
+	{
+		
+	}
+}
+
+_void UIDirector::Vsit( )
+{
+	for( UIScene* scene : mScenes )
+	{
+		if ( scene->IsVisible( ) == _true )
+			scene->Visit( mRenderer, Matrix4( ) );
+	}
+}
+
+_void UIDirector::MainLoop( _float elapse )
+{
+	if ( mRenderer == _null )
+		return;
+
+	mRenderer->OnRender( elapse );
 }

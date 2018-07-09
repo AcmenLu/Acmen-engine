@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Renderer\Renderer.h" />
+    <ClInclude Include="..\..\Include\Renderer\RenderObject.h" />
     <ClInclude Include="..\..\Include\Renderer\Shader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

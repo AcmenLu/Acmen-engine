@@ -78,7 +78,7 @@ _void Windows::Run( )
 	while ( !glfwWindowShouldClose( mGLFWWindow ) )
 	{
 		glfwPollEvents( );
-		Application::OnIdle( );
+		Application::GetInstance( )->Run( );
 		glfwSwapBuffers( mGLFWWindow );
 	}
 	glfwTerminate( );
