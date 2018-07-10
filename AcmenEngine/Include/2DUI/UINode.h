@@ -16,12 +16,11 @@ protected:
 	vector<UINode*>		mChildren;
 	UINode*				mParent;
 	string				mName;
-	Matrix4				mTransform;
 
 public:
 	inline UINode( )
 		: mVisible( _true ), mEnableTouch( _false ), mZOrder( 0 ), mPosition( Vector2( ) ), mSize( Vector2( ) ),
-		mParent( _null ), mName( "" ), mTransform( Matrix4( ) ) { }
+		mParent( _null ), mName( "" ){ }
 	~UINode( );
 
 	virtual _bool IsVisible( )
@@ -51,11 +50,6 @@ public:
 		{ return mName; }
 	virtual _void SetTransform( string name )
 		{ mName = name; }
-
-	virtual Matrix4& GetTransform( )
-		{ return mTransform; }
-	virtual _void SetTransform( Matrix4 transform )
-		{ mTransform = transform; }
 
 	virtual _void PositionChanged( ) { }
 	virtual _void SizeChanged( ){ }

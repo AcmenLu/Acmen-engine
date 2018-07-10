@@ -29,6 +29,7 @@
     <ClInclude Include="..\..\Include\2DUI\UIDirector.h" />
     <ClInclude Include="..\..\Include\2DUI\UINode.h" />
     <ClInclude Include="..\..\Include\2DUI\UIScene.h" />
+    <ClInclude Include="..\..\Include\2DUI\UiSprite.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{16D4B0C1-9675-404A-82ED-B30C3081CACA}</ProjectGuid>

@@ -19,10 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Renderer\GLRenderObject.cpp" />
+    <ClCompile Include="..\..\Source\Renderer\GLTexture.cpp" />
     <ClCompile Include="..\..\Source\Renderer\Renderer.cpp" />
     <ClCompile Include="..\..\Source\Renderer\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Include\Renderer\GLRenderObject.h" />
+    <ClInclude Include="..\..\Include\Renderer\GLTexture.h" />
     <ClInclude Include="..\..\Include\Renderer\Renderer.h" />
     <ClInclude Include="..\..\Include\Renderer\RenderObject.h" />
     <ClInclude Include="..\..\Include\Renderer\Shader.h" />

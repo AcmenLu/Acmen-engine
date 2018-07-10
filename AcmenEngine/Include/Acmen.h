@@ -27,8 +27,10 @@
 
 // Renderer
 #include "Renderer/RenderObject.h"
+#include "Renderer/GLRenderObject.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
+#include "Renderer/GLTexture.h"
 
 // Platform
 //#include "Platform/System.h"

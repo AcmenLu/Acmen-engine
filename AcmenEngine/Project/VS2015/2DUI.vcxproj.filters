@@ -41,5 +41,8 @@
     <ClInclude Include="..\..\Include\2DUI\UIComponent.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\2DUI\UiSprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
