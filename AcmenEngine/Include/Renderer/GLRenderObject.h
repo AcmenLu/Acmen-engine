@@ -8,18 +8,20 @@ struct Vertex
 	Vector3 Position;
 	Vector3 Normal;
 	Vector2 TexCoord;
+	Vector4 Color;
 
 	inline Vertex( )
-		: Position( Vector3( ) ), Normal( Vector3( ) ), TexCoord( Vector2( ) ){ }
-	inline Vertex( _float px, _float py, _float pz, _float nx, _float ny, _float nz, _float tx, _float ty )
+		: Position( Vector3( ) ), Normal( Vector3( ) ), TexCoord( Vector2( ) ), Color( Vector4( ) ) { }
+	inline Vertex( _float px, _float py, _float pz, _float nx, _float ny, _float nz, _float tx, _float ty, _float cx, _float cy, _float cz, _float cw )
 	{
 		Position = Vector3( px, py, pz );
 		Normal = Vector3( nx, ny, nz );
 		TexCoord = Vector2( tx, ty );
+		Color = Vector4( cx, cy, cz, cw );
 	}
 
-	inline Vertex( Vector3 vecP, Vector3 vecN, Vector2 vecT )
-		: Position( vecP ), Normal( vecN ), TexCoord( vecT ){ }
+	inline Vertex( Vector3 vecP, Vector3 vecN, Vector2 vecT, Vector4 vecC )
+		: Position( vecP ), Normal( vecN ), TexCoord( vecT ), Color( vecC ){ }
 };
 
 class GLRenderObject : public RenderObject
@@ -35,7 +37,7 @@ protected:
 
 public:
 	inline GLRenderObject( ) 
-		: mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ), mShader( _null ), mTransform( Matrix4( ) ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 ){ }
+		: mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ), mShader( _null ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 ){ }
 	GLRenderObject( vector< Vertex > vertices, vector< _dword > indices );
 	~GLRenderObject( );
 

@@ -41,13 +41,13 @@ _bool GLRenderObject::CreateGeometry( )
 
 	glGenBuffers( 1, &mVBO );
 	glBindBuffer( GL_ARRAY_BUFFER, mVBO );
-	glBufferData( GL_ARRAY_BUFFER, mVertices.size( ) * sizeof( Vertex ), &mVertices[0], GL_DYNAMIC_DRAW );
+	glBufferData( GL_ARRAY_BUFFER, mVertices.size( ) * sizeof( Vertex ), &mVertices[0], GL_STATIC_DRAW );
 
 	if ( mIndices.size( ) > 0 )
 	{
 		glGenBuffers( 1, &mEBO );
 		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mEBO );
-		glBufferData( GL_ELEMENT_ARRAY_BUFFER, mIndices.size( ) * sizeof( _dword ), &mIndices[0], GL_DYNAMIC_DRAW );
+		glBufferData( GL_ELEMENT_ARRAY_BUFFER, mIndices.size( ) * sizeof( _dword ), &mIndices[0], GL_STATIC_DRAW );
 	}
 	// Position
 	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, sizeof( Vertex ), (_void*)0 );
