@@ -23,13 +23,14 @@
     <ClCompile Include="..\..\Source\2DUI\UIDirector.cpp" />
     <ClCompile Include="..\..\Source\2DUI\UINode.cpp" />
     <ClCompile Include="..\..\Source\2DUI\UIScene.cpp" />
+    <ClCompile Include="..\..\Source\2DUI\UiSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\2DUI\UIComponent.h" />
     <ClInclude Include="..\..\Include\2DUI\UIDirector.h" />
     <ClInclude Include="..\..\Include\2DUI\UINode.h" />
     <ClInclude Include="..\..\Include\2DUI\UIScene.h" />
-    <ClInclude Include="..\..\Include\2DUI\UiSprite.h" />
+    <ClInclude Include="..\..\Include\2DUI\UISprite.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{16D4B0C1-9675-404A-82ED-B30C3081CACA}</ProjectGuid>

@@ -27,6 +27,9 @@
     <ClCompile Include="..\..\Source\2DUI\UIComponent.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\2DUI\UiSprite.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\2DUI\UIDirector.h">
@@ -41,7 +44,7 @@
     <ClInclude Include="..\..\Include\2DUI\UIComponent.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Include\2DUI\UiSprite.h">
+    <ClInclude Include="..\..\Include\2DUI\UISprite.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

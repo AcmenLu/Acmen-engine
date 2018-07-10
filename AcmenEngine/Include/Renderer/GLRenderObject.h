@@ -29,7 +29,6 @@ protected:
 	vector< Vertex >		mVertices;
 	vector< _dword >		mIndices;
 	Shader*					mShader;
-	Matrix4					mTransform;
 	_dword					mVAO;
 	_dword					mVBO;
 	_dword					mEBO;
@@ -41,31 +40,31 @@ public:
 	~GLRenderObject( );
 
 	virtual vector< Vertex >& GetVertices( )
-	{ return mVertices; }
+		{ return mVertices; }
 	virtual _void SetVertices( vector< Vertex > vertices )
-	{ mVertices.assign( vertices.begin( ), vertices.end( ) ); }
+		{ mVertices.assign( vertices.begin( ), vertices.end( ) ); }
 
 	virtual vector< _dword >& GetIndices( )
-	{ return mIndices; }
+		{ return mIndices; }
 	virtual _void SetIndices( vector< _dword > indices )
-	{ mIndices.assign( indices.begin( ), indices.end( ) ); }
+		{ mIndices.assign( indices.begin( ), indices.end( ) ); }
 
 	virtual Shader* GetShader( )
-	{ return mShader; }
+		{ return mShader; }
 	virtual _void SetShader( Shader* shader )
-	{ mShader = shader; }
-
-	virtual Matrix4& GetTransform( )
-	{ return mTransform; }
-	virtual _void SetTransform( Matrix4& mat4 )
-	{ mTransform = mat4; }
+		{ mShader = shader; }
 
 	virtual _dword GetVAO( )
-	{ return mVAO; }
+		{ return mVAO; }
 	virtual _dword GetVBO( )
-	{ return mVBO; }
+		{ return mVBO; }
 	virtual _dword GetEBO( )
-	{ return mEBO; }
+		{ return mEBO; }
+
+	virtual _void OnRender( _float elapse ) = 0;
+	virtual _bool CreateGeometry( );
+	virtual _bool CreateShader( ){ return _true; }
+	virtual _bool SetUniform( ){ return _true; }
 };
 
 }

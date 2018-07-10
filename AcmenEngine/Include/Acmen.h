@@ -38,10 +38,10 @@
 #include "Platform/Windows.h"
 
 // 2DUI
-
 #include "2DUI/UINode.h"
 #include "2DUI/UIScene.h"
 #include "2DUI/UIDirector.h"
+#include "2DUI/UISprite.h"
 #include "2DUI/UIComponent.h"
 
 using namespace Acmen;

@@ -1,6 +1,5 @@
 #include "Acmen.h"
 
-
 GLRenderObject::GLRenderObject( vector< Vertex > vertices, vector< _dword > indices )
 	:mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ),
 	mShader( _null ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 )

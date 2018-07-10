@@ -1,12 +1,12 @@
 #pragma once
 namespace Acmen
 {
-class UiSprite
+class UISprite : public GLRenderObject
 {
 
 public:
-	UiSprite();
-	~UiSprite();
+	UISprite( );
+	~UISprite( );
 
 };
 }
