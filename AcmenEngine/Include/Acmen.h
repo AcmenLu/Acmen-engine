@@ -24,6 +24,7 @@
 #include "Common/Vector4.h"
 #include "Common/Matrix4.h"
 #include "Common/Texture.h"
+#include "Common/String.h"
 
 // Renderer
 #include "Renderer/RenderObject.h"

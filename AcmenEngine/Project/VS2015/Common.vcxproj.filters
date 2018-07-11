@@ -41,6 +41,9 @@
     <ClInclude Include="..\..\Include\Common\stb_image.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Include\Common\String.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Common\Vector3.cpp">
@@ -56,6 +59,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Common\Texture.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Common\String.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

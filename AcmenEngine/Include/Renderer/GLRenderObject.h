@@ -24,6 +24,15 @@ struct Vertex
 		: Position( vecP ), Normal( vecN ), TexCoord( vecT ), Color( vecC ){ }
 };
 
+struct ShaderParms
+{
+	_bool UseNormal;
+	_bool UseTexCoord;
+	_bool UseColor;
+	inline ShaderParms( )
+		:UseNormal( _false ), UseTexCoord( _false ), UseColor( _true ){ }
+};
+
 class GLRenderObject : public RenderObject
 {
 
@@ -34,10 +43,11 @@ protected:
 	_dword					mVAO;
 	_dword					mVBO;
 	_dword					mEBO;
+	ShaderParms				mShaderParms;
 
 public:
 	inline GLRenderObject( ) 
-		: mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ), mShader( _null ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 ){ }
+		: mVertices( vector< Vertex >( ) ), mIndices( vector< _dword >( ) ), mShader( _null ), mVAO( 0 ), mVBO( 0 ), mEBO( 0 ), mShaderParms( ShaderParms( ) ){ }
 	GLRenderObject( vector< Vertex > vertices, vector< _dword > indices );
 	~GLRenderObject( );
 
@@ -65,7 +75,7 @@ public:
 
 	virtual _void OnRender( _float elapse ) = 0;
 	virtual _bool CreateGeometry( );
-	virtual _bool CreateShader( ){ return _true; }
+	virtual _bool CreateShader( );
 	virtual _bool SetUniform( ){ return _true; }
 };
 
